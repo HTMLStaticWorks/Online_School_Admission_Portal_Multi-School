@@ -1,1 +1,269 @@
-vgfras
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPath | Multi-School Admission Portal</title>
+    <meta name="description" content="Discover, shortlist, and apply to top schools seamlessly with EduPath's unified admission portal.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            
+            <nav class="navbar-menu">
+                <ul class="navbar-nav">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="home2.html" class="nav-link">Home 2</a></li>
+                    <li><a href="browse-schools.html" class="nav-link">Browse Schools</a></li>
+                    <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="contact.html" class="nav-link">Help</a></li>
+                </ul>
+                <div class="navbar-actions">
+                    <button class="theme-toggle" aria-label="Toggle Theme">
+                        <i class="ph ph-moon"></i>
+                    </button>
+                    <button class="rtl-toggle" aria-label="Toggle RTL">
+                        <i class="ph ph-arrows-left-right"></i>
+                    </button>
+                    <a href="parent-dashboard.html" class="btn btn-ghost">Dashboard</a>
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+            </nav>
+            
+            <!-- Mobile Toggle -->
+            <button class="nav-toggle" aria-label="Open Menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            <button class="drawer-close" aria-label="Close Menu">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="home2.html" class="nav-link">Home 2</a>
+            <a href="browse-schools.html" class="nav-link">Browse Schools</a>
+            <a href="index.html#how-it-works" class="nav-link">How It Works</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a href="contact.html" class="nav-link">Help</a>
+        </nav>
+        <div class="drawer-actions">
+            <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-4);">
+                <button class="theme-toggle" aria-label="Toggle Theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button class="rtl-toggle" aria-label="Toggle RTL">
+                    <i class="ph ph-arrows-left-right"></i>
+                </button>
+            </div>
+            <a href="parent-dashboard.html" class="btn btn-outline" style="width: 100%;">Dashboard</a>
+            <a href="login.html" class="btn btn-primary" style="width: 100%;">Login</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="section hero" style="background-color: var(--color-bg-secondary); padding-top: var(--space-12); padding-bottom: var(--space-12); text-align: center;">
+            <div class="container">
+                <h1 style="max-width: 800px; margin: 0 auto var(--space-4); font-size: 3.5rem;">Find the Perfect School for Your Child's Future</h1>
+                <p style="color: var(--color-text-secondary); font-size: 1.25rem; max-width: 600px; margin: 0 auto var(--space-8);">Explore top-rated schools, compare facilities, and apply to multiple institutions with a single, unified profile.</p>
+                
+                <!-- Search Bar -->
+                <div style="background: var(--color-bg-primary); padding: var(--space-2); border-radius: var(--radius-full); max-width: 700px; margin: 0 auto; box-shadow: var(--shadow-soft); display: flex; gap: var(--space-2); align-items: center; border: 1px solid var(--color-border);">
+                    <div style="flex: 1; display: flex; align-items: center; padding-left: var(--space-3); border-right: 1px solid var(--color-border);">
+                        <i class="ph ph-map-pin" style="color: var(--color-text-secondary); font-size: 1.25rem;"></i>
+                        <input type="text" placeholder="Location or Zip Code" style="border: none; background: transparent; padding: 0.5rem; width: 100%; outline: none;">
+                    </div>
+                    <div style="flex: 1; display: flex; align-items: center; padding-left: var(--space-3);">
+                        <i class="ph ph-books" style="color: var(--color-text-secondary); font-size: 1.25rem;"></i>
+                        <select style="border: none; background: transparent; padding: 0.5rem; width: 100%; outline: none; cursor: pointer;">
+                            <option value="">Any Curriculum</option>
+                            <option value="cbse">CBSE</option>
+                            <option value="icse">ICSE</option>
+                            <option value="ib">IB / Cambridge</option>
+                            <option value="state">State Board</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" style="border-radius: var(--radius-full); padding: 0.75rem 2rem;">Search</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Browse by Board -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Curriculum Boards</h2>
+                    <p class="subtext">Find schools that align with your preferred educational methodology</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-6);">
+                    <!-- Board Card 1 -->
+                    <a href="browse-schools.html" style="background: var(--color-bg-secondary); padding: var(--space-6); border-radius: var(--radius-soft); text-align: center; border: 1px solid var(--color-border); transition: transform var(--transition-fast);">
+                        <div style="width: 64px; height: 64px; background: var(--color-bg-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: 2rem; color: var(--color-brand-accent);">
+                            <i class="ph ph-book-open-text"></i>
+                        </div>
+                        <h3>CBSE</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">Central Board of Secondary Education</p>
+                        <span style="color: var(--color-brand-secondary); font-weight: 600; font-size: 0.875rem;">142 Schools &rarr;</span>
+                    </a>
+                    <!-- Board Card 2 -->
+                    <a href="browse-schools.html" style="background: var(--color-bg-secondary); padding: var(--space-6); border-radius: var(--radius-soft); text-align: center; border: 1px solid var(--color-border); transition: transform var(--transition-fast);">
+                        <div style="width: 64px; height: 64px; background: var(--color-bg-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: 2rem; color: var(--color-brand-accent);">
+                            <i class="ph ph-certificate"></i>
+                        </div>
+                        <h3>ICSE</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">Indian Certificate of Secondary Education</p>
+                        <span style="color: var(--color-brand-secondary); font-weight: 600; font-size: 0.875rem;">86 Schools &rarr;</span>
+                    </a>
+                    <!-- Board Card 3 -->
+                    <a href="browse-schools.html" style="background: var(--color-bg-secondary); padding: var(--space-6); border-radius: var(--radius-soft); text-align: center; border: 1px solid var(--color-border); transition: transform var(--transition-fast);">
+                        <div style="width: 64px; height: 64px; background: var(--color-bg-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: 2rem; color: var(--color-brand-accent);">
+                            <i class="ph ph-globe"></i>
+                        </div>
+                        <h3>IB / IGSE</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">International Baccalaureate & Cambridge</p>
+                        <span style="color: var(--color-brand-secondary); font-weight: 600; font-size: 0.875rem;">45 Schools &rarr;</span>
+                    </a>
+                    <!-- Board Card 4 -->
+                    <a href="browse-schools.html" style="background: var(--color-bg-secondary); padding: var(--space-6); border-radius: var(--radius-soft); text-align: center; border: 1px solid var(--color-border); transition: transform var(--transition-fast);">
+                        <div style="width: 64px; height: 64px; background: var(--color-bg-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: 2rem; color: var(--color-brand-accent);">
+                            <i class="ph ph-buildings"></i>
+                        </div>
+                        <h3>State Board</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">Recognized State Level Curriculum</p>
+                        <span style="color: var(--color-brand-secondary); font-weight: 600; font-size: 0.875rem;">215 Schools &rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Parent Stories</h2>
+                    <p class="subtext">Hear from parents who found the perfect school through EduPath</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-6);">
+                    <div style="background: var(--color-bg-secondary); padding: var(--space-6); border-radius: var(--radius-soft); border: 1px solid var(--color-border);">
+                        <div style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-3); font-size: 1.25rem;">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p style="font-style: italic; margin-bottom: var(--space-4);">"Applying to schools used to be a nightmare of paperwork. EduPath let me upload my daughter's documents once and apply to three top schools in an hour."</p>
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                            <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--color-border); overflow: hidden;">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Sarah J." style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div>
+                                <h5 style="margin-bottom: 0;">Sarah J.</h5>
+                                <span style="font-size: 0.75rem; color: var(--color-text-secondary);">Admitted to Oakridge</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: var(--color-bg-secondary); padding: var(--space-6); border-radius: var(--radius-soft); border: 1px solid var(--color-border);">
+                        <div style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-3); font-size: 1.25rem;">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p style="font-style: italic; margin-bottom: var(--space-4);">"The central dashboard showing the status of all our applications was a game changer. We never missed a single deadline or interview call."</p>
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                            <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--color-border); overflow: hidden;">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Michael R." style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div>
+                                <h5 style="margin-bottom: 0;">Michael R.</h5>
+                                <span style="font-size: 0.75rem; color: var(--color-text-secondary);">Admitted to DPS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section" style="background-color: var(--color-brand-accent); color: white; text-align: center; margin: var(--space-8) var(--space-4); border-radius: var(--radius-soft);">
+            <div class="container">
+                <h2 style="color: white; font-family: var(--font-display);">Start your child's application journey</h2>
+                <p style="color: rgba(255,255,255,0.8); font-size: 1.125rem; max-width: 600px; margin: 0 auto var(--space-6);">Join thousands of parents who have simplified their school admission process with EduPath.</p>
+                <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+                    <a href="register.html" class="btn btn-secondary" style="background-color: white; color: var(--color-brand-accent);">Create Parent Account</a>
+                    <a href="browse-schools.html" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.3);">Browse Schools First</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="navbar-brand">
+                        <i class="ph-fill ph-student"></i> EduPath
+                    </a>
+                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents and top educational institutions.</p>
+                    <div style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
+                        <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                        <li><a href="blog.html">Admission Blog</a></li>
+                        <li><a href="contact.html">Partner with Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">For Parents</h4>
+                    <ul class="footer-links">
+                        <li><a href="browse-schools.html">Browse Schools</a></li>
+                        <li><a href="parent-dashboard.html">My Applications</a></li>
+                        <li><a href="contact.html">Help & FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Data Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPath. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

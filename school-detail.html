@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oakridge International School | EduPath</title>
+    <meta name="description" content="Detailed profile, fee structure, and admission timeline for Oakridge International School.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        /* School Detail Specific */
+        .school-gallery {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 250px 250px;
+            gap: var(--space-2);
+            border-radius: var(--radius-soft);
+            overflow: hidden;
+            margin-bottom: var(--space-6);
+        }
+        .gallery-main {
+            grid-row: 1 / 3;
+        }
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-normal);
+        }
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+        }
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .school-gallery {
+                grid-template-columns: 1fr;
+                grid-template-rows: 300px 150px 150px;
+            }
+            .gallery-main {
+                grid-row: 1 / 2;
+            }
+        }
+        
+        .school-content-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-8);
+            position: relative;
+        }
+        
+        .school-main-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-8);
+        }
+        
+        .sticky-sidebar {
+            position: sticky;
+            top: 100px; /* Below navbar */
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-soft);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-soft);
+            height: fit-content;
+        }
+        
+        @media (max-width: 1024px) {
+            .school-content-layout {
+                grid-template-columns: 1fr;
+            }
+            .sticky-sidebar {
+                position: static;
+                order: -1;
+                margin-bottom: var(--space-6);
+            }
+        }
+        
+        .info-card {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-soft);
+            padding: var(--space-6);
+        }
+        
+        .facility-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-3);
+        }
+        
+        .facility-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--color-text-secondary);
+        }
+        
+        .facility-item i {
+            color: var(--color-brand-accent);
+            font-size: 1.25rem;
+        }
+        
+        .timeline-container {
+            position: relative;
+            padding-left: var(--space-4);
+            border-left: 2px solid var(--color-border);
+        }
+        
+        [dir="rtl"] .timeline-container {
+            padding-left: 0;
+            padding-right: var(--space-4);
+            border-left: none;
+            border-right: 2px solid var(--color-border);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--space-6);
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: calc(var(--space-4) * -1 - 9px); /* centers the dot on the line */
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--color-brand-accent);
+            border: 3px solid var(--color-bg-primary);
+        }
+        
+        [dir="rtl"] .timeline-dot {
+            left: auto;
+            right: calc(var(--space-4) * -1 - 9px);
+        }
+        
+        .timeline-date {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-brand-accent);
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            
+            <nav class="navbar-menu">
+                <ul class="navbar-nav">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="home2.html" class="nav-link">Home 2</a></li>
+                    <li><a href="browse-schools.html" class="nav-link active">Browse Schools</a></li>
+                    <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="contact.html" class="nav-link">Help</a></li>
+                </ul>
+                <div class="navbar-actions">
+                    <button class="theme-toggle" aria-label="Toggle Theme">
+                        <i class="ph ph-moon"></i>
+                    </button>
+                    <button class="rtl-toggle" aria-label="Toggle RTL">
+                        <i class="ph ph-arrows-left-right"></i>
+                    </button>
+                    <a href="parent-dashboard.html" class="btn btn-ghost">Dashboard</a>
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+            </nav>
+            
+            <!-- Mobile Toggle -->
+            <button class="nav-toggle" aria-label="Open Menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <!-- Drawer content same as above... -->
+        <div class="drawer-header">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            <button class="drawer-close" aria-label="Close Menu">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="home2.html" class="nav-link">Home 2</a>
+            <a href="browse-schools.html" class="nav-link active">Browse Schools</a>
+            <a href="index.html#how-it-works" class="nav-link">How It Works</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a href="contact.html" class="nav-link">Help</a>
+        </nav>
+        <div class="drawer-actions">
+            <a href="parent-dashboard.html" class="btn btn-outline" style="width: 100%;">Dashboard</a>
+            <a href="login.html" class="btn btn-primary" style="width: 100%;">Login</a>
+        </div>
+    </div>
+
+    <main class="section">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav style="margin-bottom: var(--space-4); font-size: 0.875rem; color: var(--color-text-secondary);">
+                <a href="index.html" style="color: var(--color-brand-accent);">Home</a> &gt; 
+                <a href="browse-schools.html" style="color: var(--color-brand-accent);">Browse Schools</a> &gt; 
+                <span>Oakridge International School</span>
+            </nav>
+
+            <!-- Gallery -->
+            <div class="school-gallery">
+                <div class="gallery-item gallery-main">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Main Building" class="gallery-img">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Classroom" class="gallery-img">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1546410531-bea4edad646a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Library" class="gallery-img">
+                </div>
+            </div>
+
+            <!-- Content Layout -->
+            <div class="school-content-layout">
+                <!-- Left: Main Info -->
+                <div class="school-main-info">
+                    <div>
+                        <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-2);">
+                            <span class="school-board-tag">IB / Cambridge</span>
+                            <span class="school-board-tag" style="background-color: var(--color-status-admitted-bg); color: var(--color-status-admitted);">Admissions Open 2026</span>
+                        </div>
+                        <h1 style="margin-bottom: var(--space-2);">Oakridge International School</h1>
+                        <p style="color: var(--color-text-secondary); display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="ph-fill ph-map-pin"></i> North Campus, Downtown, Area 51, Cityville
+                        </p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>About the School</h3>
+                        <p>Oakridge International School is dedicated to providing a transformative educational experience. Our curriculum is designed to foster critical thinking, creativity, and global awareness. With state-of-the-art facilities and a passionate faculty, we prepare students not just for college, but for life in a rapidly changing world.</p>
+                        <p>Established in 1995, Oakridge has consistently ranked among the top 10 international schools in the region, boasting a 100% university acceptance rate.</p>
+                    </div>
+
+                    <div>
+                        <h3>Facilities</h3>
+                        <div class="facility-list">
+                            <div class="facility-item"><i class="ph-fill ph-wifi-high"></i> Smart Classrooms</div>
+                            <div class="facility-item"><i class="ph-fill ph-books"></i> Modern Library</div>
+                            <div class="facility-item"><i class="ph-fill ph-flask"></i> Science Labs</div>
+                            <div class="facility-item"><i class="ph-fill ph-basketball"></i> Sports Complex</div>
+                            <div class="facility-item"><i class="ph-fill ph-swimming-pool"></i> Swimming Pool</div>
+                            <div class="facility-item"><i class="ph-fill ph-bus"></i> Transport Available</div>
+                            <div class="facility-item"><i class="ph-fill ph-monitor-play"></i> Computer Labs</div>
+                            <div class="facility-item"><i class="ph-fill ph-first-aid"></i> Medical Room</div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Admission Timeline 2026-27</h3>
+                        <div class="timeline-container" style="margin-top: var(--space-4);">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">Oct 15, 2025</div>
+                                <h4>Applications Open</h4>
+                                <p style="color: var(--color-text-secondary); font-size: 0.875rem;">Online application portal opens for all grades.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">Jan 30, 2026</div>
+                                <h4>Application Deadline</h4>
+                                <p style="color: var(--color-text-secondary); font-size: 0.875rem;">Last day to submit completed applications and documents.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">Feb 15 - Mar 10, 2026</div>
+                                <h4>Interviews & Assessments</h4>
+                                <p style="color: var(--color-text-secondary); font-size: 0.875rem;">Shortlisted candidates will be called for interaction.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">Mar 25, 2026</div>
+                                <h4>Final Decisions Released</h4>
+                                <p style="color: var(--color-text-secondary); font-size: 0.875rem;">Admissions decisions communicated via dashboard.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3>Parent Reviews</h3>
+                        <div style="display: flex; gap: var(--space-4); margin-bottom: var(--space-4);">
+                            <div style="text-align: center; background: var(--color-bg-secondary); padding: var(--space-4); border-radius: var(--radius-soft); min-width: 150px;">
+                                <div style="font-size: 2.5rem; font-weight: 700; color: var(--color-brand-accent);">4.8</div>
+                                <div style="display: flex; gap: 0.25rem; color: #F59E0B; justify-content: center; margin-bottom: 0.5rem;">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
+                                </div>
+                                <div style="font-size: 0.875rem; color: var(--color-text-secondary);">124 Reviews</div>
+                            </div>
+                            <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 0.5rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="font-size: 0.875rem; width: 40px;">5 Star</span>
+                                    <div style="flex-grow: 1; height: 8px; background: var(--color-border); border-radius: 4px;"><div style="width: 80%; height: 100%; background: #F59E0B; border-radius: 4px;"></div></div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="font-size: 0.875rem; width: 40px;">4 Star</span>
+                                    <div style="flex-grow: 1; height: 8px; background: var(--color-border); border-radius: 4px;"><div style="width: 15%; height: 100%; background: #F59E0B; border-radius: 4px;"></div></div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="font-size: 0.875rem; width: 40px;">3 Star</span>
+                                    <div style="flex-grow: 1; height: 8px; background: var(--color-border); border-radius: 4px;"><div style="width: 5%; height: 100%; background: #F59E0B; border-radius: 4px;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Sticky Sidebar CTA -->
+                <aside>
+                    <div class="sticky-sidebar">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2);">
+                            <i class="ph-fill ph-star"></i> 4.8 <span style="color: var(--color-text-secondary);">(124 reviews)</span>
+                        </div>
+                        <h3 style="margin-bottom: var(--space-1);">Fee Structure</h3>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-accent); margin-bottom: var(--space-4);">
+                            $12,000 - $18,000 <span style="font-size: 1rem; font-weight: 400; color: var(--color-text-secondary);">/ year</span>
+                        </div>
+                        
+                        <div style="display: flex; flex-direction: column; gap: var(--space-3); margin-bottom: var(--space-6);">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                                <span style="color: var(--color-text-secondary);">Application Fee:</span>
+                                <strong>$100 (Non-refundable)</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                                <span style="color: var(--color-text-secondary);">Grades Available:</span>
+                                <strong>Pre-K to Grade 12</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                                <span style="color: var(--color-text-secondary);">Student-Teacher Ratio:</span>
+                                <strong>12:1</strong>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                            <!-- Start Application links to the parent dashboard mock application flow -->
+                            <a href="login.html" class="btn btn-primary" style="width: 100%;">Start Application</a>
+                            <button class="btn btn-outline" style="width: 100%;"><i class="ph ph-heart"></i> Add to Shortlist</button>
+                        </div>
+                        
+                        <p style="text-align: center; font-size: 0.75rem; color: var(--color-text-secondary); margin-top: var(--space-4);">Takes ~15 mins to complete with EduPath profile.</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="navbar-brand">
+                        <i class="ph-fill ph-student"></i> EduPath
+                    </a>
+                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents and top educational institutions.</p>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                        <li><a href="blog.html">Admission Blog</a></li>
+                        <li><a href="contact.html">Partner with Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading">For Parents</h4>
+                    <ul class="footer-links">
+                        <li><a href="browse-schools.html">Browse Schools</a></li>
+                        <li><a href="parent-dashboard.html">My Applications</a></li>
+                        <li><a href="contact.html">Help & FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPath. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

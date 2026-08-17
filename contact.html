@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Contact | EduPath</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-8);
+            margin-bottom: var(--space-10);
+        }
+        
+        .contact-info {
+            background: var(--color-bg-secondary);
+            padding: var(--space-6);
+            border-radius: var(--radius-soft);
+        }
+        
+        .faq-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+        
+        .faq-item {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-soft);
+            background: var(--color-bg-primary);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: var(--space-4);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .faq-answer {
+            padding: 0 var(--space-4) var(--space-4);
+            color: var(--color-text-secondary);
+            display: none;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        .faq-item.active .ph-caret-down {
+            transform: rotate(180deg);
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+        }
+
+        @media (max-width: 768px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .contact-layout, .faq-accordion {
+                text-align: center;
+            }
+            .faq-question {
+                text-align: left; /* Keep readable */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            <nav class="navbar-menu">
+                <ul class="navbar-nav">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="browse-schools.html" class="nav-link">Browse Schools</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="contact.html" class="nav-link active">Help</a></li>
+                </ul>
+                <div class="navbar-actions">
+                    <button class="theme-toggle" aria-label="Toggle Theme"><i class="ph ph-moon"></i></button>
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+            </nav>
+            <button class="nav-toggle" aria-label="Open Menu"><i class="ph ph-list"></i></button>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container">
+            <div class="section-header">
+                <h1>How can we help?</h1>
+                <p class="subtext">Get in touch with our team or browse frequently asked questions.</p>
+            </div>
+
+            <div class="contact-layout">
+                <!-- Contact Form -->
+                <div>
+                    <h3 style="margin-bottom: var(--space-4);">Send us a message</h3>
+                    <!-- Integration Placeholder: Formspree/Netlify -->
+                    <form action="#" method="POST" style="background: var(--color-bg-primary); border: 1px solid var(--color-border); padding: var(--space-6); border-radius: var(--radius-soft);">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">I am a...</label>
+                            <select class="form-control" required>
+                                <option value="">Select option</option>
+                                <option value="parent">Parent</option>
+                                <option value="school">School Representative</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-control" rows="5" required placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info & Map -->
+                <div>
+                    <div class="contact-info" style="margin-bottom: var(--space-6);">
+                        <h3 style="margin-bottom: var(--space-4);">Contact Information</h3>
+                        <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-bg-primary); display: flex; align-items: center; justify-content: center; color: var(--color-brand-accent);">
+                                <i class="ph-fill ph-envelope-simple"></i>
+                            </div>
+                            <div>
+                                <strong style="display: block;">Email Support</strong>
+                                <a href="mailto:support@edupath.com" style="color: var(--color-text-secondary);">support@edupath.com</a>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-bg-primary); display: flex; align-items: center; justify-content: center; color: var(--color-brand-accent);">
+                                <i class="ph-fill ph-phone"></i>
+                            </div>
+                            <div>
+                                <strong style="display: block;">Phone Support</strong>
+                                <a href="tel:+18001234567" style="color: var(--color-text-secondary);">+1 (800) 123-4567</a>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-bg-primary); display: flex; align-items: center; justify-content: center; color: var(--color-brand-accent);">
+                                <i class="ph-fill ph-map-pin"></i>
+                            </div>
+                            <div>
+                                <strong style="display: block;">Office HQ</strong>
+                                <span style="color: var(--color-text-secondary);">123 Education Blvd, Suite 400<br>Cityville, ST 12345</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Integration Placeholder: Google Maps -->
+                    <div class="map-placeholder">
+                        <div style="text-align: center;">
+                            <i class="ph ph-map-trifold" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
+                            <span>Google Maps integration placeholder</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: var(--space-6);">Frequently Asked Questions</h2>
+                
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Can I apply to multiple schools?
+                            <i class="ph ph-caret-down" style="transition: transform var(--transition-fast);"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Yes! EduPath is designed specifically for multi-school applications. You create one central profile, upload your documents to the Document Vault once, and you can apply to as many partner schools as you'd like without re-entering the same information.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do I upload documents?
+                            <i class="ph ph-caret-down" style="transition: transform var(--transition-fast);"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Once you log in to your Parent Dashboard, navigate to the "Document Vault". Here you can securely upload birth certificates, medical records, and past report cards. These documents will automatically be attached to any school application that requires them.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Are there any application fees?
+                            <i class="ph ph-caret-down" style="transition: transform var(--transition-fast);"></i>
+                        </div>
+                        <div class="faq-answer">
+                            EduPath is free for parents to use for browsing and tracking. However, individual schools may charge their own non-refundable application fees. These fees are displayed clearly on the school's profile page and during the final step of the application checkout.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How will I know if my child is shortlisted?
+                            <i class="ph ph-caret-down" style="transition: transform var(--transition-fast);"></i>
+                        </div>
+                        <div class="faq-answer">
+                            You will receive an email and SMS notification (if opted in) whenever there is a status update on your application. You can also view real-time status updates across all your applications in the "My Applications" tab of your dashboard.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        // FAQ Accordion logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(q => {
+                q.addEventListener('click', () => {
+                    const item = q.parentElement;
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all
+                    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                    
+                    // Open clicked if it wasn't already active
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon | EduPath</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .coming-soon-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4);
+            background-color: var(--color-bg-primary);
+            background-image: radial-gradient(circle at top right, var(--color-bg-secondary), transparent 40%), radial-gradient(circle at bottom left, var(--color-status-interview-bg), transparent 40%);
+        }
+        
+        .cs-card {
+            background: var(--color-bg-primary);
+            padding: var(--space-8);
+            border-radius: var(--radius-soft);
+            box-shadow: var(--shadow-hover);
+            border: 1px solid var(--color-border);
+            max-width: 600px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="coming-soon-page">
+        <div class="cs-card">
+            <a href="index.html" class="navbar-brand" style="justify-content: center; margin-bottom: var(--space-6);">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            <h1 style="margin-bottom: var(--space-2);">We're arriving in your city soon.</h1>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-6);">EduPath is currently onboarding the best schools in new regions. Leave your email to get notified when we launch near you.</p>
+            
+            <form action="#" style="display: flex; gap: var(--space-2); max-width: 400px; margin: 0 auto var(--space-6);">
+                <input type="email" class="form-control" placeholder="Enter your email address" required style="flex-grow: 1;">
+                <button type="submit" class="btn btn-primary">Notify Me</button>
+            </form>
+            
+            <a href="index.html" style="color: var(--color-text-secondary); font-size: 0.875rem; text-decoration: underline;">&larr; Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

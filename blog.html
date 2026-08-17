@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Blog & Tips | EduPath</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            <nav class="navbar-menu">
+                <ul class="navbar-nav">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="browse-schools.html" class="nav-link">Browse Schools</a></li>
+                    <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                    <li><a href="contact.html" class="nav-link">Help</a></li>
+                </ul>
+                <div class="navbar-actions">
+                    <button class="theme-toggle" aria-label="Toggle Theme"><i class="ph ph-moon"></i></button>
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+            </nav>
+            <button class="nav-toggle" aria-label="Open Menu"><i class="ph ph-list"></i></button>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container">
+            <div class="section-header">
+                <h1>Admission Insights</h1>
+                <p class="subtext">Tips, guides, and updates to help you navigate school admissions.</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--space-6);">
+                <!-- Blog Card 1 -->
+                <a href="blog-single.html" style="display: block; background: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: var(--radius-soft); overflow: hidden; transition: transform var(--transition-fast), box-shadow var(--transition-fast);">
+                    <div style="height: 200px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Students" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: var(--space-5);">
+                        <span class="school-board-tag" style="background: var(--color-bg-secondary);">Admission Tips</span>
+                        <h3 style="margin: var(--space-2) 0;">CBSE vs ICSE: Which board is right for your child?</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">A comprehensive comparison of curriculum, grading systems, and future prospects.</p>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-text-secondary); font-size: 0.75rem; margin-top: var(--space-4);">
+                            <i class="ph ph-calendar"></i> Oct 12, 2025 • 5 min read
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Blog Card 2 -->
+                <a href="blog-single.html" style="display: block; background: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: var(--radius-soft); overflow: hidden; transition: transform var(--transition-fast), box-shadow var(--transition-fast);">
+                    <div style="height: 200px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Interview" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: var(--space-5);">
+                        <span class="school-board-tag" style="background: var(--color-bg-secondary);">Interview Guide</span>
+                        <h3 style="margin: var(--space-2) 0;">How to prepare for Kindergarten interaction sessions</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">5 simple ways to make your child feel confident during school interactions.</p>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-text-secondary); font-size: 0.75rem; margin-top: var(--space-4);">
+                            <i class="ph ph-calendar"></i> Oct 05, 2025 • 4 min read
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Blog Card 3 -->
+                <a href="blog-single.html" style="display: block; background: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: var(--radius-soft); overflow: hidden; transition: transform var(--transition-fast), box-shadow var(--transition-fast);">
+                    <div style="height: 200px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1546410531-bea4edad646a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Checklist" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: var(--space-5);">
+                        <span class="school-board-tag" style="background: var(--color-bg-secondary);">Checklist</span>
+                        <h3 style="margin: var(--space-2) 0;">The Ultimate Document Checklist for Admissions</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">Make sure you have all these documents ready before the admission season begins.</p>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-text-secondary); font-size: 0.75rem; margin-top: var(--space-4);">
+                            <i class="ph ph-calendar"></i> Sep 28, 2025 • 3 min read
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

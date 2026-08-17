@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | EduPath</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            overflow: hidden; /* No scroll as per requirements */
+        }
+    </style>
+</head>
+<body class="auth-page">
+    <div class="auth-card">
+        <div class="auth-header">
+            <i class="ph-fill ph-student" style="font-size: 3rem; color: var(--color-brand-accent); margin-bottom: var(--space-2);"></i>
+            <h1>Welcome Back</h1>
+            <p style="color: var(--color-text-secondary);">Log in to track your applications</p>
+        </div>
+
+        <button class="btn btn-social">
+            <i class="ph-fill ph-google-logo" style="color: #DB4437; font-size: 1.25rem;"></i> Continue with Google
+        </button>
+        <button class="btn btn-social">
+            <i class="ph-fill ph-apple-logo" style="font-size: 1.25rem;"></i> Continue with Apple
+        </button>
+
+        <div class="auth-divider">or log in with email</div>
+
+        <form action="parent-dashboard.html">
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" required placeholder="you@example.com">
+            </div>
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label class="form-label" style="margin-bottom: 0;">Password</label>
+                    <a href="#" style="font-size: 0.875rem; color: var(--color-brand-accent);">Forgot password?</a>
+                </div>
+                <input type="password" class="form-control" required placeholder="••••••••" style="margin-top: var(--space-1);">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: var(--space-4);">Log In</button>
+        </form>
+
+        <p style="font-size: 0.875rem; color: var(--color-text-secondary);">
+            Don't have an account? <a href="register.html" style="color: var(--color-brand-accent); font-weight: 600;">Sign Up</a>
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPath | Multi-School Admission Portal</title>
+    <meta name="description" content="Discover, shortlist, and apply to top schools seamlessly with EduPath's unified admission portal.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        /* Home 2 specific styles */
+        .hero-split {
+            display: flex;
+            min-height: calc(100vh - 80px);
+            background-color: var(--color-bg-primary);
+        }
+        
+        .hero-split-content {
+            flex: 1;
+            padding: var(--space-10) var(--space-8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .hero-split-image {
+            flex: 1;
+            position: relative;
+            display: none;
+        }
+        
+        @media (min-width: 1024px) {
+            .hero-split-image {
+                display: block;
+            }
+        }
+        
+        .hero-split-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-search-card {
+            background: var(--color-bg-primary);
+            padding: var(--space-6);
+            border-radius: var(--radius-soft);
+            box-shadow: var(--shadow-hover);
+            border: 1px solid var(--color-border);
+            margin-top: var(--space-6);
+            max-width: 500px;
+        }
+        
+        [data-theme="dark"] .hero-search-card {
+            background: var(--color-bg-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            
+            <nav class="navbar-menu">
+                <ul class="navbar-nav">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="home2.html" class="nav-link active">Home 2</a></li>
+                    <li><a href="browse-schools.html" class="nav-link">Browse Schools</a></li>
+                    <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="contact.html" class="nav-link">Help</a></li>
+                </ul>
+                <div class="navbar-actions">
+                    <button class="theme-toggle" aria-label="Toggle Theme">
+                        <i class="ph ph-moon"></i>
+                    </button>
+                    <button class="rtl-toggle" aria-label="Toggle RTL">
+                        <i class="ph ph-arrows-left-right"></i>
+                    </button>
+                    <a href="parent-dashboard.html" class="btn btn-ghost">Dashboard</a>
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+            </nav>
+            
+            <!-- Mobile Toggle -->
+            <button class="nav-toggle" aria-label="Open Menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            <button class="drawer-close" aria-label="Close Menu">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="home2.html" class="nav-link active">Home 2</a>
+            <a href="browse-schools.html" class="nav-link">Browse Schools</a>
+            <a href="index.html#how-it-works" class="nav-link">How It Works</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a href="contact.html" class="nav-link">Help</a>
+        </nav>
+        <div class="drawer-actions">
+            <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-4);">
+                <button class="theme-toggle" aria-label="Toggle Theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button class="rtl-toggle" aria-label="Toggle RTL">
+                    <i class="ph ph-arrows-left-right"></i>
+                </button>
+            </div>
+            <a href="parent-dashboard.html" class="btn btn-outline" style="width: 100%;">Dashboard</a>
+            <a href="login.html" class="btn btn-primary" style="width: 100%;">Login</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section 2 -->
+        <section class="hero-split">
+            <div class="hero-split-content">
+                <h1 style="font-size: 3.5rem; margin-bottom: var(--space-4);">Find the Right Path for Their Future</h1>
+                <p style="color: var(--color-text-secondary); font-size: 1.25rem; max-width: 500px;">The unified admission portal for exploring, shortlisting, and applying to the best schools in your city.</p>
+                
+                <div class="hero-search-card">
+                    <h4 style="margin-bottom: var(--space-4);">Start your search</h4>
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <div style="position: relative;">
+                            <i class="ph ph-map-pin" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary);"></i>
+                            <input type="text" class="form-control" placeholder="Enter city or zip code" style="padding-left: 2.5rem;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Curriculum</label>
+                        <div style="position: relative;">
+                            <i class="ph ph-books" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary);"></i>
+                            <select class="form-control" style="padding-left: 2.5rem; cursor: pointer;">
+                                <option value="">All Curriculums</option>
+                                <option value="cbse">CBSE</option>
+                                <option value="icse">ICSE</option>
+                                <option value="ib">IB / Cambridge</option>
+                                <option value="state">State Board</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: var(--space-2);">Search Schools</button>
+                </div>
+            </div>
+            <div class="hero-split-image">
+                <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80" alt="Students learning" class="hero-split-img">
+            </div>
+        </section>
+
+        <!-- Featured Schools -->
+        <section class="section" style="background-color: var(--color-bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Trending Admissions</h2>
+                    <p class="subtext">Schools with the highest parent interest this week</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-6);">
+                    <!-- School Card 1 -->
+                    <div class="school-card">
+                        <div class="school-card-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Oakridge International School" class="school-card-img">
+                        </div>
+                        <div class="school-card-content">
+                            <span class="school-board-tag">IB / Cambridge</span>
+                            <h3 class="school-name">Oakridge International</h3>
+                            <div class="school-location">
+                                <i class="ph-fill ph-map-pin"></i> North Campus, Downtown
+                            </div>
+                            <div class="school-actions">
+                                <a href="school-detail.html" class="btn btn-outline" style="flex: 1;">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- School Card 2 -->
+                    <div class="school-card">
+                        <div class="school-card-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Delhi Public School" class="school-card-img">
+                        </div>
+                        <div class="school-card-content">
+                            <span class="school-board-tag">CBSE</span>
+                            <h3 class="school-name">Delhi Public School</h3>
+                            <div class="school-location">
+                                <i class="ph-fill ph-map-pin"></i> Westend Sector 14
+                            </div>
+                            <div class="school-actions">
+                                <a href="school-detail.html" class="btn btn-outline" style="flex: 1;">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- School Card 3 -->
+                    <div class="school-card">
+                        <div class="school-card-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1546410531-bea4edad646a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="St. Mary's High School" class="school-card-img">
+                        </div>
+                        <div class="school-card-content">
+                            <span class="school-board-tag">ICSE</span>
+                            <h3 class="school-name">St. Mary's High School</h3>
+                            <div class="school-location">
+                                <i class="ph-fill ph-map-pin"></i> Heritage Lane, Old City
+                            </div>
+                            <div class="school-actions">
+                                <a href="school-detail.html" class="btn btn-outline" style="flex: 1;">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="navbar-brand">
+                        <i class="ph-fill ph-student"></i> EduPath
+                    </a>
+                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents and top educational institutions.</p>
+                    <div style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
+                        <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                        <li><a href="blog.html">Admission Blog</a></li>
+                        <li><a href="contact.html">Partner with Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">For Parents</h4>
+                    <ul class="footer-links">
+                        <li><a href="browse-schools.html">Browse Schools</a></li>
+                        <li><a href="parent-dashboard.html">My Applications</a></li>
+                        <li><a href="contact.html">Help & FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Data Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPath. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

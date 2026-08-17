@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Parent Account | EduPath</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            /* allow scroll if screen is small on register page, but generally keep it tight */
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="auth-page">
+    <div class="auth-card" style="max-width: 500px;">
+        <div class="auth-header">
+            <i class="ph-fill ph-student" style="font-size: 3rem; color: var(--color-brand-accent); margin-bottom: var(--space-2);"></i>
+            <h1>Create Parent Account</h1>
+            <p style="color: var(--color-text-secondary);">Start your child's admission journey</p>
+        </div>
+
+        <button class="btn btn-social">
+            <i class="ph-fill ph-google-logo" style="color: #DB4437; font-size: 1.25rem;"></i> Sign up with Google
+        </button>
+        <button class="btn btn-social">
+            <i class="ph-fill ph-apple-logo" style="font-size: 1.25rem;"></i> Sign up with Apple
+        </button>
+
+        <div class="auth-divider">or register with email</div>
+
+        <form action="parent-dashboard.html">
+            <div style="display: flex; gap: var(--space-3); margin-bottom: var(--space-3);">
+                <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                    <label class="form-label">First Name</label>
+                    <input type="text" class="form-control" required placeholder="John">
+                </div>
+                <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" class="form-control" required placeholder="Doe">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" required placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" required placeholder="+1 (555) 000-0000">
+            </div>
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" required placeholder="Create a strong password">
+            </div>
+            
+            <div style="display: flex; align-items: flex-start; gap: 0.5rem; text-align: left; margin-bottom: var(--space-4);">
+                <input type="checkbox" id="terms" required style="margin-top: 0.25rem;">
+                <label for="terms" style="font-size: 0.875rem; color: var(--color-text-secondary);">
+                    I agree to EduPath's <a href="#" style="color: var(--color-brand-accent);">Terms of Service</a> and <a href="#" style="color: var(--color-brand-accent);">Privacy Policy</a>.
+                </label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: var(--space-4);">Create Account</button>
+        </form>
+
+        <p style="font-size: 0.875rem; color: var(--color-text-secondary);">
+            Already have an account? <a href="login.html" style="color: var(--color-brand-accent); font-weight: 600;">Log In</a>
+        </p>
+    </div>
+</body>
+</html>
