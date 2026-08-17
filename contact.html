@@ -24,56 +24,104 @@
             background: var(--color-bg-secondary);
             padding: var(--space-6);
             border-radius: var(--radius-soft);
+            text-align: center;
         }
-        
-        .faq-accordion {
+
+        /* Icon above the copy: side-by-side pairs of differing widths made the
+           icons land at a different x on every row. Stacking keeps one axis. */
+        .contact-info-row {
             display: flex;
             flex-direction: column;
-            gap: var(--space-3);
-        }
-        
-        .faq-item {
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-soft);
-            background: var(--color-bg-primary);
-            overflow: hidden;
-        }
-        
-        .faq-question {
-            padding: var(--space-4);
-            display: flex;
             align-items: center;
-            justify-content: space-between;
-            font-weight: 600;
-            cursor: pointer;
-            user-select: none;
+            gap: var(--space-2);
+            margin-bottom: var(--space-5);
+            text-align: center;
         }
-        
-        .faq-answer {
-            padding: 0 var(--space-4) var(--space-4);
-            color: var(--color-text-secondary);
-            display: none;
-            line-height: 1.6;
-        }
-        
-        .faq-item.active .faq-answer {
-            display: block;
-        }
-        
-        .faq-item.active .ph-caret-down {
-            transform: rotate(180deg);
-        }
-        
-        .map-placeholder {
-            width: 100%;
-            height: 300px;
-            background: var(--color-bg-secondary);
-            border-radius: var(--radius-soft);
+
+        .contact-info-row:last-of-type { margin-bottom: 0; }
+
+        .contact-info-icon {
+            width: 40px;
+            height: 40px;
+            flex: none;
+            border-radius: 50%;
+            background: var(--color-bg-primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--color-text-secondary);
+            color: var(--color-brand-accent);
+        }
+        
+        .contact-social {
+            margin-top: var(--space-5);
+            padding-top: var(--space-5);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .contact-social-title {
+            display: block;
+            margin-bottom: var(--space-3);
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-2);
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            background: var(--color-bg-primary);
             border: 1px solid var(--color-border);
+            color: var(--color-brand-accent);
+            transition: transform var(--transition-fast),
+                        background-color var(--transition-fast),
+                        border-color var(--transition-fast),
+                        color var(--transition-fast);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            background: var(--color-brand-accent);
+            border-color: var(--color-brand-accent);
+            color: #FFFFFF;
+        }
+
+        .contact-map-section {
+            margin-bottom: var(--space-10);
+        }
+
+        .contact-map-section .section-header {
+            margin-bottom: var(--space-6);
+        }
+
+        .contact-map {
+            width: 100%;
+            height: clamp(260px, 42vw, 420px);
+            border-radius: var(--radius-soft);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-soft);
+            background: var(--color-bg-secondary);
+        }
+
+        .contact-map iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* The default map tiles are bright; ease them into a dark page */
+        [data-theme="dark"] .contact-map iframe {
+            filter: invert(0.9) hue-rotate(180deg) saturate(0.8);
         }
 
         @media (max-width: 768px) {
@@ -83,11 +131,8 @@
         }
         
         @media (max-width: 360px) {
-            .contact-layout, .faq-accordion {
+            .contact-layout {
                 text-align: center;
-            }
-            .faq-question {
-                text-align: left; /* Keep readable */
             }
         }
     </style>
@@ -99,29 +144,78 @@
             <a href="index.html" class="navbar-brand">
                 <i class="ph-fill ph-student"></i> EduPath
             </a>
+            
             <nav class="navbar-menu">
                 <ul class="navbar-nav">
                     <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="home2.html" class="nav-link">Home 2</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
                     <li><a href="browse-schools.html" class="nav-link">Browse Schools</a></li>
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li><a href="contact.html" class="nav-link active">Help</a></li>
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                    <li><a href="parent-dashboard.html" class="nav-link">Dashboard</a></li>
                 </ul>
                 <div class="navbar-actions">
-                    <button class="theme-toggle" aria-label="Toggle Theme"><i class="ph ph-moon"></i></button>
+                    <button class="theme-toggle" aria-label="Toggle Theme">
+                        <i class="ph ph-moon"></i>
+                    </button>
+                    <button class="rtl-toggle" aria-label="Toggle RTL">
+                        <i class="ph ph-arrows-left-right"></i>
+                    </button>
                     <a href="login.html" class="btn btn-primary">Login</a>
                 </div>
             </nav>
-            <button class="nav-toggle" aria-label="Open Menu"><i class="ph ph-list"></i></button>
+            
+            <!-- Mobile Toggle -->
+            <button class="nav-toggle" aria-label="Open Menu">
+                <i class="ph ph-list"></i>
+            </button>
         </div>
     </header>
 
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            <button class="drawer-close" aria-label="Close Menu">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="home2.html" class="nav-link">Home 2</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="browse-schools.html" class="nav-link">Browse Schools</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a href="contact.html" class="nav-link active">Contact</a>
+            <a href="parent-dashboard.html" class="nav-link">Dashboard</a>
+        </nav>
+        <div class="drawer-actions">
+            <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-4);">
+                <button class="theme-toggle" aria-label="Toggle Theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button class="rtl-toggle" aria-label="Toggle RTL">
+                    <i class="ph ph-arrows-left-right"></i>
+                </button>
+            </div>
+            <a href="login.html" class="btn btn-primary" style="width: 100%;">Login</a>
+        </div>
+    </div>
+
+    <section class="page-hero">
+        <div class="container">
+            <span class="eyebrow eyebrow-center">Talk to us</span>
+            <h1>How Can We Help?</h1>
+            <p class="page-hero-lead">Get in touch with our admissions team, or browse the questions parents ask us most.</p>
+        </div>
+    </section>
+
     <main class="section">
         <div class="container">
-            <div class="section-header">
-                <h1>How can we help?</h1>
-                <p class="subtext">Get in touch with our team or browse frequently asked questions.</p>
-            </div>
-
             <div class="contact-layout">
                 <!-- Contact Form -->
                 <div>
@@ -157,8 +251,8 @@
                 <div>
                     <div class="contact-info" style="margin-bottom: var(--space-6);">
                         <h3 style="margin-bottom: var(--space-4);">Contact Information</h3>
-                        <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
-                            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-bg-primary); display: flex; align-items: center; justify-content: center; color: var(--color-brand-accent);">
+                        <div class="contact-info-row">
+                            <div class="contact-info-icon">
                                 <i class="ph-fill ph-envelope-simple"></i>
                             </div>
                             <div>
@@ -166,8 +260,8 @@
                                 <a href="mailto:support@edupath.com" style="color: var(--color-text-secondary);">support@edupath.com</a>
                             </div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
-                            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-bg-primary); display: flex; align-items: center; justify-content: center; color: var(--color-brand-accent);">
+                        <div class="contact-info-row">
+                            <div class="contact-info-icon">
                                 <i class="ph-fill ph-phone"></i>
                             </div>
                             <div>
@@ -175,8 +269,8 @@
                                 <a href="tel:+18001234567" style="color: var(--color-text-secondary);">+1 (800) 123-4567</a>
                             </div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: var(--space-3);">
-                            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-bg-primary); display: flex; align-items: center; justify-content: center; color: var(--color-brand-accent);">
+                        <div class="contact-info-row">
+                            <div class="contact-info-icon">
                                 <i class="ph-fill ph-map-pin"></i>
                             </div>
                             <div>
@@ -184,89 +278,103 @@
                                 <span style="color: var(--color-text-secondary);">123 Education Blvd, Suite 400<br>Cityville, ST 12345</span>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Integration Placeholder: Google Maps -->
-                    <div class="map-placeholder">
-                        <div style="text-align: center;">
-                            <i class="ph ph-map-trifold" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                            <span>Google Maps integration placeholder</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- FAQ Section -->
-            <div style="max-width: 800px; margin: 0 auto;">
-                <h2 style="text-align: center; margin-bottom: var(--space-6);">Frequently Asked Questions</h2>
-                
-                <div class="faq-accordion">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            Can I apply to multiple schools?
-                            <i class="ph ph-caret-down" style="transition: transform var(--transition-fast);"></i>
-                        </div>
-                        <div class="faq-answer">
-                            Yes! EduPath is designed specifically for multi-school applications. You create one central profile, upload your documents to the Document Vault once, and you can apply to as many partner schools as you'd like without re-entering the same information.
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            How do I upload documents?
-                            <i class="ph ph-caret-down" style="transition: transform var(--transition-fast);"></i>
-                        </div>
-                        <div class="faq-answer">
-                            Once you log in to your Parent Dashboard, navigate to the "Document Vault". Here you can securely upload birth certificates, medical records, and past report cards. These documents will automatically be attached to any school application that requires them.
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            Are there any application fees?
-                            <i class="ph ph-caret-down" style="transition: transform var(--transition-fast);"></i>
-                        </div>
-                        <div class="faq-answer">
-                            EduPath is free for parents to use for browsing and tracking. However, individual schools may charge their own non-refundable application fees. These fees are displayed clearly on the school's profile page and during the final step of the application checkout.
+                        <div class="contact-social">
+                            <strong class="contact-social-title">Follow us</strong>
+                            <div class="social-links">
+                                <a href="https://facebook.com/" class="social-link" target="_blank" rel="noopener" aria-label="EduPath on Facebook">
+                                    <i class="ph-fill ph-facebook-logo"></i>
+                                </a>
+                                <a href="https://instagram.com/" class="social-link" target="_blank" rel="noopener" aria-label="EduPath on Instagram">
+                                    <i class="ph-fill ph-instagram-logo"></i>
+                                </a>
+                                <a href="https://x.com/" class="social-link" target="_blank" rel="noopener" aria-label="EduPath on X">
+                                    <i class="ph-fill ph-x-logo"></i>
+                                </a>
+                                <a href="https://linkedin.com/" class="social-link" target="_blank" rel="noopener" aria-label="EduPath on LinkedIn">
+                                    <i class="ph-fill ph-linkedin-logo"></i>
+                                </a>
+                                <a href="https://youtube.com/" class="social-link" target="_blank" rel="noopener" aria-label="EduPath on YouTube">
+                                    <i class="ph-fill ph-youtube-logo"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            How will I know if my child is shortlisted?
-                            <i class="ph ph-caret-down" style="transition: transform var(--transition-fast);"></i>
-                        </div>
-                        <div class="faq-answer">
-                            You will receive an email and SMS notification (if opted in) whenever there is a status update on your application. You can also view real-time status updates across all your applications in the "My Applications" tab of your dashboard.
-                        </div>
-                    </div>
                 </div>
             </div>
+
+            <!-- Find Us: map gets its own full-width band -->
+            <div class="contact-map-section">
+                <div class="section-header">
+                    <span class="eyebrow eyebrow-center">Find us</span>
+                    <h2>Visit the EduPath Office</h2>
+                    <p class="subtext">123 Education Blvd, Suite 400, Cityville, ST 12345</p>
+                </div>
+                <!-- Map: swap the src query for the real office address -->
+                <div class="contact-map">
+                    <iframe
+                        src="https://www.google.com/maps?q=123+Education+Blvd,+Cityville&output=embed"
+                        title="Map showing the EduPath office location"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+
         </div>
     </main>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="navbar-brand">
+                        <i class="ph-fill ph-student"></i> EduPath
+                    </a>
+                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents and top educational institutions.</p>
+                    <div style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
+                        <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                        <li><a href="blog.html">Admission Blog</a></li>
+                        <li><a href="contact.html">Partner with Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">For Parents</h4>
+                    <ul class="footer-links">
+                        <li><a href="browse-schools.html">Browse Schools</a></li>
+                        <li><a href="parent-dashboard.html">My Applications</a></li>
+                        <li><a href="contact.html">Help & FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Data Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPath. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
-    <script>
-        // FAQ Accordion logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            
-            faqQuestions.forEach(q => {
-                q.addEventListener('click', () => {
-                    const item = q.parentElement;
-                    const isActive = item.classList.contains('active');
-                    
-                    // Close all
-                    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-                    
-                    // Open clicked if it wasn't already active
-                    if (!isActive) {
-                        item.classList.add('active');
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

@@ -11,6 +11,134 @@
     
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+            gap: var(--space-6);
+        }
+
+        .blog-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-soft);
+            overflow: hidden;
+            text-align: center;
+            transition: transform var(--transition-premium),
+                        box-shadow var(--transition-premium),
+                        border-color var(--transition-premium);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-brand-secondary);
+        }
+
+        .blog-card-media {
+            display: block;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .blog-card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s var(--ease-premium);
+        }
+
+        .blog-card:hover .blog-card-media img { transform: scale(1.05); }
+
+        .blog-card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            padding: var(--space-5);
+        }
+
+        .blog-card-tag {
+            background: var(--color-bg-secondary);
+            color: var(--color-text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .blog-card-title {
+            font-size: 1.25rem;
+            line-height: 1.35;
+            margin: var(--space-3) 0 var(--space-2);
+            /* Two lines reserved so every excerpt starts on the same line */
+            min-height: 2.7em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-card-title a { color: inherit; }
+
+        /* The title link covers the whole card, so the card stays one target
+           without nesting the Read More control inside another anchor */
+        .blog-card-title a::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+        }
+
+        .blog-card-excerpt {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            /* Two lines reserved so the meta line sits level across the row */
+            min-height: 2.8em;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--color-text-secondary);
+            font-size: 0.75rem;
+            margin: var(--space-4) 0;
+        }
+
+        .blog-faq {
+            max-width: 800px;
+            margin: var(--space-12) auto 0;
+        }
+
+        .blog-faq .section-header {
+            margin-bottom: var(--space-6);
+        }
+
+        .blog-card-btn {
+            margin-top: auto;
+            width: 100%;
+            gap: 0.4rem;
+        }
+
+        .blog-card:hover .blog-card-btn {
+            background: var(--color-brand-accent);
+            border-color: var(--color-brand-accent);
+            color: #FFFFFF;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .blog-card, .blog-card-media img { transition: none; }
+            .blog-card:hover { transform: none; }
+            .blog-card:hover .blog-card-media img { transform: none; }
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -19,77 +147,251 @@
             <a href="index.html" class="navbar-brand">
                 <i class="ph-fill ph-student"></i> EduPath
             </a>
+            
             <nav class="navbar-menu">
                 <ul class="navbar-nav">
                     <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="home2.html" class="nav-link">Home 2</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
                     <li><a href="browse-schools.html" class="nav-link">Browse Schools</a></li>
                     <li><a href="blog.html" class="nav-link active">Blog</a></li>
-                    <li><a href="contact.html" class="nav-link">Help</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="parent-dashboard.html" class="nav-link">Dashboard</a></li>
                 </ul>
                 <div class="navbar-actions">
-                    <button class="theme-toggle" aria-label="Toggle Theme"><i class="ph ph-moon"></i></button>
+                    <button class="theme-toggle" aria-label="Toggle Theme">
+                        <i class="ph ph-moon"></i>
+                    </button>
+                    <button class="rtl-toggle" aria-label="Toggle RTL">
+                        <i class="ph ph-arrows-left-right"></i>
+                    </button>
                     <a href="login.html" class="btn btn-primary">Login</a>
                 </div>
             </nav>
-            <button class="nav-toggle" aria-label="Open Menu"><i class="ph ph-list"></i></button>
+            
+            <!-- Mobile Toggle -->
+            <button class="nav-toggle" aria-label="Open Menu">
+                <i class="ph ph-list"></i>
+            </button>
         </div>
     </header>
 
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            <button class="drawer-close" aria-label="Close Menu">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="home2.html" class="nav-link">Home 2</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="browse-schools.html" class="nav-link">Browse Schools</a>
+            <a href="blog.html" class="nav-link active">Blog</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="parent-dashboard.html" class="nav-link">Dashboard</a>
+        </nav>
+        <div class="drawer-actions">
+            <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-4);">
+                <button class="theme-toggle" aria-label="Toggle Theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button class="rtl-toggle" aria-label="Toggle RTL">
+                    <i class="ph ph-arrows-left-right"></i>
+                </button>
+            </div>
+            <a href="login.html" class="btn btn-primary" style="width: 100%;">Login</a>
+        </div>
+    </div>
+
+    <section class="page-hero">
+        <div class="container">
+            <span class="eyebrow eyebrow-center">From the blog</span>
+            <h1>Admission Insights</h1>
+            <p class="page-hero-lead">Tips, guides, and updates to help you navigate school admissions with confidence.</p>
+        </div>
+    </section>
+
     <main class="section">
         <div class="container">
-            <div class="section-header">
-                <h1>Admission Insights</h1>
-                <p class="subtext">Tips, guides, and updates to help you navigate school admissions.</p>
-            </div>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--space-6);">
+
+            <div class="blog-grid">
                 <!-- Blog Card 1 -->
-                <a href="blog-single.html" style="display: block; background: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: var(--radius-soft); overflow: hidden; transition: transform var(--transition-fast), box-shadow var(--transition-fast);">
-                    <div style="height: 200px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Students" style="width: 100%; height: 100%; object-fit: cover;">
+                <article class="blog-card">
+                    <div class="blog-card-media">
+                        <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Students">
                     </div>
-                    <div style="padding: var(--space-5);">
-                        <span class="school-board-tag" style="background: var(--color-bg-secondary);">Admission Tips</span>
-                        <h3 style="margin: var(--space-2) 0;">CBSE vs ICSE: Which board is right for your child?</h3>
-                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">A comprehensive comparison of curriculum, grading systems, and future prospects.</p>
-                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-text-secondary); font-size: 0.75rem; margin-top: var(--space-4);">
-                            <i class="ph ph-calendar"></i> Oct 12, 2025 • 5 min read
-                        </div>
+                    <div class="blog-card-body">
+                        <span class="blog-card-tag">Admission Tips</span>
+                        <h3 class="blog-card-title"><a href="blog-single.html">CBSE vs ICSE: Which board is right for your child?</a></h3>
+                        <p class="blog-card-excerpt">A comprehensive comparison of curriculum, grading systems, and future prospects.</p>
+                        <div class="blog-card-meta"><i class="ph ph-calendar"></i>Oct 12, 2025 • 5 min read</div>
+                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
                     </div>
-                </a>
+                </article>
 
                 <!-- Blog Card 2 -->
-                <a href="blog-single.html" style="display: block; background: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: var(--radius-soft); overflow: hidden; transition: transform var(--transition-fast), box-shadow var(--transition-fast);">
-                    <div style="height: 200px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Interview" style="width: 100%; height: 100%; object-fit: cover;">
+                <article class="blog-card">
+                    <div class="blog-card-media">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Interview">
                     </div>
-                    <div style="padding: var(--space-5);">
-                        <span class="school-board-tag" style="background: var(--color-bg-secondary);">Interview Guide</span>
-                        <h3 style="margin: var(--space-2) 0;">How to prepare for Kindergarten interaction sessions</h3>
-                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">5 simple ways to make your child feel confident during school interactions.</p>
-                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-text-secondary); font-size: 0.75rem; margin-top: var(--space-4);">
-                            <i class="ph ph-calendar"></i> Oct 05, 2025 • 4 min read
-                        </div>
+                    <div class="blog-card-body">
+                        <span class="blog-card-tag">Interview Guide</span>
+                        <h3 class="blog-card-title"><a href="blog-single.html">How to prepare for Kindergarten interaction sessions</a></h3>
+                        <p class="blog-card-excerpt">5 simple ways to make your child feel confident during school interactions.</p>
+                        <div class="blog-card-meta"><i class="ph ph-calendar"></i>Oct 05, 2025 • 4 min read</div>
+                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
                     </div>
-                </a>
+                </article>
 
                 <!-- Blog Card 3 -->
-                <a href="blog-single.html" style="display: block; background: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: var(--radius-soft); overflow: hidden; transition: transform var(--transition-fast), box-shadow var(--transition-fast);">
-                    <div style="height: 200px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1546410531-bea4edad646a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Checklist" style="width: 100%; height: 100%; object-fit: cover;">
+                <article class="blog-card">
+                    <div class="blog-card-media">
+                        <img src="https://images.unsplash.com/photo-1546410531-bea4edad646a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Checklist">
                     </div>
-                    <div style="padding: var(--space-5);">
-                        <span class="school-board-tag" style="background: var(--color-bg-secondary);">Checklist</span>
-                        <h3 style="margin: var(--space-2) 0;">The Ultimate Document Checklist for Admissions</h3>
-                        <p style="color: var(--color-text-secondary); font-size: 0.875rem;">Make sure you have all these documents ready before the admission season begins.</p>
-                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-text-secondary); font-size: 0.75rem; margin-top: var(--space-4);">
-                            <i class="ph ph-calendar"></i> Sep 28, 2025 • 3 min read
-                        </div>
+                    <div class="blog-card-body">
+                        <span class="blog-card-tag">Checklist</span>
+                        <h3 class="blog-card-title"><a href="blog-single.html">The Ultimate Document Checklist for Admissions</a></h3>
+                        <p class="blog-card-excerpt">Make sure you have all these documents ready before the admission season begins.</p>
+                        <div class="blog-card-meta"><i class="ph ph-calendar"></i>Sep 28, 2025 • 3 min read</div>
+                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
                     </div>
-                </a>
+                </article>
+
+                <!-- Blog Card 4 -->
+                <article class="blog-card">
+                    <div class="blog-card-media">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="IB Board">
+                    </div>
+                    <div class="blog-card-body">
+                        <span class="blog-card-tag">Board Insights</span>
+                        <h3 class="blog-card-title"><a href="blog-single.html">Is the IB Diploma worth the investment?</a></h3>
+                        <p class="blog-card-excerpt">Unpacking the global recognition, academic rigor, and future college paths of the IB board.</p>
+                        <div class="blog-card-meta"><i class="ph ph-calendar"></i>Sep 20, 2025 • 6 min read</div>
+                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
+                    </div>
+                </article>
+
+                <!-- Blog Card 5 -->
+                <article class="blog-card">
+                    <div class="blog-card-media">
+                        <img src="https://images.unsplash.com/photo-1472289065668-ce650ac443d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Extracurriculars">
+                    </div>
+                    <div class="blog-card-body">
+                        <span class="blog-card-tag">Development</span>
+                        <h3 class="blog-card-title"><a href="blog-single.html">The role of extracurricular activities in admissions</a></h3>
+                        <p class="blog-card-excerpt">Why academic institutions value active participation in sports, music, and social service projects.</p>
+                        <div class="blog-card-meta"><i class="ph ph-calendar"></i>Sep 15, 2025 • 4 min read</div>
+                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
+                    </div>
+                </article>
+
+                <!-- Blog Card 6 -->
+                <article class="blog-card">
+                    <div class="blog-card-media">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Scholarships">
+                    </div>
+                    <div class="blog-card-body">
+                        <span class="blog-card-tag">Financial Aid</span>
+                        <h3 class="blog-card-title"><a href="blog-single.html">Navigating school scholarships and aid programs</a></h3>
+                        <p class="blog-card-excerpt">Steps to apply for merit-based and need-based tuition waivers in private schools.</p>
+                        <div class="blog-card-meta"><i class="ph ph-calendar"></i>Sep 08, 2025 • 5 min read</div>
+                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
+                    </div>
+                </article>
+            </div>
+
+            <!-- FAQ: native <details>, so it collapses without any script -->
+            <div class="blog-faq">
+                <div class="section-header">
+                    <span class="eyebrow eyebrow-center">Reader questions</span>
+                    <h2>Frequently Asked Questions</h2>
+                    <p class="subtext">The things parents ask us most about our guides and admission advice.</p>
+                </div>
+
+                <details class="faq-details">
+                    <summary class="faq-summary">How often do you publish new articles?</summary>
+                    <div class="faq-answer">
+                        We publish two to three guides a month, and we increase that during peak admission season
+                        (roughly September to January) when board deadlines and interview rounds come thick and fast.
+                        Every article carries its publication date so you can tell at a glance how current the advice is.
+                    </div>
+                </details>
+
+                <details class="faq-details">
+                    <summary class="faq-summary">Is the admission advice specific to one board or city?</summary>
+                    <div class="faq-answer">
+                        Most of our guides cover principles that hold across CBSE, ICSE, IB and State boards, and we
+                        label the ones that are board-specific in the article tag. Where fees, dates or document
+                        requirements vary by city, we say so in the piece rather than quoting a single figure.
+                    </div>
+                </details>
+
+                <details class="faq-details">
+                    <summary class="faq-summary">Can I suggest a topic or ask a question of my own?</summary>
+                    <div class="faq-answer">
+                        Yes — send it through the <a href="contact.html">contact page</a> and it goes to the same
+                        admissions team that writes these guides. Questions we hear repeatedly usually become a full
+                        article, and you will get a direct reply either way.
+                    </div>
+                </details>
             </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="navbar-brand">
+                        <i class="ph-fill ph-student"></i> EduPath
+                    </a>
+                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents and top educational institutions.</p>
+                    <div style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
+                        <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                        <li><a href="blog.html">Admission Blog</a></li>
+                        <li><a href="contact.html">Partner with Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">For Parents</h4>
+                    <ul class="footer-links">
+                        <li><a href="browse-schools.html">Browse Schools</a></li>
+                        <li><a href="parent-dashboard.html">My Applications</a></li>
+                        <li><a href="contact.html">Help & FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Data Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPath. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>

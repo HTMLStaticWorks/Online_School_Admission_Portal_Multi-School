@@ -26,25 +26,37 @@
         </div>
         
         <nav class="dashboard-nav">
-            <a href="parent-dashboard.html" class="dash-nav-item active">
+            <a href="#overview" class="dash-nav-item active" data-view="overview">
                 <i class="ph ph-squares-four"></i> Overview
             </a>
-            <a href="#applications" class="dash-nav-item">
+            <a href="#applications" class="dash-nav-item" data-view="applications">
                 <i class="ph ph-files"></i> My Applications
             </a>
-            <a href="#vault" class="dash-nav-item">
+            <a href="#vault" class="dash-nav-item" data-view="vault">
                 <i class="ph ph-folder-lock"></i> Document Vault
             </a>
-            <a href="#shortlisted" class="dash-nav-item">
+            <a href="#shortlist" class="dash-nav-item" data-view="shortlist">
                 <i class="ph ph-heart"></i> Shortlisted Schools
             </a>
-            <a href="#messages" class="dash-nav-item">
-                <i class="ph ph-chat-circle-dots"></i> Messages <span style="background: var(--color-brand-accent); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; margin-left: auto;">2</span>
+            <a href="#interviews" class="dash-nav-item" data-view="interviews">
+                <i class="ph ph-calendar-check"></i> Interviews
+                <span class="dash-nav-badge">1</span>
             </a>
-            <a href="#profile" class="dash-nav-item">
-                <i class="ph ph-user-circle"></i> Profile & Child Details
+            <a href="#messages" class="dash-nav-item" data-view="messages">
+                <i class="ph ph-chat-circle-dots"></i> Messages
+                <span class="dash-nav-badge">2</span>
             </a>
-            <a href="#settings" class="dash-nav-item">
+            <a href="#payments" class="dash-nav-item" data-view="payments">
+                <i class="ph ph-receipt"></i> Fees &amp; Payments
+            </a>
+            <a href="#notifications" class="dash-nav-item" data-view="notifications">
+                <i class="ph ph-bell-ringing"></i> Notifications
+                <span class="dash-nav-badge">2</span>
+            </a>
+            <a href="#profile" class="dash-nav-item" data-view="profile">
+                <i class="ph ph-user-circle"></i> Profile &amp; Child Details
+            </a>
+            <a href="#settings" class="dash-nav-item" data-view="settings">
                 <i class="ph ph-gear"></i> Settings
             </a>
         </nav>
@@ -57,7 +69,7 @@
                     <div style="color: var(--color-text-secondary); font-size: 0.75rem;">Parent Account</div>
                 </div>
             </div>
-            <a href="login.html" class="dash-nav-item" style="color: var(--color-status-reject); padding: 0;">
+            <a href="index.html" class="dash-nav-item" style="color: var(--color-status-reject); padding: 0;">
                 <i class="ph ph-sign-out"></i> Logout
             </a>
         </div>
@@ -67,193 +79,855 @@
     <main class="dashboard-main">
         <!-- Header -->
         <header class="dashboard-header">
-            <div style="display: flex; align-items: center; gap: var(--space-3);">
+            <div class="dashboard-header-start">
                 <button class="nav-toggle" id="sidebarToggle" style="display: none;">
                     <i class="ph ph-list"></i>
                 </button>
-                <h2 style="font-size: 1.25rem; margin-bottom: 0;">Overview</h2>
+                <a href="index.html" class="navbar-brand dashboard-header-brand">
+                    <i class="ph-fill ph-student"></i> <span class="brand-text">EduPath</span>
+                </a>
+                <!-- Still announced to screen readers, and kept in sync by the router -->
+                <h2 class="sr-only" id="dashTitle">Overview</h2>
             </div>
-            
-            <div style="display: flex; align-items: center; gap: var(--space-3);">
+
+            <div class="dashboard-header-end">
                 <button class="theme-toggle" aria-label="Toggle Theme">
                     <i class="ph ph-moon"></i>
                 </button>
                 <button class="rtl-toggle" aria-label="Toggle RTL">
                     <i class="ph ph-arrows-left-right"></i>
                 </button>
-                <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--color-border); background: var(--color-bg-primary); display: flex; align-items: center; justify-content: center; color: var(--color-text-secondary); position: relative;">
-                    <i class="ph ph-bell"></i>
-                    <span style="position: absolute; top: 10px; right: 10px; width: 8px; height: 8px; background: var(--color-status-reject); border-radius: 50%;"></span>
-                </button>
+                <a href="#profile" class="header-profile" data-view="profile" aria-label="Profile &amp; child details">
+                    <i class="ph ph-user"></i>
+                </a>
             </div>
         </header>
 
         <div class="dashboard-content">
-            <!-- KPIs -->
-            <div class="dash-kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-icon"><i class="ph-fill ph-files"></i></div>
-                    <div class="kpi-info">
-                        <h4>Active Applications</h4>
-                        <div class="kpi-value">3</div>
-                    </div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-icon" style="color: var(--color-status-shortlist); background: var(--color-status-shortlist-bg);"><i class="ph-fill ph-heart"></i></div>
-                    <div class="kpi-info">
-                        <h4>Shortlisted Schools</h4>
-                        <div class="kpi-value">5</div>
-                    </div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-icon" style="color: var(--color-status-review); background: var(--color-status-review-bg);"><i class="ph-fill ph-folder-lock"></i></div>
-                    <div class="kpi-info">
-                        <h4>Documents Uploaded</h4>
-                        <div class="kpi-value">8<span style="font-size: 0.875rem; color: var(--color-text-secondary); font-weight: 400;">/10 required</span></div>
-                    </div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-icon" style="color: var(--color-status-interview); background: var(--color-status-interview-bg);"><i class="ph-fill ph-calendar-blank"></i></div>
-                    <div class="kpi-info">
-                        <h4>Upcoming Interviews</h4>
-                        <div class="kpi-value">1</div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- My Applications Table -->
-            <div class="dash-card" id="applications">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
-                    <h3 style="margin-bottom: 0;">My Applications</h3>
-                    <a href="browse-schools.html" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Start New</a>
-                </div>
-                
-                <div class="dash-table-wrapper">
-                    <table class="dash-table">
-                        <thead>
-                            <tr>
-                                <th>School Name</th>
-                                <th>Curriculum</th>
-                                <th>Date Applied</th>
-                                <th>Status</th>
-                                <th>Next Action Needed</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                        <div style="width: 40px; height: 40px; border-radius: var(--radius-soft); background: var(--color-bg-secondary); overflow: hidden;">
-                                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" style="width: 100%; height: 100%; object-fit: cover;">
-                                        </div>
-                                        <strong style="color: var(--color-text-primary);">Oakridge International</strong>
-                                    </div>
-                                </td>
-                                <td>IB / Cambridge</td>
-                                <td>Oct 10, 2025</td>
-                                <td>
-                                    <span class="status-badge status-interview" aria-label="Status: Interview Scheduled">
-                                        <i class="ph-fill ph-calendar-check"></i> Interview
-                                    </span>
-                                </td>
-                                <td style="color: var(--color-status-interview); font-size: 0.875rem;">
-                                    Interview on Nov 15
-                                </td>
-                                <td>
-                                    <a href="application-detail.html" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                        <div style="width: 40px; height: 40px; border-radius: var(--radius-soft); background: var(--color-bg-secondary); overflow: hidden;">
-                                            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" style="width: 100%; height: 100%; object-fit: cover;">
-                                        </div>
-                                        <strong style="color: var(--color-text-primary);">Delhi Public School</strong>
-                                    </div>
-                                </td>
-                                <td>CBSE</td>
-                                <td>Oct 12, 2025</td>
-                                <td>
-                                    <span class="status-badge status-review" aria-label="Status: Under Review">
-                                        <i class="ph-fill ph-magnifying-glass"></i> Under Review
-                                    </span>
-                                </td>
-                                <td style="color: var(--color-text-secondary); font-size: 0.875rem;">
-                                    Awaiting school decision
-                                </td>
-                                <td>
-                                    <a href="application-detail.html" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                        <div style="width: 40px; height: 40px; border-radius: var(--radius-soft); background: var(--color-bg-secondary); overflow: hidden;">
-                                            <img src="https://images.unsplash.com/photo-1546410531-bea4edad646a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" style="width: 100%; height: 100%; object-fit: cover;">
-                                        </div>
-                                        <strong style="color: var(--color-text-primary);">St. Mary's High School</strong>
-                                    </div>
-                                </td>
-                                <td>ICSE</td>
-                                <td>Oct 15, 2025</td>
-                                <td>
-                                    <span class="status-badge status-applied" aria-label="Status: Applied">
-                                        <i class="ph-fill ph-paper-plane-tilt"></i> Applied
-                                    </span>
-                                </td>
-                                <td style="color: var(--color-status-reject); font-size: 0.875rem;">
-                                    Missing Medical Record
-                                </td>
-                                <td>
-                                    <a href="application-detail.html" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Document Vault Preview -->
-            <div class="dash-card" id="vault">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+            <!-- ============================ OVERVIEW ============================ -->
+            <section class="dash-view is-active" id="view-overview" data-title="Overview" tabindex="-1">
+                <div class="dash-page-head">
                     <div>
-                        <h3 style="margin-bottom: 0.25rem;">Document Vault</h3>
-                        <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin: 0;">Upload once, attach to many applications.</p>
+                        <h2>Welcome back, Sarah</h2>
+                        <div class="sub">Three applications in flight &mdash; two need something from you.</div>
                     </div>
-                    <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i class="ph ph-upload-simple"></i> Upload New</button>
-                </div>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--space-4);">
-                    <div style="border: 1px solid var(--color-border); border-radius: var(--radius-soft); padding: var(--space-4); display: flex; align-items: center; gap: var(--space-3);">
-                        <div style="font-size: 2rem; color: var(--color-status-applied);"><i class="ph-fill ph-file-pdf"></i></div>
-                        <div style="flex-grow: 1; overflow: hidden;">
-                            <div style="font-weight: 600; font-size: 0.875rem; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">Birth_Certificate.pdf</div>
-                            <div style="font-size: 0.75rem; color: var(--color-text-secondary);">Attached to 3 applications</div>
-                        </div>
-                        <button style="color: var(--color-text-secondary);"><i class="ph ph-dots-three-vertical"></i></button>
-                    </div>
-                    
-                    <div style="border: 1px solid var(--color-border); border-radius: var(--radius-soft); padding: var(--space-4); display: flex; align-items: center; gap: var(--space-3);">
-                        <div style="font-size: 2rem; color: var(--color-status-shortlist);"><i class="ph-fill ph-file-image"></i></div>
-                        <div style="flex-grow: 1; overflow: hidden;">
-                            <div style="font-weight: 600; font-size: 0.875rem; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">Passport_Photo.jpg</div>
-                            <div style="font-size: 0.75rem; color: var(--color-text-secondary);">Attached to 3 applications</div>
-                        </div>
-                        <button style="color: var(--color-text-secondary);"><i class="ph ph-dots-three-vertical"></i></button>
-                    </div>
-
-                    <div style="border: 1px dashed var(--color-status-reject); background: var(--color-status-reject-bg); border-radius: var(--radius-soft); padding: var(--space-4); display: flex; align-items: center; gap: var(--space-3); cursor: pointer;">
-                        <div style="font-size: 2rem; color: var(--color-status-reject);"><i class="ph ph-warning-circle"></i></div>
-                        <div style="flex-grow: 1;">
-                            <div style="font-weight: 600; font-size: 0.875rem; color: var(--color-status-reject);">Missing Medical Record</div>
-                            <div style="font-size: 0.75rem; color: var(--color-text-secondary);">Required for St. Mary's</div>
-                        </div>
-                        <button class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Upload</button>
+                    <div class="dash-page-actions">
+                        <a href="browse-schools.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                            <i class="ph ph-plus"></i> New Application
+                        </a>
                     </div>
                 </div>
-            </div>
+
+                <div class="dash-kpi-grid">
+                    <a class="kpi-card" href="#applications">
+                        <div class="kpi-icon"><i class="ph-fill ph-files"></i></div>
+                        <div class="kpi-info">
+                            <h4>Active Applications</h4>
+                            <div class="kpi-value">3</div>
+                        </div>
+                    </a>
+                    <a class="kpi-card" href="#shortlist">
+                        <div class="kpi-icon" style="color: var(--color-status-shortlist); background: var(--color-status-shortlist-bg);"><i class="ph-fill ph-heart"></i></div>
+                        <div class="kpi-info">
+                            <h4>Shortlisted Schools</h4>
+                            <div class="kpi-value">5</div>
+                        </div>
+                    </a>
+                    <a class="kpi-card" href="#vault">
+                        <div class="kpi-icon" style="color: var(--color-status-review); background: var(--color-status-review-bg);"><i class="ph-fill ph-folder-lock"></i></div>
+                        <div class="kpi-info">
+                            <h4>Documents Uploaded</h4>
+                            <div class="kpi-value">8<span style="font-size: 0.875rem; color: var(--color-text-secondary);">/10 required</span></div>
+                        </div>
+                    </a>
+                    <a class="kpi-card" href="#interviews">
+                        <div class="kpi-icon" style="color: var(--color-status-interview); background: var(--color-status-interview-bg);"><i class="ph-fill ph-calendar-blank"></i></div>
+                        <div class="kpi-info">
+                            <h4>Upcoming Interviews</h4>
+                            <div class="kpi-value">1</div>
+                        </div>
+                    </a>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--space-6); align-items: start;" class="overview-split">
+                    <!-- Next actions -->
+                    <div class="dash-card" style="margin-bottom: 0;">
+                        <div class="dash-page-head" style="margin-bottom: var(--space-3);">
+                            <div><h3 style="margin-bottom: 0;">Needs your attention</h3></div>
+                        </div>
+
+                        <div class="notif-item is-unread">
+                            <div class="notif-icon" style="background: var(--color-status-reject-bg); color: var(--color-status-reject);"><i class="ph-fill ph-warning-circle"></i></div>
+                            <div class="notif-main">
+                                <div class="t">Medical record missing</div>
+                                <div class="d">St. Mary's High School cannot proceed without it.</div>
+                            </div>
+                            <a href="#vault" class="btn btn-outline" style="padding: 0.3rem 0.7rem; font-size: 0.78rem; align-self: center;">Upload</a>
+                        </div>
+
+                        <div class="notif-item is-unread">
+                            <div class="notif-icon" style="background: var(--color-status-interview-bg); color: var(--color-status-interview);"><i class="ph-fill ph-calendar-check"></i></div>
+                            <div class="notif-main">
+                                <div class="t">Confirm interview slot</div>
+                                <div class="d">Oakridge International &middot; Nov 15, 10:30 AM</div>
+                            </div>
+                            <a href="#interviews" class="btn btn-outline" style="padding: 0.3rem 0.7rem; font-size: 0.78rem; align-self: center;">Confirm</a>
+                        </div>
+
+                        <div class="notif-item">
+                            <div class="notif-icon" style="background: var(--color-status-applied-bg); color: var(--color-status-applied);"><i class="ph-fill ph-receipt"></i></div>
+                            <div class="notif-main">
+                                <div class="t">Application fee due</div>
+                                <div class="d">Greenwood High &middot; $120 due Nov 02</div>
+                            </div>
+                            <a href="#payments" class="btn btn-outline" style="padding: 0.3rem 0.7rem; font-size: 0.78rem; align-self: center;">Pay</a>
+                        </div>
+                    </div>
+
+                    <!-- Application progress snapshot -->
+                    <div class="dash-card" style="margin-bottom: 0;">
+                        <h3 style="margin-bottom: var(--space-3);">Where things stand</h3>
+
+                        <div class="mockup-timeline-track">
+                            <div class="mockup-track-step active">
+                                <div class="mockup-track-dot"><i class="ph ph-check"></i></div>
+                                <div style="font-size: 0.85rem;">Profile completed</div>
+                            </div>
+                            <div class="mockup-track-step active">
+                                <div class="mockup-track-dot"><i class="ph ph-check"></i></div>
+                                <div style="font-size: 0.85rem;">3 applications submitted</div>
+                            </div>
+                            <div class="mockup-track-step active">
+                                <div class="mockup-track-dot"><i class="ph ph-check"></i></div>
+                                <div style="font-size: 0.85rem;">8 of 10 documents verified</div>
+                            </div>
+                            <div class="mockup-track-step">
+                                <div class="mockup-track-dot">4</div>
+                                <div style="font-size: 0.85rem; color: var(--color-text-secondary);">Interviews &amp; decisions</div>
+                            </div>
+                        </div>
+
+                        <div class="result-divider"></div>
+
+                        <div class="storage-meter" style="margin-bottom: 0;">
+                            <span class="label">Overall progress</span>
+                            <div class="meter"><div class="meter-fill" style="width: 68%;"></div></div>
+                            <span class="value">68%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================== APPLICATIONS ========================== -->
+            <section class="dash-view" id="view-applications" data-title="My Applications" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>My Applications</h2>
+                        <div class="sub">Every school you have applied to, and what each one is waiting on.</div>
+                    </div>
+                    <div class="dash-page-actions">
+                        <a href="browse-schools.html" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Start New</a>
+                    </div>
+                </div>
+
+                <div class="filter-tabs" data-filter-group="applications">
+                    <button type="button" class="filter-tab" aria-pressed="true" data-filter="all">All <span style="opacity:.6">3</span></button>
+                    <button type="button" class="filter-tab" aria-pressed="false" data-filter="applied">Applied</button>
+                    <button type="button" class="filter-tab" aria-pressed="false" data-filter="review">Under review</button>
+                    <button type="button" class="filter-tab" aria-pressed="false" data-filter="interview">Interview</button>
+                    <button type="button" class="filter-tab" aria-pressed="false" data-filter="decision">Decision</button>
+                </div>
+
+                <div class="dash-card dash-card--flush">
+                    <div class="dash-table-wrapper">
+                        <table class="dash-table stack-mobile">
+                            <thead>
+                                <tr>
+                                    <th>School Name</th>
+                                    <th>Curriculum</th>
+                                    <th>Date Applied</th>
+                                    <th>Status</th>
+                                    <th>Next Action Needed</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody data-filter-target="applications">
+                                <tr data-status="interview">
+                                    <td class="cell-primary">
+                                        <div class="dash-school-cell">
+                                            <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=120&q=80" alt="">
+                                            <strong>Oakridge International</strong>
+                                        </div>
+                                    </td>
+                                    <td data-label="Curriculum">IB / Cambridge</td>
+                                    <td data-label="Applied">Oct 10, 2025</td>
+                                    <td data-label="Status">
+                                        <span class="status-badge status-interview" aria-label="Status: Interview Scheduled">
+                                            <i class="ph-fill ph-calendar-check"></i> Interview
+                                        </span>
+                                    </td>
+                                    <td data-label="Next action" style="color: var(--color-status-interview); font-size: 0.875rem;">Interview on Nov 15</td>
+                                    <td class="cell-action"><a href="application-detail.html" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
+                                </tr>
+                                <tr data-status="review">
+                                    <td class="cell-primary">
+                                        <div class="dash-school-cell">
+                                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=120&q=80" alt="">
+                                            <strong>Delhi Public School</strong>
+                                        </div>
+                                    </td>
+                                    <td data-label="Curriculum">CBSE</td>
+                                    <td data-label="Applied">Oct 12, 2025</td>
+                                    <td data-label="Status">
+                                        <span class="status-badge status-review" aria-label="Status: Under Review">
+                                            <i class="ph-fill ph-magnifying-glass"></i> Under Review
+                                        </span>
+                                    </td>
+                                    <td data-label="Next action" style="color: var(--color-text-secondary); font-size: 0.875rem;">Awaiting school decision</td>
+                                    <td class="cell-action"><a href="application-detail.html" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
+                                </tr>
+                                <tr data-status="applied">
+                                    <td class="cell-primary">
+                                        <div class="dash-school-cell">
+                                            <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?auto=format&fit=crop&w=120&q=80" alt="">
+                                            <strong>St. Mary's High School</strong>
+                                        </div>
+                                    </td>
+                                    <td data-label="Curriculum">ICSE</td>
+                                    <td data-label="Applied">Oct 15, 2025</td>
+                                    <td data-label="Status">
+                                        <span class="status-badge status-applied" aria-label="Status: Applied">
+                                            <i class="ph-fill ph-paper-plane-tilt"></i> Applied
+                                        </span>
+                                    </td>
+                                    <td data-label="Next action" style="color: var(--color-status-reject); font-size: 0.875rem;">Missing Medical Record</td>
+                                    <td class="cell-action"><a href="application-detail.html" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="empty-state" data-filter-empty="applications" hidden>No applications at this stage yet.</p>
+                </div>
+            </section>
+
+            <!-- ========================== DOCUMENT VAULT ========================== -->
+            <section class="dash-view" id="view-vault" data-title="Document Vault" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Document Vault</h2>
+                        <div class="sub">Upload once, attach to many applications.</div>
+                    </div>
+                    <div class="dash-page-actions">
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i class="ph ph-upload-simple"></i> Upload New</button>
+                    </div>
+                </div>
+
+                <div class="storage-meter">
+                    <span class="label">8 of 10 required documents verified</span>
+                    <div class="meter"><div class="meter-fill" style="width: 80%;"></div></div>
+                    <span class="value">80%</span>
+                </div>
+
+                <div class="dash-card dash-card--flush">
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <div class="doc-icon" style="color: var(--color-status-applied);"><i class="ph-fill ph-file-pdf"></i></div>
+                            <div class="doc-main">
+                                <div class="doc-name">Birth_Certificate.pdf</div>
+                                <div class="doc-meta">Attached to 3 applications</div>
+                            </div>
+                            <button style="color: var(--color-text-secondary);" aria-label="Birth certificate options"><i class="ph ph-dots-three-vertical"></i></button>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-icon" style="color: var(--color-status-shortlist);"><i class="ph-fill ph-file-image"></i></div>
+                            <div class="doc-main">
+                                <div class="doc-name">Passport_Photo.jpg</div>
+                                <div class="doc-meta">Attached to 3 applications</div>
+                            </div>
+                            <button style="color: var(--color-text-secondary);" aria-label="Passport photo options"><i class="ph ph-dots-three-vertical"></i></button>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-icon" style="color: var(--color-status-applied);"><i class="ph-fill ph-file-pdf"></i></div>
+                            <div class="doc-main">
+                                <div class="doc-name">Report_Card_2024-25.pdf</div>
+                                <div class="doc-meta">Attached to 3 applications</div>
+                            </div>
+                            <button style="color: var(--color-text-secondary);" aria-label="Report card options"><i class="ph ph-dots-three-vertical"></i></button>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-icon" style="color: var(--color-status-admitted);"><i class="ph-fill ph-identification-card"></i></div>
+                            <div class="doc-main">
+                                <div class="doc-name">Parent_ID_Proof.pdf</div>
+                                <div class="doc-meta">Verified &middot; Vault protected</div>
+                            </div>
+                            <button style="color: var(--color-text-secondary);" aria-label="ID proof options"><i class="ph ph-dots-three-vertical"></i></button>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-icon" style="color: var(--color-status-applied);"><i class="ph-fill ph-file-pdf"></i></div>
+                            <div class="doc-main">
+                                <div class="doc-name">Address_Proof.pdf</div>
+                                <div class="doc-meta">Attached to 2 applications</div>
+                            </div>
+                            <button style="color: var(--color-text-secondary);" aria-label="Address proof options"><i class="ph ph-dots-three-vertical"></i></button>
+                        </div>
+
+                        <div class="doc-card is-missing">
+                            <div class="doc-icon" style="color: var(--color-status-reject);"><i class="ph ph-warning-circle"></i></div>
+                            <div class="doc-main">
+                                <div class="doc-name" style="color: var(--color-status-reject);">Missing Medical Record</div>
+                                <div class="doc-meta">Required for St. Mary's</div>
+                            </div>
+                            <button class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;">Upload</button>
+                        </div>
+
+                        <div class="doc-card is-missing">
+                            <div class="doc-icon" style="color: var(--color-status-reject);"><i class="ph ph-warning-circle"></i></div>
+                            <div class="doc-main">
+                                <div class="doc-name" style="color: var(--color-status-reject);">Missing Transfer Certificate</div>
+                                <div class="doc-meta">Required for Oakridge International</div>
+                            </div>
+                            <button class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;">Upload</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================ SHORTLIST ============================ -->
+            <section class="dash-view" id="view-shortlist" data-title="Shortlisted Schools" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Shortlisted Schools</h2>
+                        <div class="sub">Saved for later. Apply when you are ready, or remove to tidy up.</div>
+                    </div>
+                    <div class="dash-page-actions">
+                        <a href="browse-schools.html" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Browse more</a>
+                    </div>
+                </div>
+
+                <div class="shortlist-grid">
+                    <div class="shortlist-card">
+                        <div class="shortlist-media">
+                            <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=500&q=80" alt="Greenwood High School">
+                            <button class="shortlist-fav" aria-label="Remove Greenwood High from shortlist"><i class="ph-fill ph-heart"></i></button>
+                        </div>
+                        <div class="shortlist-body">
+                            <span class="school-board-tag">ICSE</span>
+                            <div class="name">Greenwood High School</div>
+                            <div class="meta"><i class="ph ph-map-pin"></i> Sarjapur Road, Bangalore</div>
+                            <div class="meta"><i class="ph ph-wallet"></i> $11,200 / year</div>
+                            <div class="actions">
+                                <a href="school-detail.html" class="btn btn-outline">Details</a>
+                                <a href="browse-schools.html" class="btn btn-primary">Apply</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shortlist-card">
+                        <div class="shortlist-media">
+                            <img src="https://images.unsplash.com/photo-1592280771190-3e2e4d571952?auto=format&fit=crop&w=500&q=80" alt="Nova Cambridge School">
+                            <button class="shortlist-fav" aria-label="Remove Nova Cambridge from shortlist"><i class="ph-fill ph-heart"></i></button>
+                        </div>
+                        <div class="shortlist-body">
+                            <span class="school-board-tag">IB / Cambridge</span>
+                            <div class="name">Nova Cambridge School</div>
+                            <div class="meta"><i class="ph ph-map-pin"></i> Powai, Mumbai</div>
+                            <div class="meta"><i class="ph ph-wallet"></i> $17,800 / year</div>
+                            <div class="actions">
+                                <a href="school-detail.html" class="btn btn-outline">Details</a>
+                                <a href="browse-schools.html" class="btn btn-primary">Apply</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shortlist-card">
+                        <div class="shortlist-media">
+                            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=500&q=80" alt="Crescent Valley Academy">
+                            <button class="shortlist-fav" aria-label="Remove Crescent Valley from shortlist"><i class="ph-fill ph-heart"></i></button>
+                        </div>
+                        <div class="shortlist-body">
+                            <span class="school-board-tag">CBSE</span>
+                            <div class="name">Crescent Valley Academy</div>
+                            <div class="meta"><i class="ph ph-map-pin"></i> Whitefield, Bangalore</div>
+                            <div class="meta"><i class="ph ph-wallet"></i> $8,900 / year</div>
+                            <div class="actions">
+                                <a href="school-detail.html" class="btn btn-outline">Details</a>
+                                <a href="browse-schools.html" class="btn btn-primary">Apply</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shortlist-card">
+                        <div class="shortlist-media">
+                            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=500&q=80" alt="Harmony Montessori">
+                            <button class="shortlist-fav" aria-label="Remove Harmony Montessori from shortlist"><i class="ph-fill ph-heart"></i></button>
+                        </div>
+                        <div class="shortlist-body">
+                            <span class="school-board-tag">State Board</span>
+                            <div class="name">Harmony Montessori</div>
+                            <div class="meta"><i class="ph ph-map-pin"></i> Indiranagar, Bangalore</div>
+                            <div class="meta"><i class="ph ph-wallet"></i> $4,100 / year</div>
+                            <div class="actions">
+                                <a href="school-detail.html" class="btn btn-outline">Details</a>
+                                <a href="browse-schools.html" class="btn btn-primary">Apply</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shortlist-card">
+                        <div class="shortlist-media">
+                            <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=500&q=80" alt="Riverdale Public School">
+                            <button class="shortlist-fav" aria-label="Remove Riverdale Public School from shortlist"><i class="ph-fill ph-heart"></i></button>
+                        </div>
+                        <div class="shortlist-body">
+                            <span class="school-board-tag">State Board</span>
+                            <div class="name">Riverdale Public School</div>
+                            <div class="meta"><i class="ph ph-map-pin"></i> Kharadi, Pune</div>
+                            <div class="meta"><i class="ph ph-wallet"></i> $3,200 / year</div>
+                            <div class="actions">
+                                <a href="school-detail.html" class="btn btn-outline">Details</a>
+                                <a href="browse-schools.html" class="btn btn-primary">Apply</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================ INTERVIEWS ============================ -->
+            <section class="dash-view" id="view-interviews" data-title="Interviews" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Interviews</h2>
+                        <div class="sub">Parent and child interactions scheduled by your shortlisted schools.</div>
+                    </div>
+                    <div class="dash-page-actions">
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i class="ph ph-calendar-plus"></i> Add to calendar</button>
+                    </div>
+                </div>
+
+                <h3 style="font-family: var(--font-body); font-size: 1.05rem; margin-bottom: var(--space-3);">Upcoming</h3>
+
+                <div class="interview-card">
+                    <div class="interview-date">
+                        <div class="d">15</div>
+                        <div class="m">Nov</div>
+                    </div>
+                    <div class="interview-main">
+                        <h4>Oakridge International &mdash; Parent &amp; Child Interaction</h4>
+                        <div class="meta">
+                            <span><i class="ph ph-clock"></i> 10:30 &ndash; 11:15 AM</span>
+                            <span><i class="ph ph-map-pin"></i> Gachibowli campus, Block B</span>
+                            <span><i class="ph ph-user"></i> Ms. Reddy, Admissions Head</span>
+                        </div>
+                    </div>
+                    <span class="status-badge status-interview"><i class="ph-fill ph-hourglass-medium"></i> Awaiting confirmation</span>
+                    <button class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.85rem;">Confirm</button>
+                </div>
+
+                <h3 style="font-family: var(--font-body); font-size: 1.05rem; margin: var(--space-5) 0 var(--space-3);">Past</h3>
+
+                <div class="interview-card is-past">
+                    <div class="interview-date">
+                        <div class="d">28</div>
+                        <div class="m">Oct</div>
+                    </div>
+                    <div class="interview-main">
+                        <h4>Delhi Public School &mdash; Orientation Call</h4>
+                        <div class="meta">
+                            <span><i class="ph ph-clock"></i> 4:00 &ndash; 4:30 PM</span>
+                            <span><i class="ph ph-video-camera"></i> Video call</span>
+                        </div>
+                    </div>
+                    <span class="status-badge status-admitted"><i class="ph-fill ph-check-circle"></i> Attended</span>
+                </div>
+
+                <div class="interview-card is-past">
+                    <div class="interview-date">
+                        <div class="d">19</div>
+                        <div class="m">Oct</div>
+                    </div>
+                    <div class="interview-main">
+                        <h4>St. Mary's High School &mdash; Campus Walkthrough</h4>
+                        <div class="meta">
+                            <span><i class="ph ph-clock"></i> 11:00 AM &ndash; 12:00 PM</span>
+                            <span><i class="ph ph-map-pin"></i> Heritage Lane, Pune</span>
+                        </div>
+                    </div>
+                    <span class="status-badge status-admitted"><i class="ph-fill ph-check-circle"></i> Attended</span>
+                </div>
+            </section>
+
+            <!-- ============================= MESSAGES ============================= -->
+            <section class="dash-view" id="view-messages" data-title="Messages" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Messages</h2>
+                        <div class="sub">Direct thread with each school's admissions office.</div>
+                    </div>
+                </div>
+
+                <div class="messages-layout">
+                    <div class="msg-list" role="tablist" aria-label="Conversations">
+                        <button type="button" class="msg-item" role="tab" aria-pressed="true" data-thread="oakridge">
+                            <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=120&q=80" alt="">
+                            <div class="msg-main">
+                                <div class="msg-who"><strong>Oakridge International</strong> <span class="msg-when">2h</span></div>
+                                <div class="msg-preview">Please confirm the Nov 15 slot at your earliest&hellip;</div>
+                            </div>
+                            <span class="msg-unread-dot" aria-label="Unread"></span>
+                        </button>
+
+                        <button type="button" class="msg-item" role="tab" aria-pressed="false" data-thread="stmarys">
+                            <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?auto=format&fit=crop&w=120&q=80" alt="">
+                            <div class="msg-main">
+                                <div class="msg-who"><strong>St. Mary's High School</strong> <span class="msg-when">1d</span></div>
+                                <div class="msg-preview">We still need the medical record to proceed.</div>
+                            </div>
+                            <span class="msg-unread-dot" aria-label="Unread"></span>
+                        </button>
+
+                        <button type="button" class="msg-item" role="tab" aria-pressed="false" data-thread="dps">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=120&q=80" alt="">
+                            <div class="msg-main">
+                                <div class="msg-who"><strong>Delhi Public School</strong> <span class="msg-when">3d</span></div>
+                                <div class="msg-preview">Thank you &mdash; your application is now under review.</div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="msg-thread">
+                        <div class="msg-thread-head">
+                            <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=120&q=80" alt="" style="width:38px;height:38px;border-radius:var(--radius-sm);object-fit:cover;" data-thread-avatar>
+                            <div>
+                                <div style="font-size: 0.95rem;" data-thread-name>Oakridge International</div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-secondary);">Admissions Office &middot; replies within a day</div>
+                            </div>
+                        </div>
+
+                        <div class="msg-thread-body" data-thread-body aria-live="polite"></div>
+
+                        <form class="msg-composer" data-thread-form>
+                            <input type="text" class="form-control" placeholder="Write a reply&hellip;" aria-label="Message" data-thread-input>
+                            <button type="submit" class="btn btn-primary" style="padding: 0.6rem 1rem;" aria-label="Send"><i class="ph ph-paper-plane-tilt"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================= PAYMENTS ============================= -->
+            <section class="dash-view" id="view-payments" data-title="Fees &amp; Payments" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Fees &amp; Payments</h2>
+                        <div class="sub">Application fees, deposits and receipts across all your schools.</div>
+                    </div>
+                    <div class="dash-page-actions">
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i class="ph ph-download-simple"></i> Export receipts</button>
+                    </div>
+                </div>
+
+                <div class="fee-summary">
+                    <div class="fee-tile is-due">
+                        <div class="cap">Due now</div>
+                        <div class="amt">$120</div>
+                        <div style="font-size: 0.8rem; color: var(--color-text-secondary);">Greenwood High &middot; by Nov 02</div>
+                    </div>
+                    <div class="fee-tile is-paid">
+                        <div class="cap">Paid this season</div>
+                        <div class="amt">$430</div>
+                        <div style="font-size: 0.8rem; color: var(--color-text-secondary);">Across 3 applications</div>
+                    </div>
+                    <div class="fee-tile">
+                        <div class="cap">Refundable deposits</div>
+                        <div class="amt">$250</div>
+                        <div style="font-size: 0.8rem; color: var(--color-text-secondary);">Released after admission</div>
+                    </div>
+                </div>
+
+                <div class="dash-card dash-card--flush">
+                    <h3 style="margin-bottom: var(--space-3);">Transaction history</h3>
+                    <div class="dash-table-wrapper">
+                        <table class="dash-table stack-mobile">
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>School</th>
+                                    <th>Purpose</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="cell-primary"><code style="font-size: 0.82rem;">INV-2025-0148</code></td>
+                                    <td data-label="School">Greenwood High School</td>
+                                    <td data-label="Purpose">Application fee</td>
+                                    <td data-label="Date">Oct 26, 2025</td>
+                                    <td data-label="Amount" style="font-variant-numeric: tabular-nums;">$120.00</td>
+                                    <td data-label="Status"><span class="status-badge status-waitlist"><i class="ph-fill ph-clock"></i> Due</span></td>
+                                    <td class="cell-action"><button class="btn btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.82rem;">Pay now</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-primary"><code style="font-size: 0.82rem;">INV-2025-0121</code></td>
+                                    <td data-label="School">St. Mary's High School</td>
+                                    <td data-label="Purpose">Application fee</td>
+                                    <td data-label="Date">Oct 15, 2025</td>
+                                    <td data-label="Amount" style="font-variant-numeric: tabular-nums;">$95.00</td>
+                                    <td data-label="Status"><span class="status-badge status-admitted"><i class="ph-fill ph-check-circle"></i> Paid</span></td>
+                                    <td class="cell-action"><button class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.82rem;">Receipt</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-primary"><code style="font-size: 0.82rem;">INV-2025-0109</code></td>
+                                    <td data-label="School">Delhi Public School</td>
+                                    <td data-label="Purpose">Application fee</td>
+                                    <td data-label="Date">Oct 12, 2025</td>
+                                    <td data-label="Amount" style="font-variant-numeric: tabular-nums;">$85.00</td>
+                                    <td data-label="Status"><span class="status-badge status-admitted"><i class="ph-fill ph-check-circle"></i> Paid</span></td>
+                                    <td class="cell-action"><button class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.82rem;">Receipt</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-primary"><code style="font-size: 0.82rem;">INV-2025-0097</code></td>
+                                    <td data-label="School">Oakridge International</td>
+                                    <td data-label="Purpose">Application fee + seat deposit</td>
+                                    <td data-label="Date">Oct 10, 2025</td>
+                                    <td data-label="Amount" style="font-variant-numeric: tabular-nums;">$250.00</td>
+                                    <td data-label="Status"><span class="status-badge status-admitted"><i class="ph-fill ph-check-circle"></i> Paid</span></td>
+                                    <td class="cell-action"><button class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.82rem;">Receipt</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =========================== NOTIFICATIONS =========================== -->
+            <section class="dash-view" id="view-notifications" data-title="Notifications" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Notifications</h2>
+                        <div class="sub">Everything that has happened across your applications.</div>
+                    </div>
+                    <div class="dash-page-actions">
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Mark all as read</button>
+                    </div>
+                </div>
+
+                <div class="notif-item is-unread">
+                    <div class="notif-icon" style="background: var(--color-status-interview-bg); color: var(--color-status-interview);"><i class="ph-fill ph-calendar-check"></i></div>
+                    <div class="notif-main">
+                        <div class="t">Interview scheduled by Oakridge International</div>
+                        <div class="d">Nov 15, 10:30 AM at the Gachibowli campus. Please confirm your slot.</div>
+                    </div>
+                    <span class="notif-when">2 hours ago</span>
+                </div>
+
+                <div class="notif-item is-unread">
+                    <div class="notif-icon" style="background: var(--color-status-reject-bg); color: var(--color-status-reject);"><i class="ph-fill ph-warning-circle"></i></div>
+                    <div class="notif-main">
+                        <div class="t">Document required by St. Mary's High School</div>
+                        <div class="d">A medical record is needed before your application can move forward.</div>
+                    </div>
+                    <span class="notif-when">1 day ago</span>
+                </div>
+
+                <div class="notif-item">
+                    <div class="notif-icon" style="background: var(--color-status-review-bg); color: var(--color-status-review);"><i class="ph-fill ph-magnifying-glass"></i></div>
+                    <div class="notif-main">
+                        <div class="t">Delhi Public School moved your application to review</div>
+                        <div class="d">No action needed &mdash; the school will share a decision shortly.</div>
+                    </div>
+                    <span class="notif-when">3 days ago</span>
+                </div>
+
+                <div class="notif-item">
+                    <div class="notif-icon" style="background: var(--color-status-admitted-bg); color: var(--color-status-admitted);"><i class="ph-fill ph-shield-check"></i></div>
+                    <div class="notif-main">
+                        <div class="t">Report card verified</div>
+                        <div class="d">Report_Card_2024-25.pdf was verified and attached to 3 applications.</div>
+                    </div>
+                    <span class="notif-when">5 days ago</span>
+                </div>
+
+                <div class="notif-item">
+                    <div class="notif-icon" style="background: var(--color-status-applied-bg); color: var(--color-status-applied);"><i class="ph-fill ph-receipt"></i></div>
+                    <div class="notif-main">
+                        <div class="t">Payment received</div>
+                        <div class="d">$95.00 application fee for St. Mary's High School.</div>
+                    </div>
+                    <span class="notif-when">Oct 15</span>
+                </div>
+            </section>
+
+            <!-- ============================== PROFILE ============================== -->
+            <section class="dash-view" id="view-profile" data-title="Profile &amp; Child Details" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Profile &amp; Child Details</h2>
+                        <div class="sub">Entered once, shared with every school you apply to.</div>
+                    </div>
+                    <div class="dash-page-actions">
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Save changes</button>
+                    </div>
+                </div>
+
+                <div class="profile-hero">
+                    <div class="profile-avatar">SJ</div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <div style="font-size: 1.1rem;">Sarah Johnson</div>
+                        <div style="font-size: 0.85rem; color: var(--color-text-secondary);">Parent account &middot; joined March 2025</div>
+                    </div>
+                    <button class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.85rem;"><i class="ph ph-camera"></i> Change photo</button>
+                </div>
+
+                <div class="dash-card">
+                    <h3 style="margin-bottom: var(--space-4);">Parent / guardian</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="pfFirst">First name</label>
+                            <input class="form-control" id="pfFirst" type="text" value="Sarah">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="pfLast">Last name</label>
+                            <input class="form-control" id="pfLast" type="text" value="Johnson">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="pfEmail">Email</label>
+                            <input class="form-control" id="pfEmail" type="email" value="sarah.j@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="pfPhone">Phone</label>
+                            <input class="form-control" id="pfPhone" type="tel" value="+1 555 0134">
+                        </div>
+                        <div class="form-group is-wide">
+                            <label class="form-label" for="pfAddress">Residential address</label>
+                            <input class="form-control" id="pfAddress" type="text" value="42 Linden Avenue, Bangalore 560103">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-card">
+                    <h3 style="margin-bottom: var(--space-4);">Child details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="cdName">Child's full name</label>
+                            <input class="form-control" id="cdName" type="text" value="Maya Johnson">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cdDob">Date of birth</label>
+                            <input class="form-control" id="cdDob" type="date" value="2016-04-22">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cdGrade">Applying for grade</label>
+                            <select class="form-control" id="cdGrade">
+                                <option>Nursery</option>
+                                <option>Grade 1</option>
+                                <option selected>Grade 4</option>
+                                <option>Grade 8</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cdSchool">Current school</label>
+                            <input class="form-control" id="cdSchool" type="text" value="Bright Beginnings Primary">
+                        </div>
+                        <div class="form-group is-wide">
+                            <label class="form-label" for="cdNotes">Medical notes or accommodations</label>
+                            <textarea class="form-control" id="cdNotes" rows="3">Mild peanut allergy. Carries an EpiPen.</textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================== SETTINGS ============================== -->
+            <section class="dash-view" id="view-settings" data-title="Settings" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Settings</h2>
+                        <div class="sub">Control how EduPath contacts you and who can see your child's profile.</div>
+                    </div>
+                </div>
+
+                <div class="dash-card">
+                    <h3 style="margin-bottom: var(--space-2);">Notifications</h3>
+                    <div class="settings-row">
+                        <div>
+                            <div class="t">Application status updates</div>
+                            <div class="d">Email me whenever a school changes an application's status.</div>
+                        </div>
+                        <button type="button" class="switch" role="switch" aria-pressed="true" aria-label="Application status updates"></button>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="t">Interview reminders</div>
+                            <div class="d">A reminder 24 hours before each scheduled interview.</div>
+                        </div>
+                        <button type="button" class="switch" role="switch" aria-pressed="true" aria-label="Interview reminders"></button>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="t">Deadline warnings</div>
+                            <div class="d">Alert me a week before any admission window closes.</div>
+                        </div>
+                        <button type="button" class="switch" role="switch" aria-pressed="true" aria-label="Deadline warnings"></button>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="t">School recommendations</div>
+                            <div class="d">Occasional suggestions based on your shortlist.</div>
+                        </div>
+                        <button type="button" class="switch" role="switch" aria-pressed="false" aria-label="School recommendations"></button>
+                    </div>
+                </div>
+
+                <div class="dash-card">
+                    <h3 style="margin-bottom: var(--space-2);">Privacy</h3>
+                    <div class="settings-row">
+                        <div>
+                            <div class="t">Share profile with shortlisted schools</div>
+                            <div class="d">Schools you have saved can view basic details before you apply.</div>
+                        </div>
+                        <button type="button" class="switch" role="switch" aria-pressed="false" aria-label="Share profile with shortlisted schools"></button>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="t">Two-factor authentication</div>
+                            <div class="d">Require a code from your phone when signing in.</div>
+                        </div>
+                        <button type="button" class="switch" role="switch" aria-pressed="true" aria-label="Two-factor authentication"></button>
+                    </div>
+                </div>
+
+                <div class="dash-card">
+                    <h3 style="margin-bottom: var(--space-2);">Account</h3>
+                    <div class="settings-row">
+                        <div>
+                            <div class="t">Change password</div>
+                            <div class="d">Last changed 4 months ago.</div>
+                        </div>
+                        <button class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Update</button>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="t">Download my data</div>
+                            <div class="d">A copy of your profile, documents and application history.</div>
+                        </div>
+                        <button class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Request</button>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="t" style="color: var(--color-status-reject);">Delete account</div>
+                            <div class="d">Permanently removes your vault and withdraws open applications.</div>
+                        </div>
+                        <button class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; color: var(--color-status-reject); border-color: var(--color-status-reject);">Delete</button>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
 

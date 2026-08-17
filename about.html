@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | EduPath</title>
+    <meta name="description" content="Learn more about EduPath's mission to streamline multi-school admission processes for parents and schools.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        .mission-media {
+            border-radius: var(--radius-soft);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-soft);
+            transition: transform var(--transition-premium),
+                        box-shadow var(--transition-premium),
+                        border-color var(--transition-premium);
+        }
+
+        .mission-media img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s var(--ease-premium);
+        }
+
+        .mission-media:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-brand-secondary);
+        }
+
+        .mission-media:hover img {
+            transform: scale(1.06);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .mission-media,
+            .mission-media img { transition: none; }
+            .mission-media:hover,
+            .mission-media:hover img { transform: none; }
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
+            margin-top: var(--space-8);
+        }
+
+        .value-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            padding: var(--space-6);
+            border-radius: var(--radius-soft);
+            text-align: center;
+            transition: transform var(--transition-fast);
+        }
+
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .value-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-bg-secondary);
+            color: var(--color-brand-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            /* Fixed-width circle: needs auto side margins to sit centred */
+            margin: 0 auto var(--space-4);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-6);
+            margin-top: var(--space-8);
+        }
+
+        .team-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-soft);
+            overflow: hidden;
+            text-align: center;
+            transition: transform var(--transition-fast);
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .team-img-wrapper {
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .team-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: var(--space-4);
+        }
+
+        .team-info h4 {
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-info p {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body style="background-color: var(--color-bg-primary);">
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            
+            <nav class="navbar-menu">
+                <ul class="navbar-nav">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="home2.html" class="nav-link">Home 2</a></li>
+                    <li><a href="about.html" class="nav-link active">About</a></li>
+                    <li><a href="browse-schools.html" class="nav-link">Browse Schools</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="parent-dashboard.html" class="nav-link">Dashboard</a></li>
+                </ul>
+                <div class="navbar-actions">
+                    <button class="theme-toggle" aria-label="Toggle Theme">
+                        <i class="ph ph-moon"></i>
+                    </button>
+                    <button class="rtl-toggle" aria-label="Toggle RTL">
+                        <i class="ph ph-arrows-left-right"></i>
+                    </button>
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+            </nav>
+            
+            <!-- Mobile Toggle -->
+            <button class="nav-toggle" aria-label="Open Menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <a href="index.html" class="navbar-brand">
+                <i class="ph-fill ph-student"></i> EduPath
+            </a>
+            <button class="drawer-close" aria-label="Close Menu">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="home2.html" class="nav-link">Home 2</a>
+            <a href="about.html" class="nav-link active">About</a>
+            <a href="browse-schools.html" class="nav-link">Browse Schools</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="parent-dashboard.html" class="nav-link">Dashboard</a>
+        </nav>
+        <div class="drawer-actions">
+            <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-4);">
+                <button class="theme-toggle" aria-label="Toggle Theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button class="rtl-toggle" aria-label="Toggle RTL">
+                    <i class="ph ph-arrows-left-right"></i>
+                </button>
+            </div>
+            <a href="login.html" class="btn btn-primary" style="width: 100%;">Login</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- About Hero Section -->
+        <section class="page-hero">
+            <div class="container">
+                <span class="eyebrow eyebrow-center">About EduPath</span>
+                <h1>Simplifying Admissions, Empowering Parents</h1>
+                <p class="page-hero-lead">EduPath bridges the gap between parents and leading educational institutions, replacing paperwork loops with a unified, digital admission pipeline.</p>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="section">
+            <div class="container">
+                <div style="display: flex; gap: var(--space-8); align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1.2; min-width: 320px; text-align: center;">
+                        <span class="eyebrow eyebrow-center">Why we exist</span>
+                        <h2 style="font-size: 2.25rem; margin-bottom: var(--space-4);">Our Vision &amp; Mission</h2>
+                        <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.7;">At EduPath, we believe discovering and applying to the perfect school should be an exciting and stress-free milestone for families. Our mission is to standardize, digitize, and simplify the K-12 admission process &mdash; clear comparison metrics, a secure document vault, and unified tracking, so your child's educational future is secured faster.</p>
+                    </div>
+                    <div class="mission-media" style="flex: 0.8; min-width: 300px;">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80" alt="Students learning">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="section" style="background-color: var(--color-bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">What we stand for</span>
+                    <h2>Our Core Values</h2>
+                    <p class="subtext">The operational principles that guide our platform development</p>
+                </div>
+                <div class="values-grid grid-3">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="ph ph-eye"></i></div>
+                        <h3>Transparency</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.95rem; margin-top: var(--space-2);">Clear fees breakdown, precise application timelines, and real-time status trackers so you're never left guessing.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon"><i class="ph ph-shield-check"></i></div>
+                        <h3>Security First</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.95rem; margin-top: var(--space-2);">Your child's transcripts, birth certificates, and ID documents are safely stored in our vault under bank-grade encryption protocols.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon"><i class="ph ph-hand-heart"></i></div>
+                        <h3>Accessibility</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.95rem; margin-top: var(--space-2);">Helping parents apply to any board curriculum—be it CBSE, ICSE, IB, or State boards—within a few clicks on any screen size.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive: Milestone Timeline -->
+        <section class="section interactive-section" id="our-story">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Interactive</span>
+                    <h2>Seven Years, One Idea</h2>
+                    <p class="subtext">Step through the moments that shaped EduPath &mdash; select any year on the rail.</p>
+                </div>
+
+                <div class="milestone-timeline" id="milestoneTimeline">
+                    <div class="milestone-rail" role="tablist" aria-label="Company milestones">
+                        <button type="button" class="milestone-node" role="tab" aria-selected="false" data-year="2019">
+                            <span class="milestone-dot"><i class="ph ph-lightbulb"></i></span>
+                            <span class="milestone-year">2019</span>
+                        </button>
+                        <button type="button" class="milestone-node" role="tab" aria-selected="false" data-year="2021">
+                            <span class="milestone-dot"><i class="ph ph-vault"></i></span>
+                            <span class="milestone-year">2021</span>
+                        </button>
+                        <button type="button" class="milestone-node" role="tab" aria-selected="false" data-year="2023">
+                            <span class="milestone-dot"><i class="ph ph-device-mobile"></i></span>
+                            <span class="milestone-year">2023</span>
+                        </button>
+                        <button type="button" class="milestone-node" role="tab" aria-selected="true" data-year="2026">
+                            <span class="milestone-dot"><i class="ph ph-trophy"></i></span>
+                            <span class="milestone-year">2026</span>
+                        </button>
+                    </div>
+
+                    <div class="milestone-panel" role="tabpanel" aria-live="polite">
+                        <div class="milestone-copy" data-readout="copy"></div>
+                        <figure class="milestone-figure" data-readout="figure"></figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="section" style="background-color: var(--color-bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">The people</span>
+                    <h2>Meet Our Leadership</h2>
+                    <p class="subtext">The passionate team dedicated to redefining school admissions</p>
+                </div>
+                <div class="team-grid grid-3">
+                    <!-- Member 1 -->
+                    <div class="team-card">
+                        <div class="team-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Dr. Aris V." class="team-img">
+                        </div>
+                        <div class="team-info">
+                            <h4>Dr. Aris V.</h4>
+                            <p>Founder & CEO</p>
+                        </div>
+                    </div>
+                    <!-- Member 2 -->
+                    <div class="team-card">
+                        <div class="team-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80" alt="Mark S." class="team-img">
+                        </div>
+                        <div class="team-info">
+                            <h4>Mark S.</h4>
+                            <p>Chief Technology Officer</p>
+                        </div>
+                    </div>
+                    <!-- Member 3 -->
+                    <div class="team-card">
+                        <div class="team-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="Priya N." class="team-img">
+                        </div>
+                        <div class="team-info">
+                            <h4>Priya N.</h4>
+                            <p>Head of School Relations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section" style="background-color: var(--color-brand-accent); color: white; text-align: center; margin: var(--space-8) var(--space-4); border-radius: var(--radius-soft);">
+            <div class="container">
+                <h2 style="color: white; font-family: var(--font-display);">Ready to simplify admissions?</h2>
+                <p style="color: rgba(255,255,255,0.8); font-size: 1.125rem; max-width: 600px; margin: 0 auto var(--space-6);">Join thousands of parents and find the perfect school for your child today.</p>
+                <div class="cta-actions">
+                    <a href="register.html" class="btn cta-btn cta-btn-solid">Register Parent Account</a>
+                    <a href="browse-schools.html" class="btn cta-btn cta-btn-ghost">Browse Schools First</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="navbar-brand">
+                        <i class="ph-fill ph-student"></i> EduPath
+                    </a>
+                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents and top educational institutions.</p>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Admission Blog</a></li>
+                        <li><a href="contact.html">Partner with Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">For Parents</h4>
+                    <ul class="footer-links">
+                        <li><a href="browse-schools.html">Browse Schools</a></li>
+                        <li><a href="parent-dashboard.html">My Applications</a></li>
+                        <li><a href="contact.html">Help & FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPath. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/interactive.js"></script>
+</body>
+</html>

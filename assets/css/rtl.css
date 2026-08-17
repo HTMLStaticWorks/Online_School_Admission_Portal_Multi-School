@@ -19,14 +19,30 @@
   margin-right: auto;
 }
 
-[dir="rtl"] .auth-divider::before {
-  margin-right: 0;
-  margin-left: .5em;
+/* Auth: the password reveal button moves to the other side of the field */
+[dir="rtl"] .password-field .form-control {
+  padding-right: 1rem;
+  padding-left: 3rem;
 }
 
-[dir="rtl"] .auth-divider::after {
-  margin-left: 0;
-  margin-right: .5em;
+[dir="rtl"] .password-toggle {
+  right: auto;
+  left: 0.5rem;
+}
+
+[dir="rtl"] .auth-check,
+[dir="rtl"] .auth-card .form-group {
+  text-align: right;
+}
+
+/* The copy here is English, so let each run resolve its own direction —
+   otherwise trailing punctuation ("Forgot Password?") jumps to the front. */
+[dir="rtl"] .auth-link,
+[dir="rtl"] .auth-footer,
+[dir="rtl"] .auth-check span,
+[dir="rtl"] .auth-header p,
+[dir="rtl"] .auth-card .form-label {
+  unicode-bidi: plaintext;
 }
 
 /* Dashboard Sidebar Flip */

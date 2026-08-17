@@ -16,19 +16,22 @@
     <style>
         .directory-layout {
             display: flex;
-            gap: var(--space-6);
+            gap: var(--space-8);
             align-items: flex-start;
         }
         
         .filter-sidebar {
-            width: 280px;
+            width: 300px;
             flex-shrink: 0;
             background: var(--color-bg-primary);
-            padding: var(--space-5);
+            padding: var(--space-6);
             border-radius: var(--radius-soft);
             border: 1px solid var(--color-border);
             position: sticky;
-            top: 100px; /* Below navbar */
+            top: 88px; /* Clears the 72px sticky navbar */
+            max-height: calc(100vh - 108px);
+            overflow-y: auto;
+            box-shadow: var(--shadow-soft);
         }
         
         .directory-main {
@@ -37,7 +40,7 @@
         
         .filter-group {
             margin-bottom: var(--space-5);
-            padding-bottom: var(--space-4);
+            padding-bottom: var(--space-5);
             border-bottom: 1px solid var(--color-border);
         }
         
@@ -49,10 +52,12 @@
         
         .filter-title {
             font-size: 1rem;
+            font-weight: 700;
             margin-bottom: var(--space-3);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            color: var(--color-text-primary);
         }
         
         .checkbox-item {
@@ -62,17 +67,21 @@
             margin-bottom: var(--space-2);
             color: var(--color-text-secondary);
             cursor: pointer;
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
         }
         
         .checkbox-item input {
             cursor: pointer;
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             accent-color: var(--color-brand-accent);
+            border-radius: 4px;
+            border: 1px solid var(--color-border);
         }
         
         .checkbox-item:hover {
-            color: var(--color-text-primary);
+            color: var(--color-brand-accent);
         }
 
         .view-toggles {
@@ -99,67 +108,352 @@
             background: rgba(45, 74, 34, 0.05);
         }
         
-        /* List View Modifier */
+        /* Directory Main Grid */
         .schools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            /* min() keeps the track from exceeding the container on narrow
+               screens, which a bare 320px minimum would overflow */
+            grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
             gap: var(--space-6);
         }
         
-        .schools-grid.list-view {
-            grid-template-columns: 1fr;
-        }
-        
-        .schools-grid.list-view .school-card {
-            flex-direction: row;
-            text-align: left;
-            align-items: stretch;
-        }
-        
-        [dir="rtl"] .schools-grid.list-view .school-card {
-            text-align: right;
-        }
-        
-        .schools-grid.list-view .school-card-img-wrapper {
-            width: 300px;
-            height: auto;
-        }
-        
-        .schools-grid.list-view .school-card-content {
-            align-items: flex-start;
-        }
-        
-        [dir="rtl"] .schools-grid.list-view .school-card-content {
-            align-items: flex-end;
+        /* Clean Custom School Cards */
+        .school-card {
+            background-color: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-soft);
+            overflow: hidden;
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
-        .schools-grid.list-view .school-actions {
-            justify-content: flex-start;
+        .school-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .school-card-img-wrapper {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .school-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-normal);
+        }
+
+        .school-card:hover .school-card-img {
+            transform: scale(1.05);
+        }
+
+        /* Float Badge over Image */
+        .admission-status-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--color-brand-accent);
+            color: white;
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.725rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .school-card-content {
+            padding: var(--space-5);
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .school-board-tag {
+            align-self: center;
+            background-color: rgba(45, 74, 34, 0.08);
+            color: var(--color-brand-accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-2);
+        }
+
+        .school-name {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: var(--space-1);
+            color: var(--color-text-primary);
+        }
+
+        .school-location {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: var(--space-3);
+        }
+
+        .school-fees {
+            font-weight: 700;
+            color: var(--color-brand-accent);
+            font-size: 1.1rem;
+            margin-top: auto;
+            margin-bottom: var(--space-4);
+            border-top: 1px dashed var(--color-border);
+            padding-top: var(--space-3);
+        }
+
+        .school-actions {
+            display: flex;
+            gap: var(--space-2);
+            width: 100%;
+        }
+
+        .school-actions .btn-primary {
+            border-radius: var(--radius-soft);
+        }
+
+        .btn-shortlist {
+            padding: 0.625rem;
+            flex: 0 0 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-soft);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+            transition: all var(--transition-fast);
+        }
+
+        .btn-shortlist:hover {
+            color: #EF4444;
+            border-color: #EF4444;
+            background: #FEF2F2;
         }
         
-        [dir="rtl"] .schools-grid.list-view .school-actions {
-            justify-content: flex-end;
+        /* --- Directory header --- */
+        .directory-header { margin-bottom: var(--space-6); }
+
+        .directory-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--space-3) var(--space-4);
         }
-        
-        @media (max-width: 1024px) {
+
+        .result-count { color: var(--color-text-secondary); margin: 0; }
+
+        .directory-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .sort-control {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            min-width: 0;
+        }
+
+        .sort-control label {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            white-space: nowrap;
+        }
+
+        .sort-control .form-control {
+            padding: 0.5rem 0.75rem;
+            width: auto;
+            border-radius: var(--radius-soft);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 560px) {
+            .directory-header-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-3);
+            }
+
+            .result-count {
+                text-align: center;
+                font-size: 0.9rem;
+            }
+
+            /* One tidy control bar: sort fills the row, view toggles cap it */
+            .directory-controls {
+                width: 100%;
+                gap: var(--space-2);
+                padding: var(--space-3);
+                background: var(--color-bg-primary);
+                border: 1px solid var(--color-border);
+                border-radius: var(--radius-soft);
+                box-shadow: var(--shadow-soft);
+            }
+
+            .sort-control {
+                flex: 1;
+                min-width: 0;
+                gap: var(--space-2);
+            }
+
+            .sort-control label { font-size: 0.8rem; }
+
+            .sort-control .form-control {
+                flex: 1;
+                width: 100%;
+                min-width: 0;
+            }
+
+            .view-toggles { flex: none; }
+
+            .view-btn {
+                width: 38px;
+                height: 38px;
+                flex: none;
+            }
+        }
+
+        /* --- Filters toggle (small screens only) --- */
+        .filters-bar {
+            display: none;
+            margin-bottom: var(--space-4);
+        }
+
+        .filters-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.8rem 1.1rem;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-soft);
+            color: var(--color-text-primary);
+            box-shadow: var(--shadow-soft);
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .filters-toggle:hover { border-color: var(--color-brand-secondary); }
+
+        .filters-toggle .count {
+            margin-left: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .filters-toggle .caret { transition: transform var(--transition-premium); }
+        .filters-toggle[aria-expanded="true"] .caret { transform: rotate(180deg); }
+
+        /* ============================ 1100px ============================ */
+        /* Keep the two-column directory, just narrow the rail */
+        @media (max-width: 1100px) {
+            .directory-layout { gap: var(--space-6); }
+            .filter-sidebar { width: 250px; padding: var(--space-4); }
+            /* Smaller floor keeps two cards per row once the rail eats width */
+            .schools-grid {
+                gap: var(--space-4);
+                grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            }
+        }
+
+        /* ============================= 900px ============================= */
+        /* Rail no longer earns its width — collapse it behind a toggle so the
+           results stay at the top of the page instead of below a tall panel. */
+        @media (max-width: 900px) {
             .directory-layout {
                 flex-direction: column;
+                gap: 0;
+                /* flex-start on a column flex sizes children to their content,
+                   which left the grid narrower than the page. Stretch instead. */
+                align-items: stretch;
             }
+
+            .directory-main { width: 100%; min-width: 0; }
+
+            .filters-bar { display: block; }
+
             .filter-sidebar {
                 width: 100%;
                 position: static;
+                display: none;
+                margin-bottom: var(--space-5);
             }
-            .schools-grid.list-view .school-card {
-                flex-direction: column;
-                text-align: center;
+
+            .filter-sidebar.is-open { display: block; }
+
+            /* Filter groups sit side by side rather than in one long column */
+            .filter-sidebar .filter-group {
+                margin-bottom: var(--space-4);
+                padding-bottom: var(--space-4);
             }
-            .schools-grid.list-view .school-card-img-wrapper {
-                width: 100%;
-                height: 200px;
+        }
+
+        @media (min-width: 641px) and (max-width: 900px) {
+            .filter-sidebar.is-open {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0 var(--space-6);
+                align-items: start;
             }
-            .schools-grid.list-view .school-card-content {
-                align-items: center;
+
+            .filter-sidebar .filter-group:nth-last-child(2) { border-bottom: none; }
+            .filter-sidebar > .btn { grid-column: 1 / -1; }
+        }
+
+        /* --- Pagination --- */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-top: var(--space-8);
+        }
+
+        .pagination .btn { padding: 0.5rem 1rem; }
+        .pagination .page-num { min-width: 44px; padding: 0.5rem 0.75rem; }
+        .pagination .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .pagination .btn:disabled:hover { transform: none; box-shadow: none; }
+
+        .page-gap {
+            padding: 0.5rem 0.25rem;
+            color: var(--color-text-secondary);
+        }
+
+        @media (max-width: 480px) {
+            /* Page numbers on one row, the step buttons spanning below it */
+            .pagination { gap: 0.4rem; }
+            .pagination .page-step {
+                order: 1;
+                flex: 1 1 45%;
             }
+            .pagination .page-num,
+            .pagination .page-gap { order: 0; }
+            .pagination .page-num { min-width: 40px; padding: 0.45rem 0.6rem; }
+        }
+
+        /* ============================= 480px ============================= */
+        @media (max-width: 480px) {
+            .school-card-img-wrapper { height: 180px; }
+            .school-card-content { padding: var(--space-4); }
+            .school-name { font-size: 1.2rem; }
+            .school-fees { font-size: 1rem; }
         }
     </style>
 </head>
@@ -175,10 +469,11 @@
                 <ul class="navbar-nav">
                     <li><a href="index.html" class="nav-link">Home</a></li>
                     <li><a href="home2.html" class="nav-link">Home 2</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
                     <li><a href="browse-schools.html" class="nav-link active">Browse Schools</a></li>
-                    <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li><a href="contact.html" class="nav-link">Help</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="parent-dashboard.html" class="nav-link">Dashboard</a></li>
                 </ul>
                 <div class="navbar-actions">
                     <button class="theme-toggle" aria-label="Toggle Theme">
@@ -187,7 +482,6 @@
                     <button class="rtl-toggle" aria-label="Toggle RTL">
                         <i class="ph ph-arrows-left-right"></i>
                     </button>
-                    <a href="parent-dashboard.html" class="btn btn-ghost">Dashboard</a>
                     <a href="login.html" class="btn btn-primary">Login</a>
                 </div>
             </nav>
@@ -213,10 +507,11 @@
         <nav class="drawer-nav">
             <a href="index.html" class="nav-link">Home</a>
             <a href="home2.html" class="nav-link">Home 2</a>
+            <a href="about.html" class="nav-link">About</a>
             <a href="browse-schools.html" class="nav-link active">Browse Schools</a>
-            <a href="index.html#how-it-works" class="nav-link">How It Works</a>
             <a href="blog.html" class="nav-link">Blog</a>
-            <a href="contact.html" class="nav-link">Help</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="parent-dashboard.html" class="nav-link">Dashboard</a>
         </nav>
         <div class="drawer-actions">
             <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-4);">
@@ -227,23 +522,29 @@
                     <i class="ph ph-arrows-left-right"></i>
                 </button>
             </div>
-            <a href="parent-dashboard.html" class="btn btn-outline" style="width: 100%;">Dashboard</a>
             <a href="login.html" class="btn btn-primary" style="width: 100%;">Login</a>
         </div>
     </div>
 
     <!-- Main Content -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="eyebrow eyebrow-center">The directory</span>
+            <h1>Browse Schools</h1>
+            <p class="page-hero-lead">Compare 142 partner schools by board, fees, distance, and facilities &mdash; then apply with one profile.</p>
+        </div>
+    </section>
+
     <main class="section" style="padding-top: var(--space-6);">
         <div class="container">
             <!-- Directory Header -->
-            <div style="margin-bottom: var(--space-6);">
-                <h1 style="margin-bottom: var(--space-2);">Browse Schools</h1>
-                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4);">
-                    <p style="color: var(--color-text-secondary); margin: 0;">Showing 1-12 of 142 schools</p>
-                    <div style="display: flex; align-items: center; gap: var(--space-4);">
-                        <div style="display: flex; align-items: center; gap: var(--space-2);">
-                            <span style="color: var(--color-text-secondary); font-size: 0.875rem;">Sort by:</span>
-                            <select class="form-control" style="padding: 0.5rem; width: auto; border-radius: var(--radius-soft);">
+            <div class="directory-header">
+                <div class="directory-header-row">
+                    <p class="result-count">Showing 1-12 of 142 schools</p>
+                    <div class="directory-controls">
+                        <div class="sort-control">
+                            <label for="sortBy">Sort by:</label>
+                            <select class="form-control" id="sortBy">
                                 <option>Recommended</option>
                                 <option>Rating (High to Low)</option>
                                 <option>Fee (Low to High)</option>
@@ -251,10 +552,10 @@
                             </select>
                         </div>
                         <div class="view-toggles">
-                            <button class="view-btn active" id="gridViewBtn" aria-label="Grid View">
+                            <button type="button" class="view-btn active" id="gridViewBtn" aria-label="Grid View" aria-pressed="true">
                                 <i class="ph-fill ph-squares-four"></i>
                             </button>
-                            <button class="view-btn" id="listViewBtn" aria-label="List View">
+                            <button type="button" class="view-btn" id="listViewBtn" aria-label="List View" aria-pressed="false">
                                 <i class="ph-fill ph-list"></i>
                             </button>
                         </div>
@@ -263,8 +564,21 @@
             </div>
 
             <div class="directory-layout">
+                <!-- Filters toggle: replaces the rail below 900px -->
+                <div class="filters-bar">
+                    <button type="button" class="filters-toggle" id="filtersToggle"
+                            aria-expanded="false" aria-controls="filterSidebar">
+                        <i class="ph ph-sliders-horizontal"></i>
+                        <span>Filters</span>
+                        <span class="count">
+                            <span>1 applied</span>
+                            <i class="ph ph-caret-down caret"></i>
+                        </span>
+                    </button>
+                </div>
+
                 <!-- Filter Sidebar -->
-                <aside class="filter-sidebar">
+                <aside class="filter-sidebar" id="filterSidebar">
                     <div class="filter-group">
                         <div class="filter-title">
                             <strong>Location</strong>
@@ -320,7 +634,8 @@
                         <!-- School Card 1 -->
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Oakridge International School" class="school-card-img">
+                                <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80" alt="Oakridge International School" class="school-card-img">
+                                <span class="admission-status-badge" style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">IB / Cambridge</span>
@@ -334,7 +649,7 @@
                                 </div>
                                 <div class="school-fees">$12,000 - $18,000 / year</div>
                                 <div class="school-actions">
-                                    <button class="btn btn-outline" style="padding: 0.625rem; flex: 0 0 44px;" title="Shortlist"><i class="ph ph-heart"></i></button>
+                                    <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
                                     <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
                                 </div>
                             </div>
@@ -344,6 +659,7 @@
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
                                 <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Delhi Public School" class="school-card-img">
+                                <span class="admission-status-badge" style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">CBSE</span>
@@ -357,7 +673,7 @@
                                 </div>
                                 <div class="school-fees">$5,000 - $8,000 / year</div>
                                 <div class="school-actions">
-                                    <button class="btn btn-outline" style="padding: 0.625rem; flex: 0 0 44px;" title="Shortlist"><i class="ph ph-heart"></i></button>
+                                    <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
                                     <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
                                 </div>
                             </div>
@@ -366,7 +682,8 @@
                         <!-- School Card 3 -->
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1546410531-bea4edad646a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="St. Mary's High School" class="school-card-img">
+                                <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=800&q=80" alt="St. Mary's High School" class="school-card-img">
+                                <span class="admission-status-badge" style="background-color: var(--color-status-applied); color: white;">FEW SEATS LEFT</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">ICSE</span>
@@ -380,7 +697,7 @@
                                 </div>
                                 <div class="school-fees">$4,500 - $7,000 / year</div>
                                 <div class="school-actions">
-                                    <button class="btn btn-outline" style="padding: 0.625rem; flex: 0 0 44px;" title="Shortlist"><i class="ph ph-heart"></i></button>
+                                    <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
                                     <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
                                 </div>
                             </div>
@@ -390,6 +707,7 @@
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
                                 <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Greenwood High" class="school-card-img">
+                                <span class="admission-status-badge" style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">IB / ICSE</span>
@@ -403,7 +721,7 @@
                                 </div>
                                 <div class="school-fees">$9,000 - $14,000 / year</div>
                                 <div class="school-actions">
-                                    <button class="btn btn-outline" style="padding: 0.625rem; flex: 0 0 44px;" title="Shortlist"><i class="ph ph-heart"></i></button>
+                                    <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
                                     <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
                                 </div>
                             </div>
@@ -413,6 +731,7 @@
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
                                 <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="National Public School" class="school-card-img">
+                                <span class="admission-status-badge" style="background-color: var(--color-status-waitlist); color: black;">LAST CALL</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">CBSE</span>
@@ -426,7 +745,7 @@
                                 </div>
                                 <div class="school-fees">$6,000 - $9,000 / year</div>
                                 <div class="school-actions">
-                                    <button class="btn btn-outline" style="padding: 0.625rem; flex: 0 0 44px;" title="Shortlist"><i class="ph ph-heart"></i></button>
+                                    <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
                                     <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
                                 </div>
                             </div>
@@ -436,6 +755,7 @@
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
                                 <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bishop Cotton Boys' School" class="school-card-img">
+                                <span class="admission-status-badge" style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">ICSE</span>
@@ -449,7 +769,7 @@
                                 </div>
                                 <div class="school-fees">$5,500 - $8,500 / year</div>
                                 <div class="school-actions">
-                                    <button class="btn btn-outline" style="padding: 0.625rem; flex: 0 0 44px;" title="Shortlist"><i class="ph ph-heart"></i></button>
+                                    <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
                                     <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
                                 </div>
                             </div>
@@ -457,15 +777,15 @@
                     </div>
 
                     <!-- Pagination -->
-                    <div style="display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-8);">
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem;" disabled>&larr; Prev</button>
-                        <button class="btn btn-primary" style="padding: 0.5rem 1rem;">1</button>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem;">2</button>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem;">3</button>
-                        <span style="padding: 0.5rem 1rem; color: var(--color-text-secondary);">...</span>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem;">12</button>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem;">Next &rarr;</button>
-                    </div>
+                    <nav class="pagination" aria-label="Pagination">
+                        <button class="btn btn-outline page-step" disabled>&larr; Prev</button>
+                        <button class="btn btn-primary page-num" aria-current="page">1</button>
+                        <button class="btn btn-outline page-num">2</button>
+                        <button class="btn btn-outline page-num">3</button>
+                        <span class="page-gap">&hellip;</span>
+                        <button class="btn btn-outline page-num">12</button>
+                        <button class="btn btn-outline page-step">Next &rarr;</button>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -514,25 +834,46 @@
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
     <script>
-        // Grid/List View Toggle Script
         document.addEventListener('DOMContentLoaded', () => {
-            const gridViewBtn = document.getElementById('gridViewBtn');
-            const listViewBtn = document.getElementById('listViewBtn');
-            const schoolsGrid = document.getElementById('schoolsGrid');
+            // View toggles are presentational: clicking one just moves the
+            // highlight, the results layout stays as it is.
+            const viewBtns = document.querySelectorAll('.view-btn');
 
-            if (gridViewBtn && listViewBtn && schoolsGrid) {
-                gridViewBtn.addEventListener('click', () => {
-                    schoolsGrid.classList.remove('list-view');
-                    gridViewBtn.classList.add('active');
-                    listViewBtn.classList.remove('active');
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    viewBtns.forEach(b => {
+                        const on = b === btn;
+                        b.classList.toggle('active', on);
+                        b.setAttribute('aria-pressed', String(on));
+                    });
                 });
+            });
 
-                listViewBtn.addEventListener('click', () => {
-                    schoolsGrid.classList.add('list-view');
-                    listViewBtn.classList.add('active');
-                    gridViewBtn.classList.remove('active');
+            // Filters panel — only rendered below 900px, where the rail collapses
+            const filtersToggle = document.getElementById('filtersToggle');
+            const filterSidebar = document.getElementById('filterSidebar');
+
+            if (filtersToggle && filterSidebar) {
+                filtersToggle.addEventListener('click', () => {
+                    const open = filterSidebar.classList.toggle('is-open');
+                    filtersToggle.setAttribute('aria-expanded', String(open));
                 });
             }
+
+            // Keep the applied-filter count on the toggle honest
+            const boxes = filterSidebar
+                ? filterSidebar.querySelectorAll('input[type="checkbox"]')
+                : [];
+            const countEl = filtersToggle && filtersToggle.querySelector('.count > span');
+
+            const syncCount = () => {
+                if (!countEl) return;
+                const n = [...boxes].filter(b => b.checked).length;
+                countEl.textContent = n === 0 ? 'None applied' : n + ' applied';
+            };
+
+            boxes.forEach(b => b.addEventListener('change', syncCount));
+            syncCount();
         });
     </script>
 </body>

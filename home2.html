@@ -1,52 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduPath | Multi-School Admission Portal</title>
-    <meta name="description" content="Discover, shortlist, and apply to top schools seamlessly with EduPath's unified admission portal.">
-    
+    <meta name="description"
+        content="Discover, shortlist, and apply to top schools seamlessly with EduPath's unified admission portal.">
+
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/rtl.css">
-    
+
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <style>
         /* Home 2 specific styles */
-        .hero-split {
-            display: flex;
-            min-height: calc(100vh - 80px);
-            background-color: var(--color-bg-primary);
-        }
-        
-        .hero-split-content {
-            flex: 1;
-            padding: var(--space-10) var(--space-8);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .hero-split-image {
-            flex: 1;
-            position: relative;
-            display: none;
-        }
-        
-        @media (min-width: 1024px) {
-            .hero-split-image {
-                display: block;
-            }
-        }
-        
-        .hero-split-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
         .hero-search-card {
             background: var(--color-bg-primary);
             padding: var(--space-6);
@@ -56,12 +26,13 @@
             margin-top: var(--space-6);
             max-width: 500px;
         }
-        
+
         [data-theme="dark"] .hero-search-card {
             background: var(--color-bg-secondary);
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <header class="navbar">
@@ -69,15 +40,16 @@
             <a href="index.html" class="navbar-brand">
                 <i class="ph-fill ph-student"></i> EduPath
             </a>
-            
+
             <nav class="navbar-menu">
                 <ul class="navbar-nav">
                     <li><a href="index.html" class="nav-link">Home</a></li>
                     <li><a href="home2.html" class="nav-link active">Home 2</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
                     <li><a href="browse-schools.html" class="nav-link">Browse Schools</a></li>
-                    <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li><a href="contact.html" class="nav-link">Help</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="parent-dashboard.html" class="nav-link">Dashboard</a></li>
                 </ul>
                 <div class="navbar-actions">
                     <button class="theme-toggle" aria-label="Toggle Theme">
@@ -86,11 +58,10 @@
                     <button class="rtl-toggle" aria-label="Toggle RTL">
                         <i class="ph ph-arrows-left-right"></i>
                     </button>
-                    <a href="parent-dashboard.html" class="btn btn-ghost">Dashboard</a>
                     <a href="login.html" class="btn btn-primary">Login</a>
                 </div>
             </nav>
-            
+
             <!-- Mobile Toggle -->
             <button class="nav-toggle" aria-label="Open Menu">
                 <i class="ph ph-list"></i>
@@ -112,10 +83,11 @@
         <nav class="drawer-nav">
             <a href="index.html" class="nav-link">Home</a>
             <a href="home2.html" class="nav-link active">Home 2</a>
+            <a href="about.html" class="nav-link">About</a>
             <a href="browse-schools.html" class="nav-link">Browse Schools</a>
-            <a href="index.html#how-it-works" class="nav-link">How It Works</a>
             <a href="blog.html" class="nav-link">Blog</a>
-            <a href="contact.html" class="nav-link">Help</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="parent-dashboard.html" class="nav-link">Dashboard</a>
         </nav>
         <div class="drawer-actions">
             <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-4);">
@@ -126,7 +98,6 @@
                     <i class="ph ph-arrows-left-right"></i>
                 </button>
             </div>
-            <a href="parent-dashboard.html" class="btn btn-outline" style="width: 100%;">Dashboard</a>
             <a href="login.html" class="btn btn-primary" style="width: 100%;">Login</a>
         </div>
     </div>
@@ -134,38 +105,50 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section 2 -->
-        <section class="hero-split">
-            <div class="hero-split-content">
-                <h1 style="font-size: 3.5rem; margin-bottom: var(--space-4);">Find the Right Path for Their Future</h1>
-                <p style="color: var(--color-text-secondary); font-size: 1.25rem; max-width: 500px;">The unified admission portal for exploring, shortlisting, and applying to the best schools in your city.</p>
-                
-                <div class="hero-search-card">
-                    <h4 style="margin-bottom: var(--space-4);">Start your search</h4>
-                    <div class="form-group">
-                        <label class="form-label">Location</label>
-                        <div style="position: relative;">
-                            <i class="ph ph-map-pin" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary);"></i>
-                            <input type="text" class="form-control" placeholder="Enter city or zip code" style="padding-left: 2.5rem;">
+        <section class="hero-bg hero-bg--left"
+            style="--hero-image: url('https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=2000&q=80'); --hero-position: center right;">
+            <div class="container">
+                <div class="hero-bg-inner">
+                    <span class="eyebrow">Admissions, unified</span>
+                    <h1 style="margin-bottom: var(--space-4);">Find the Right Path for Their Future</h1>
+                    <p class="hero-lead" style="max-width: 500px;">The unified admission portal for exploring,
+                        shortlisting, and applying to the best schools in your city.</p>
+
+                    <div class="hero-search-card">
+                        <h4 style="margin-bottom: var(--space-4);">Start your search</h4>
+                        <div class="form-group">
+                            <label class="form-label">Location</label>
+                            <div style="position: relative;">
+                                <i class="ph ph-map-pin"
+                                    style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary);"></i>
+                                <input type="text" class="form-control" placeholder="Enter city or zip code"
+                                    style="padding-left: 2.5rem;">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Curriculum</label>
-                        <div style="position: relative;">
-                            <i class="ph ph-books" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary);"></i>
-                            <select class="form-control" style="padding-left: 2.5rem; cursor: pointer;">
-                                <option value="">All Curriculums</option>
-                                <option value="cbse">CBSE</option>
-                                <option value="icse">ICSE</option>
-                                <option value="ib">IB / Cambridge</option>
-                                <option value="state">State Board</option>
-                            </select>
+                        <div class="form-group">
+                            <label class="form-label">Curriculum</label>
+                            <div style="position: relative;">
+                                <i class="ph ph-books"
+                                    style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary);"></i>
+                                <select class="form-control" style="padding-left: 2.5rem; cursor: pointer;">
+                                    <option value="">All Curriculums</option>
+                                    <option value="cbse">CBSE</option>
+                                    <option value="icse">ICSE</option>
+                                    <option value="ib">IB / Cambridge</option>
+                                    <option value="state">State Board</option>
+                                </select>
+                            </div>
                         </div>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: var(--space-2);">Search
+                            Schools</button>
                     </div>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: var(--space-2);">Search Schools</button>
+
+                    <div class="hero-trust">
+                        <span><i class="ph-fill ph-buildings"></i> 500+ partner schools</span>
+                        <span><i class="ph-fill ph-files"></i> 120k+ applications</span>
+                        <span><i class="ph-fill ph-star"></i> 4.9/5 parent rating</span>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-split-image">
-                <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80" alt="Students learning" class="hero-split-img">
             </div>
         </section>
 
@@ -173,15 +156,17 @@
         <section class="section" style="background-color: var(--color-bg-secondary);">
             <div class="container">
                 <div class="section-header">
+                    <span class="eyebrow">This week</span>
                     <h2>Trending Admissions</h2>
                     <p class="subtext">Schools with the highest parent interest this week</p>
                 </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-6);">
+
+                <div class="grid-3">
                     <!-- School Card 1 -->
                     <div class="school-card">
                         <div class="school-card-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Oakridge International School" class="school-card-img">
+                            <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80"
+                                alt="Oakridge International School" class="school-card-img">
                         </div>
                         <div class="school-card-content">
                             <span class="school-board-tag">IB / Cambridge</span>
@@ -198,7 +183,8 @@
                     <!-- School Card 2 -->
                     <div class="school-card">
                         <div class="school-card-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Delhi Public School" class="school-card-img">
+                            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Delhi Public School" class="school-card-img">
                         </div>
                         <div class="school-card-content">
                             <span class="school-board-tag">CBSE</span>
@@ -215,7 +201,8 @@
                     <!-- School Card 3 -->
                     <div class="school-card">
                         <div class="school-card-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1546410531-bea4edad646a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="St. Mary's High School" class="school-card-img">
+                            <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=800&q=80"
+                                alt="St. Mary's High School" class="school-card-img">
                         </div>
                         <div class="school-card-content">
                             <span class="school-board-tag">ICSE</span>
@@ -231,6 +218,344 @@
                 </div>
             </div>
         </section>
+
+        <!-- Stats Banner Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">By the numbers</span>
+                    <h2>EduPath at a Glance</h2>
+                    <p class="subtext">What the platform has added up to for families so far</p>
+                </div>
+                <div class="stats-banner">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <h3>500+</h3>
+                            <p>Partner Schools</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>120k+</h3>
+                            <p>Applications Submitted</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>15 Days</h3>
+                            <p>Average Admission Time</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>4.9/5</h3>
+                            <p>Parent Rating</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive: Admission Cost Estimator -->
+        <section class="section interactive-section" id="cost-estimator"
+            style="background-color: var(--color-bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Interactive</span>
+                    <h2>Estimate the Real Cost of Year One</h2>
+                    <p class="subtext">Tuition is only part of it. Move the controls and watch the full first-year
+                        figure rebuild itself.</p>
+                </div>
+
+                <div class="interactive-shell" id="costEstimator">
+                    <!-- Controls -->
+                    <div class="interactive-panel">
+                        <span class="panel-label">Your situation</span>
+
+                        <div class="control-block">
+                            <div class="control-title">
+                                <span>Curriculum</span>
+                                <span class="control-value" data-readout="board">CBSE</span>
+                            </div>
+                            <div class="chip-row" data-group="board" data-mode="single">
+                                <button type="button" class="chip" aria-pressed="true" data-value="cbse">CBSE</button>
+                                <button type="button" class="chip" aria-pressed="false" data-value="icse">ICSE</button>
+                                <button type="button" class="chip" aria-pressed="false" data-value="ib">IB /
+                                    Cambridge</button>
+                                <button type="button" class="chip" aria-pressed="false" data-value="state">State
+                                    Board</button>
+                            </div>
+                        </div>
+
+                        <div class="control-block">
+                            <div class="control-title">
+                                <span>Grade band</span>
+                                <span class="control-value" data-readout="grade">Grade 1 &ndash; 5</span>
+                            </div>
+                            <div class="chip-row" data-group="grade" data-mode="single">
+                                <button type="button" class="chip" aria-pressed="false" data-value="early">Nursery
+                                    &ndash; KG</button>
+                                <button type="button" class="chip" aria-pressed="true" data-value="primary">Grade 1
+                                    &ndash; 5</button>
+                                <button type="button" class="chip" aria-pressed="false" data-value="middle">Grade 6
+                                    &ndash; 8</button>
+                                <button type="button" class="chip" aria-pressed="false" data-value="senior">Grade 9
+                                    &ndash; 12</button>
+                            </div>
+                        </div>
+
+                        <div class="control-block">
+                            <div class="control-title">
+                                <span>City tier</span>
+                                <span class="control-value" data-readout="city">Metro</span>
+                            </div>
+                            <div class="chip-row" data-group="city" data-mode="single">
+                                <button type="button" class="chip" aria-pressed="true" data-value="metro">Metro</button>
+                                <button type="button" class="chip" aria-pressed="false" data-value="tier2">Tier 2
+                                    city</button>
+                                <button type="button" class="chip" aria-pressed="false" data-value="tier3">Tier 3 /
+                                    town</button>
+                            </div>
+                        </div>
+
+                        <div class="control-block">
+                            <div class="control-title">
+                                <span>Add-ons</span>
+                                <span class="control-value" data-readout="addons">None</span>
+                            </div>
+                            <div class="chip-row" data-group="addon" data-mode="multi">
+                                <button type="button" class="chip" aria-pressed="false" data-value="transport">School
+                                    bus</button>
+                                <button type="button" class="chip" aria-pressed="false" data-value="meals">Meal
+                                    plan</button>
+                                <button type="button" class="chip" aria-pressed="false"
+                                    data-value="boarding">Boarding</button>
+                                <button type="button" class="chip" aria-pressed="false"
+                                    data-value="coaching">After-school coaching</button>
+                            </div>
+                        </div>
+
+                        <div class="control-block">
+                            <div class="control-title">
+                                <label for="siblingRange">Children applying</label>
+                                <span class="control-value" data-readout="children">1</span>
+                            </div>
+                            <input type="range" class="range-input" id="siblingRange" min="1" max="3" step="1"
+                                value="1">
+                            <div class="range-scale">
+                                <span>1 child</span>
+                                <span>3 children</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live result -->
+                    <div class="interactive-panel">
+                        <span class="panel-label">Estimated first year</span>
+                        <div class="result-headline" data-readout="total">$0</div>
+                        <p class="result-sub" data-readout="permonth">&mdash;</p>
+
+                        <div class="cost-bar" aria-hidden="true" data-readout="bar"></div>
+                        <div class="cost-legend" data-readout="legend" aria-live="polite"></div>
+
+                        <div class="result-divider"></div>
+
+                        <div class="result-row">
+                            <div class="row-icon"><i class="ph ph-seal-percent"></i></div>
+                            <div class="row-main">
+                                <div class="row-title">Sibling &amp; early-bird savings</div>
+                                <div class="row-meta" data-readout="savingsnote">Applies from the second child onward
+                                </div>
+                            </div>
+                            <div class="row-value" data-readout="savings">&minus;$0</div>
+                        </div>
+
+                        <p style="font-size: 0.75rem; color: var(--color-text-secondary); margin-top: var(--space-3);">
+                            Indicative figures based on published fee ranges across EduPath partner schools. Actual fees
+                            are confirmed on each school's page.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deadlines Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Don't miss these</span>
+                    <h2>Upcoming Admission Deadlines</h2>
+                    <p class="subtext">Stay ahead of dates and secure your application slots early</p>
+                </div>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <!-- Deadline Card 1 -->
+                    <div class="deadline-card">
+                        <div class="deadline-meta">
+                            <div class="deadline-date-badge">
+                                28
+                                <span>Aug</span>
+                            </div>
+                            <div class="deadline-info">
+                                <h4>Delhi Public School Admissions Close</h4>
+                                <p>Grade K-8. CBSE board admissions for regional quota seat allocation.</p>
+                            </div>
+                        </div>
+                        <span class="deadline-tag"
+                            style="background-color: var(--color-status-reject-bg); color: var(--color-status-reject);">3
+                            Days Left</span>
+                    </div>
+
+                    <!-- Deadline Card 2 -->
+                    <div class="deadline-card">
+                        <div class="deadline-meta">
+                            <div class="deadline-date-badge">
+                                05
+                                <span>Sep</span>
+                            </div>
+                            <div class="deadline-info">
+                                <h4>Oakridge International Merit Scholarship Test</h4>
+                                <p>Registration for grade 9 to 11 scholarship evaluation applications.</p>
+                            </div>
+                        </div>
+                        <span class="deadline-tag"
+                            style="background-color: var(--color-status-waitlist-bg); color: var(--color-status-waitlist);">10
+                            Days Left</span>
+                    </div>
+
+                    <!-- Deadline Card 3 -->
+                    <div class="deadline-card">
+                        <div class="deadline-meta">
+                            <div class="deadline-date-badge">
+                                12
+                                <span>Sep</span>
+                            </div>
+                            <div class="deadline-info">
+                                <h4>St. Mary's High School Phase 2 Admission</h4>
+                                <p>ICSE Board Nursery & Kindergarten application window opening.</p>
+                            </div>
+                        </div>
+                        <span class="deadline-tag"
+                            style="background-color: var(--color-status-admitted-bg); color: var(--color-status-admitted);">Upcoming</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section" style="background-color: var(--color-bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Parent stories</span>
+                    <h2>Admissions, in Their Words</h2>
+                    <p class="subtext">Families who moved from stacks of paperwork to a single confirmed seat</p>
+                </div>
+
+                <!-- Featured story -->
+                <div class="testimonial-feature">
+                    <figure class="testimonial-photo">
+                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=80"
+                            alt="A family photographed together outdoors">
+                        <div class="testimonial-photo-badge">
+                            <i class="ph-fill ph-clock-countdown"></i>
+                            <span>Seat confirmed in <strong>11 days</strong></span>
+                        </div>
+                    </figure>
+
+                    <div class="testimonial-body">
+                        <div class="testimonial-mark"><i class="ph-fill ph-quotes"></i></div>
+                        <blockquote>
+                            We were quoted six weeks and four separate visits. EduPath got our son a confirmed seat at
+                            our first-choice school in eleven days &mdash; and I never printed a single document.
+                        </blockquote>
+                        <div class="testimonial-stars" aria-label="Rated 5 out of 5">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80"
+                                alt="Anita Rao">
+                            <div>
+                                <div class="who">Anita Rao</div>
+                                <div class="where"><i class="ph-fill ph-graduation-cap"></i> Grade 4 &middot; Delhi
+                                    Public School</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Short quotes -->
+                <div class="testimonial-mini-grid grid-3">
+                    <div class="testimonial-mini">
+                        <div class="testimonial-stars" aria-label="Rated 5 out of 5">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i>
+                        </div>
+                        <p>&ldquo;The fee estimator was the first honest number anyone gave us. No surprise charges when
+                            the invoice actually arrived.&rdquo;</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&q=80"
+                                alt="Daniel Mensah">
+                            <div>
+                                <div class="who">Daniel Mensah</div>
+                                <div class="where"><i class="ph-fill ph-graduation-cap"></i> Grade 1 &middot; Greenwood
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-mini">
+                        <div class="testimonial-stars" aria-label="Rated 5 out of 5">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i>
+                        </div>
+                        <p>&ldquo;Two children, two boards, one login. The vault meant I uploaded their birth
+                            certificates exactly once.&rdquo;</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80"
+                                alt="Rohit Malhotra">
+                            <div>
+                                <div class="who">Rohit Malhotra</div>
+                                <div class="where"><i class="ph-fill ph-graduation-cap"></i> Grades 3 &amp; 7 &middot;
+                                    Oakridge</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-mini">
+                        <div class="testimonial-stars" aria-label="Rated 4 out of 5">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph ph-star"></i>
+                        </div>
+                        <p>&ldquo;We missed a deadline last year doing this on our own. This time the dashboard nudged
+                            us a week ahead.&rdquo;</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80"
+                                alt="Leila Haddad">
+                            <div>
+                                <div class="who">Leila Haddad</div>
+                                <div class="where"><i class="ph-fill ph-graduation-cap"></i> Grade 9 &middot; St. Mary's
+                                    High</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section"
+            style="background-color: var(--color-brand-accent); color: white; text-align: center; margin: var(--space-8) var(--space-4); border-radius: var(--radius-soft);">
+            <div class="container">
+                <h2 style="color: white; font-family: var(--font-display);">One profile. Every school on your shortlist.
+                </h2>
+                <p
+                    style="color: rgba(255,255,255,0.8); font-size: 1.125rem; max-width: 600px; margin: 0 auto var(--space-6);">
+                    Fill in your child's details once, upload documents to the vault, and track every application from a
+                    single dashboard.</p>
+                <div class="cta-actions">
+                    <a href="register.html" class="btn cta-btn cta-btn-solid">Start Your Application</a>
+                    <a href="parent-dashboard.html" class="btn cta-btn cta-btn-ghost">See the Dashboard</a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -241,14 +566,16 @@
                     <a href="index.html" class="navbar-brand">
                         <i class="ph-fill ph-student"></i> EduPath
                     </a>
-                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents and top educational institutions.</p>
-                    <div style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
+                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents
+                        and top educational institutions.</p>
+                    <div
+                        style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
                         <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
                         <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
                         <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
                     </div>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">Platform</h4>
                     <ul class="footer-links">
@@ -257,7 +584,7 @@
                         <li><a href="contact.html">Partner with Us</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">For Parents</h4>
                     <ul class="footer-links">
@@ -266,7 +593,7 @@
                         <li><a href="contact.html">Help & FAQ</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">Legal</h4>
                     <ul class="footer-links">
@@ -284,5 +611,7 @@
 
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/interactive.js"></script>
 </body>
+
 </html>
