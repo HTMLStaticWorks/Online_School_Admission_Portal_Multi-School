@@ -133,6 +133,29 @@
             gap: 0.4rem;
         }
 
+        /* Reserving line counts above only lines the rows up while every title
+           and excerpt wraps to the expected number of lines — at narrower
+           widths they wrap to three and the meta rows drift apart. Subgrid
+           makes the card share the grid rows, so each band is sized by the
+           tallest card in the row and titles, excerpts, dates and buttons all
+           end level regardless of how the text wraps. */
+        @supports (grid-template-rows: subgrid) {
+            .blog-card {
+                grid-row: span 6;
+                display: grid;
+                grid-template-rows: subgrid;
+                row-gap: 0;
+            }
+
+            .blog-card-body {
+                grid-row: span 5;
+                display: grid;
+                grid-template-rows: subgrid;
+                row-gap: 0;
+                justify-items: center;
+            }
+        }
+
         .blog-card:hover .blog-card-btn {
             background: var(--color-brand-accent);
             border-color: var(--color-brand-accent);

@@ -71,6 +71,10 @@
 
   /* Premium accents */
   --color-brass: #B08D57;          /* Muted brass for hairlines & marks */
+  /* Brass reads as a hairline, not as text: at 12px uppercase it only clears
+     ~3:1 on the cream grounds. Eyebrows use this deepened cut instead, which
+     holds 4.6:1 on bg-secondary and 5.1:1 on bg-primary. */
+  --color-eyebrow: #8A6520;
   --color-accent-tint: rgba(45, 74, 34, 0.07);
   --color-secondary-tint: rgba(232, 156, 131, 0.14);
   --surface-elevated: #FFFFFF;
@@ -104,6 +108,8 @@
   --color-brand-accent: #3C6330;
   --color-brand-accent-hover: #4A7A3B;
   --color-accent-ink: #9CC784;
+  /* Same swap in reverse — brass is lifted so it carries on the dark ground */
+  --color-eyebrow: #D8B078;
 
   --shadow-soft:
     0 1px 2px rgba(0, 0, 0, 0.5),
@@ -163,6 +169,10 @@ button {
   cursor: pointer;
   background: none;
   border: none;
+  /* Without this a button keeps the UA ButtonText colour rather than the
+     theme ink, so any button whose label is not explicitly coloured turns
+     near-black on the dark surfaces (e.g. the dashboard message list). */
+  color: inherit;
 }
 
 a {
@@ -823,6 +833,35 @@ p:last-child { margin-bottom: 0; }
 
 .dash-table-wrapper {
   overflow-x: auto;
+  /* The global scrollbar is a thin --color-border thumb on a transparent
+     track, which disappears against the dark card and reads as a cropped
+     table. Give the data tables a scrollbar in the secondary brand colour
+     so the fact that there is more to the right is obvious. */
+  scrollbar-color: var(--color-brand-secondary) var(--color-bg-secondary);
+  scrollbar-width: thin;
+}
+
+.dash-table-wrapper::-webkit-scrollbar { height: 10px; }
+
+.dash-table-wrapper::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-full);
+}
+
+.dash-table-wrapper::-webkit-scrollbar-thumb {
+  background: var(--color-brand-secondary);
+  border: none;
+  border-radius: var(--radius-full);
+}
+
+.dash-table-wrapper::-webkit-scrollbar-thumb:hover { background: var(--color-brand-accent); }
+
+/* Tablet widths are where these tables overflow but the platform still hides
+   its overlay scrollbars until a scroll starts. Reserving the track keeps the
+   affordance on screen the whole time. Below 769px the tables restack as
+   record cards and no longer overflow, so the track would sit there empty. */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .dash-table-wrapper { overflow-x: scroll; }
 }
 
 .dash-table {
@@ -1090,7 +1129,10 @@ p:last-child { margin-bottom: 0; }
   top: 1rem;
   right: 1rem;
   background: rgba(255, 255, 255, 0.95);
-  color: var(--color-text-primary);
+  /* The pill is a fixed near-white chip floating on the photo, so it does not
+     invert with the theme — its ink must not either. var(--color-text-primary)
+     flips to #FDFCF8 in dark mode and the rating vanishes into the chip. */
+  color: #2A2626;
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-soft);
   font-size: 0.75rem;
@@ -1639,7 +1681,7 @@ body {
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-brass);
+  color: var(--color-eyebrow);
   margin-bottom: var(--space-2);
 }
 
@@ -4647,4 +4689,59 @@ a.kpi-card:hover {
 
 @media (max-width: 480px) {
   .cta-btn { flex: 1 1 100%; }
+}
+
+/* --------------------------------------------------------------------------
+   Back to top
+   Injected by main.js on every page that loads it. Sits below the drawer and
+   overlay (1001/1000) so it never covers an open menu.
+   -------------------------------------------------------------------------- */
+
+.back-to-top {
+  position: fixed;
+  bottom: var(--space-5);
+  /* Logical inset so the button follows the RTL toggle to the other side */
+  inset-inline-end: var(--space-5);
+  z-index: 900;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  background: var(--color-brand-accent);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-hover);
+  /* Kept out of the layout and the tab order until it is actually offered */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+  transition:
+    opacity var(--transition-normal),
+    visibility var(--transition-normal),
+    transform var(--transition-normal),
+    background-color var(--transition-fast);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover { background: var(--color-brand-accent-hover); }
+.back-to-top:active { transform: translateY(0) scale(0.94); }
+
+.back-to-top:focus-visible {
+  outline: 2px solid var(--color-accent-ink);
+  outline-offset: 3px;
+}
+
+/* The dashboard keeps a sticky composer/footer area at the bottom of some
+   views, so lift the button clear of it on the narrow layouts */
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: var(--space-4);
+    inset-inline-end: var(--space-4);
+  }
 }

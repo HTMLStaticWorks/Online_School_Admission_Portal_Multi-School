@@ -207,4 +207,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     counters.forEach(el => countObserver.observe(el));
   }
+
+  // --- Back to top ---
+  // Injected rather than authored into all twelve pages: the control does
+  // nothing without JS, so there is no point shipping dead markup to browsers
+  // that cannot use it. Rides the same rAF-throttled scroll pattern as the
+  // navbar elevation above.
+  const backToTop = document.createElement('button');
+  backToTop.type = 'button';
+  backToTop.className = 'back-to-top';
+  backToTop.setAttribute('aria-label', 'Back to top');
+  backToTop.innerHTML = '<i class="ph ph-arrow-up" aria-hidden="true"></i>';
+  document.body.appendChild(backToTop);
+
+  let topTicking = false;
+  const syncBackToTop = () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    topTicking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!topTicking) {
+      topTicking = true;
+      window.requestAnimationFrame(syncBackToTop);
+    }
+  }, { passive: true });
+
+  syncBackToTop();
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+    // Move focus to the top of the document as well, so keyboard and screen
+    // reader users land where the page just scrolled to rather than staying
+    // parked on a control that has since faded out.
+    const target = document.querySelector('.navbar') || document.body;
+    target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+  });
 });
