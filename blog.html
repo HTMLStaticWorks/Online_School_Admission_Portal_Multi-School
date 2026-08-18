@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admission Blog & Tips | EduPath</title>
-    
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/rtl.css">
-    
+
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
@@ -29,8 +31,8 @@
             overflow: hidden;
             text-align: center;
             transition: transform var(--transition-premium),
-                        box-shadow var(--transition-premium),
-                        border-color var(--transition-premium);
+                box-shadow var(--transition-premium),
+                border-color var(--transition-premium);
         }
 
         .blog-card:hover {
@@ -52,7 +54,9 @@
             transition: transform 0.7s var(--ease-premium);
         }
 
-        .blog-card:hover .blog-card-media img { transform: scale(1.05); }
+        .blog-card:hover .blog-card-media img {
+            transform: scale(1.05);
+        }
 
         .blog-card-body {
             display: flex;
@@ -84,7 +88,9 @@
             justify-content: center;
         }
 
-        .blog-card-title a { color: inherit; }
+        .blog-card-title a {
+            color: inherit;
+        }
 
         /* The title link covers the whole card, so the card stays one target
            without nesting the Read More control inside another anchor */
@@ -134,12 +140,23 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .blog-card, .blog-card-media img { transition: none; }
-            .blog-card:hover { transform: none; }
-            .blog-card:hover .blog-card-media img { transform: none; }
+
+            .blog-card,
+            .blog-card-media img {
+                transition: none;
+            }
+
+            .blog-card:hover {
+                transform: none;
+            }
+
+            .blog-card:hover .blog-card-media img {
+                transform: none;
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <header class="navbar">
@@ -147,7 +164,7 @@
             <a href="index.html" class="navbar-brand">
                 <i class="ph-fill ph-student"></i> EduPath
             </a>
-            
+
             <nav class="navbar-menu">
                 <ul class="navbar-nav">
                     <li><a href="index.html" class="nav-link">Home</a></li>
@@ -168,7 +185,7 @@
                     <a href="login.html" class="btn btn-primary">Login</a>
                 </div>
             </nav>
-            
+
             <!-- Mobile Toggle -->
             <button class="nav-toggle" aria-label="Open Menu">
                 <i class="ph ph-list"></i>
@@ -213,7 +230,8 @@
         <div class="container">
             <span class="eyebrow eyebrow-center">From the blog</span>
             <h1>Admission Insights</h1>
-            <p class="page-hero-lead">Tips, guides, and updates to help you navigate school admissions with confidence.</p>
+            <p class="page-hero-lead">Tips, guides, and updates to help you navigate school admissions with confidence.
+            </p>
         </div>
     </section>
 
@@ -224,88 +242,105 @@
                 <!-- Blog Card 1 -->
                 <article class="blog-card">
                     <div class="blog-card-media">
-                        <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Students">
+                        <img src="assets/images/blog-cbse-vs-icse.jpg" alt="Students">
                     </div>
                     <div class="blog-card-body">
                         <span class="blog-card-tag">Admission Tips</span>
-                        <h3 class="blog-card-title"><a href="blog-single.html">CBSE vs ICSE: Which board is right for your child?</a></h3>
-                        <p class="blog-card-excerpt">A comprehensive comparison of curriculum, grading systems, and future prospects.</p>
+                        <h3 class="blog-card-title"><a href="blog-single.html">CBSE vs ICSE: Which board is right for
+                                your child?</a></h3>
+                        <p class="blog-card-excerpt">A comprehensive comparison of curriculum, grading systems, and
+                            future prospects.</p>
                         <div class="blog-card-meta"><i class="ph ph-calendar"></i>Oct 12, 2025 • 5 min read</div>
-                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
+                        <a href="blog-single.html" class="btn btn-outline blog-card-btn">Read More <i
+                                class="ph ph-arrow-right"></i></a>
                     </div>
                 </article>
 
                 <!-- Blog Card 2 -->
                 <article class="blog-card">
                     <div class="blog-card-media">
-                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Interview">
+                        <img src="assets/images/blog-kindergarten-interview.jpg" alt="Interview">
                     </div>
                     <div class="blog-card-body">
                         <span class="blog-card-tag">Interview Guide</span>
-                        <h3 class="blog-card-title"><a href="blog-single.html">How to prepare for Kindergarten interaction sessions</a></h3>
-                        <p class="blog-card-excerpt">5 simple ways to make your child feel confident during school interactions.</p>
+                        <h3 class="blog-card-title"><a href="blog-single.html">How to prepare for Kindergarten
+                                interaction sessions</a></h3>
+                        <p class="blog-card-excerpt">5 simple ways to make your child feel confident during school
+                            interactions.</p>
                         <div class="blog-card-meta"><i class="ph ph-calendar"></i>Oct 05, 2025 • 4 min read</div>
-                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
+                        <a href="blog-single.html" class="btn btn-outline blog-card-btn">Read More <i
+                                class="ph ph-arrow-right"></i></a>
                     </div>
                 </article>
 
                 <!-- Blog Card 3 -->
                 <article class="blog-card">
                     <div class="blog-card-media">
-                        <img src="https://images.unsplash.com/photo-1546410531-bea4edad646a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Checklist">
+                        <img src="assets/images/blog-document-checklist.jpg" alt="Checklist">
                     </div>
                     <div class="blog-card-body">
                         <span class="blog-card-tag">Checklist</span>
-                        <h3 class="blog-card-title"><a href="blog-single.html">The Ultimate Document Checklist for Admissions</a></h3>
-                        <p class="blog-card-excerpt">Make sure you have all these documents ready before the admission season begins.</p>
+                        <h3 class="blog-card-title"><a href="blog-single.html">The Ultimate Document Checklist for
+                                Admissions</a></h3>
+                        <p class="blog-card-excerpt">Make sure you have all these documents ready before the admission
+                            season begins.</p>
                         <div class="blog-card-meta"><i class="ph ph-calendar"></i>Sep 28, 2025 • 3 min read</div>
-                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
+                        <a href="blog-single.html" class="btn btn-outline blog-card-btn">Read More <i
+                                class="ph ph-arrow-right"></i></a>
                     </div>
                 </article>
 
                 <!-- Blog Card 4 -->
                 <article class="blog-card">
                     <div class="blog-card-media">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="IB Board">
+                        <img src="assets/images/blog-ib-diploma.jpg" alt="IB Board">
                     </div>
                     <div class="blog-card-body">
                         <span class="blog-card-tag">Board Insights</span>
-                        <h3 class="blog-card-title"><a href="blog-single.html">Is the IB Diploma worth the investment?</a></h3>
-                        <p class="blog-card-excerpt">Unpacking the global recognition, academic rigor, and future college paths of the IB board.</p>
+                        <h3 class="blog-card-title"><a href="blog-single.html">Is the IB Diploma worth the
+                                investment?</a></h3>
+                        <p class="blog-card-excerpt">Unpacking the global recognition, academic rigor, and future
+                            college paths of the IB board.</p>
                         <div class="blog-card-meta"><i class="ph ph-calendar"></i>Sep 20, 2025 • 6 min read</div>
-                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
+                        <a href="blog-single.html" class="btn btn-outline blog-card-btn">Read More <i
+                                class="ph ph-arrow-right"></i></a>
                     </div>
                 </article>
 
                 <!-- Blog Card 5 -->
                 <article class="blog-card">
                     <div class="blog-card-media">
-                        <img src="https://images.unsplash.com/photo-1472289065668-ce650ac443d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Extracurriculars">
+                        <img src="assets/images/blog-extracurriculars.jpg" alt="Extracurriculars">
                     </div>
                     <div class="blog-card-body">
                         <span class="blog-card-tag">Development</span>
-                        <h3 class="blog-card-title"><a href="blog-single.html">The role of extracurricular activities in admissions</a></h3>
-                        <p class="blog-card-excerpt">Why academic institutions value active participation in sports, music, and social service projects.</p>
+                        <h3 class="blog-card-title"><a href="blog-single.html">The role of extracurricular activities in
+                                admissions</a></h3>
+                        <p class="blog-card-excerpt">Why academic institutions value active participation in sports,
+                            music, and social service projects.</p>
                         <div class="blog-card-meta"><i class="ph ph-calendar"></i>Sep 15, 2025 • 4 min read</div>
-                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
+                        <a href="blog-single.html" class="btn btn-outline blog-card-btn">Read More <i
+                                class="ph ph-arrow-right"></i></a>
                     </div>
                 </article>
 
                 <!-- Blog Card 6 -->
                 <article class="blog-card">
                     <div class="blog-card-media">
-                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Scholarships">
+                        <img src="assets/images/blog-scholarships.jpg" alt="Scholarships">
                     </div>
                     <div class="blog-card-body">
                         <span class="blog-card-tag">Financial Aid</span>
-                        <h3 class="blog-card-title"><a href="blog-single.html">Navigating school scholarships and aid programs</a></h3>
-                        <p class="blog-card-excerpt">Steps to apply for merit-based and need-based tuition waivers in private schools.</p>
+                        <h3 class="blog-card-title"><a href="blog-single.html">Navigating school scholarships and aid
+                                programs</a></h3>
+                        <p class="blog-card-excerpt">Steps to apply for merit-based and need-based tuition waivers in
+                            private schools.</p>
                         <div class="blog-card-meta"><i class="ph ph-calendar"></i>Sep 08, 2025 • 5 min read</div>
-                        <span class="btn btn-outline blog-card-btn">Read More <i class="ph ph-arrow-right"></i></span>
+                        <a href="blog-single.html" class="btn btn-outline blog-card-btn">Read More <i
+                                class="ph ph-arrow-right"></i></a>
                     </div>
                 </article>
             </div>
-
             <!-- FAQ: native <details>, so it collapses without any script -->
             <div class="blog-faq">
                 <div class="section-header">
@@ -319,7 +354,8 @@
                     <div class="faq-answer">
                         We publish two to three guides a month, and we increase that during peak admission season
                         (roughly September to January) when board deadlines and interview rounds come thick and fast.
-                        Every article carries its publication date so you can tell at a glance how current the advice is.
+                        Every article carries its publication date so you can tell at a glance how current the advice
+                        is.
                     </div>
                 </details>
 
@@ -352,14 +388,16 @@
                     <a href="index.html" class="navbar-brand">
                         <i class="ph-fill ph-student"></i> EduPath
                     </a>
-                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents and top educational institutions.</p>
-                    <div style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
-                        <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents
+                        and top educational institutions.</p>
+                    <div
+                        style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
+                        <a href="#" aria-label="EduPath on X"><i class="ph-fill ph-x-logo"></i></a>
                         <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
                         <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
                     </div>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">Platform</h4>
                     <ul class="footer-links">
@@ -368,7 +406,7 @@
                         <li><a href="contact.html">Partner with Us</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">For Parents</h4>
                     <ul class="footer-links">
@@ -377,7 +415,7 @@
                         <li><a href="contact.html">Help & FAQ</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">Legal</h4>
                     <ul class="footer-links">
@@ -396,4 +434,5 @@
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
 </body>
+
 </html>

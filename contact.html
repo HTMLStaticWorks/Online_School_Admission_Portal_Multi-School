@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help & Contact | EduPath</title>
-    
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/rtl.css">
-    
+
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <style>
         .contact-layout {
             display: grid;
@@ -19,7 +21,7 @@
             gap: var(--space-8);
             margin-bottom: var(--space-10);
         }
-        
+
         .contact-info {
             background: var(--color-bg-secondary);
             padding: var(--space-6);
@@ -38,7 +40,9 @@
             text-align: center;
         }
 
-        .contact-info-row:last-of-type { margin-bottom: 0; }
+        .contact-info-row:last-of-type {
+            margin-bottom: 0;
+        }
 
         .contact-info-icon {
             width: 40px;
@@ -51,7 +55,7 @@
             justify-content: center;
             color: var(--color-brand-accent);
         }
-        
+
         .contact-social {
             margin-top: var(--space-5);
             padding-top: var(--space-5);
@@ -82,9 +86,9 @@
             border: 1px solid var(--color-border);
             color: var(--color-brand-accent);
             transition: transform var(--transition-fast),
-                        background-color var(--transition-fast),
-                        border-color var(--transition-fast),
-                        color var(--transition-fast);
+                background-color var(--transition-fast),
+                border-color var(--transition-fast),
+                color var(--transition-fast);
         }
 
         .social-link:hover {
@@ -129,7 +133,7 @@
                 grid-template-columns: 1fr;
             }
         }
-        
+
         @media (max-width: 360px) {
             .contact-layout {
                 text-align: center;
@@ -137,6 +141,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <header class="navbar">
@@ -144,7 +149,7 @@
             <a href="index.html" class="navbar-brand">
                 <i class="ph-fill ph-student"></i> EduPath
             </a>
-            
+
             <nav class="navbar-menu">
                 <ul class="navbar-nav">
                     <li><a href="index.html" class="nav-link">Home</a></li>
@@ -165,7 +170,7 @@
                     <a href="login.html" class="btn btn-primary">Login</a>
                 </div>
             </nav>
-            
+
             <!-- Mobile Toggle -->
             <button class="nav-toggle" aria-label="Open Menu">
                 <i class="ph ph-list"></i>
@@ -210,7 +215,8 @@
         <div class="container">
             <span class="eyebrow eyebrow-center">Talk to us</span>
             <h1>How Can We Help?</h1>
-            <p class="page-hero-lead">Get in touch with our admissions team, or browse the questions parents ask us most.</p>
+            <p class="page-hero-lead">Get in touch with our admissions team, or browse the questions parents ask us
+                most.</p>
         </div>
     </section>
 
@@ -221,7 +227,8 @@
                 <div>
                     <h3 style="margin-bottom: var(--space-4);">Send us a message</h3>
                     <!-- Integration Placeholder: Formspree/Netlify -->
-                    <form action="#" method="POST" style="background: var(--color-bg-primary); border: 1px solid var(--color-border); padding: var(--space-6); border-radius: var(--radius-soft);">
+                    <form action="#" method="POST"
+                        style="background: var(--color-bg-primary); border: 1px solid var(--color-border); padding: var(--space-6); border-radius: var(--radius-soft);">
                         <div class="form-group">
                             <label class="form-label">Full Name</label>
                             <input type="text" class="form-control" required placeholder="John Doe">
@@ -241,7 +248,8 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Message</label>
-                            <textarea class="form-control" rows="5" required placeholder="How can we help you?"></textarea>
+                            <textarea class="form-control" rows="5" required
+                                placeholder="How can we help you?"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
                     </form>
@@ -257,7 +265,8 @@
                             </div>
                             <div>
                                 <strong style="display: block;">Email Support</strong>
-                                <a href="mailto:support@edupath.com" style="color: var(--color-text-secondary);">support@edupath.com</a>
+                                <a href="mailto:support@edupath.com"
+                                    style="color: var(--color-text-secondary);">support@edupath.com</a>
                             </div>
                         </div>
                         <div class="contact-info-row">
@@ -266,7 +275,8 @@
                             </div>
                             <div>
                                 <strong style="display: block;">Phone Support</strong>
-                                <a href="tel:+18001234567" style="color: var(--color-text-secondary);">+1 (800) 123-4567</a>
+                                <a href="tel:+18001234567" style="color: var(--color-text-secondary);">+1 (800)
+                                    123-4567</a>
                             </div>
                         </div>
                         <div class="contact-info-row">
@@ -275,26 +285,32 @@
                             </div>
                             <div>
                                 <strong style="display: block;">Office HQ</strong>
-                                <span style="color: var(--color-text-secondary);">123 Education Blvd, Suite 400<br>Cityville, ST 12345</span>
+                                <span style="color: var(--color-text-secondary);">123 Education Blvd, Suite
+                                    400<br>Cityville, ST 12345</span>
                             </div>
                         </div>
 
                         <div class="contact-social">
                             <strong class="contact-social-title">Follow us</strong>
                             <div class="social-links">
-                                <a href="https://facebook.com/" class="social-link" target="_blank" rel="noopener" aria-label="EduPath on Facebook">
+                                <a href="https://facebook.com/" class="social-link" target="_blank" rel="noopener"
+                                    aria-label="EduPath on Facebook">
                                     <i class="ph-fill ph-facebook-logo"></i>
                                 </a>
-                                <a href="https://instagram.com/" class="social-link" target="_blank" rel="noopener" aria-label="EduPath on Instagram">
+                                <a href="https://instagram.com/" class="social-link" target="_blank" rel="noopener"
+                                    aria-label="EduPath on Instagram">
                                     <i class="ph-fill ph-instagram-logo"></i>
                                 </a>
-                                <a href="https://x.com/" class="social-link" target="_blank" rel="noopener" aria-label="EduPath on X">
+                                <a href="https://x.com/" class="social-link" target="_blank" rel="noopener"
+                                    aria-label="EduPath on X">
                                     <i class="ph-fill ph-x-logo"></i>
                                 </a>
-                                <a href="https://linkedin.com/" class="social-link" target="_blank" rel="noopener" aria-label="EduPath on LinkedIn">
+                                <a href="https://linkedin.com/" class="social-link" target="_blank" rel="noopener"
+                                    aria-label="EduPath on LinkedIn">
                                     <i class="ph-fill ph-linkedin-logo"></i>
                                 </a>
-                                <a href="https://youtube.com/" class="social-link" target="_blank" rel="noopener" aria-label="EduPath on YouTube">
+                                <a href="https://youtube.com/" class="social-link" target="_blank" rel="noopener"
+                                    aria-label="EduPath on YouTube">
                                     <i class="ph-fill ph-youtube-logo"></i>
                                 </a>
                             </div>
@@ -313,18 +329,14 @@
                 </div>
                 <!-- Map: swap the src query for the real office address -->
                 <div class="contact-map">
-                    <iframe
-                        src="https://www.google.com/maps?q=123+Education+Blvd,+Cityville&output=embed"
-                        title="Map showing the EduPath office location"
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        allowfullscreen></iframe>
+                    <iframe src="https://www.google.com/maps?q=123+Education+Blvd,+Cityville&output=embed"
+                        title="Map showing the EduPath office location" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
                 </div>
             </div>
 
         </div>
     </main>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -333,14 +345,16 @@
                     <a href="index.html" class="navbar-brand">
                         <i class="ph-fill ph-student"></i> EduPath
                     </a>
-                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents and top educational institutions.</p>
-                    <div style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
-                        <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents
+                        and top educational institutions.</p>
+                    <div
+                        style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
+                        <a href="#" aria-label="EduPath on X"><i class="ph-fill ph-x-logo"></i></a>
                         <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
                         <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
                     </div>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">Platform</h4>
                     <ul class="footer-links">
@@ -349,7 +363,7 @@
                         <li><a href="contact.html">Partner with Us</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">For Parents</h4>
                     <ul class="footer-links">
@@ -358,7 +372,7 @@
                         <li><a href="contact.html">Help & FAQ</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">Legal</h4>
                     <ul class="footer-links">
@@ -377,4 +391,5 @@
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
 </body>
+
 </html>

@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | EduPath</title>
-    <meta name="description" content="Learn more about EduPath's mission to streamline multi-school admission processes for parents and schools.">
-    
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <meta name="description"
+        content="Learn more about EduPath's mission to streamline multi-school admission processes for parents and schools.">
+
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/rtl.css">
-    
+
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <style>
         .mission-media {
             border-radius: var(--radius-soft);
@@ -20,8 +23,8 @@
             border: 1px solid var(--color-border);
             box-shadow: var(--shadow-soft);
             transition: transform var(--transition-premium),
-                        box-shadow var(--transition-premium),
-                        border-color var(--transition-premium);
+                box-shadow var(--transition-premium),
+                border-color var(--transition-premium);
         }
 
         .mission-media img {
@@ -43,10 +46,16 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
+
             .mission-media,
-            .mission-media img { transition: none; }
+            .mission-media img {
+                transition: none;
+            }
+
             .mission-media:hover,
-            .mission-media:hover img { transform: none; }
+            .mission-media:hover img {
+                transform: none;
+            }
         }
 
         .values-grid {
@@ -106,14 +115,16 @@
         }
 
         .team-img-wrapper {
-            height: 240px;
+            aspect-ratio: 3 / 4;
             overflow: hidden;
         }
 
         .team-img {
+            display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: 50% 15%;
         }
 
         .team-info {
@@ -131,6 +142,7 @@
         }
     </style>
 </head>
+
 <body style="background-color: var(--color-bg-primary);">
     <!-- Navbar -->
     <header class="navbar">
@@ -138,7 +150,7 @@
             <a href="index.html" class="navbar-brand">
                 <i class="ph-fill ph-student"></i> EduPath
             </a>
-            
+
             <nav class="navbar-menu">
                 <ul class="navbar-nav">
                     <li><a href="index.html" class="nav-link">Home</a></li>
@@ -159,7 +171,7 @@
                     <a href="login.html" class="btn btn-primary">Login</a>
                 </div>
             </nav>
-            
+
             <!-- Mobile Toggle -->
             <button class="nav-toggle" aria-label="Open Menu">
                 <i class="ph ph-list"></i>
@@ -207,7 +219,8 @@
             <div class="container">
                 <span class="eyebrow eyebrow-center">About EduPath</span>
                 <h1>Simplifying Admissions, Empowering Parents</h1>
-                <p class="page-hero-lead">EduPath bridges the gap between parents and leading educational institutions, replacing paperwork loops with a unified, digital admission pipeline.</p>
+                <p class="page-hero-lead">EduPath bridges the gap between parents and leading educational institutions,
+                    replacing paperwork loops with a unified, digital admission pipeline.</p>
             </div>
         </section>
 
@@ -218,10 +231,14 @@
                     <div style="flex: 1.2; min-width: 320px; text-align: center;">
                         <span class="eyebrow eyebrow-center">Why we exist</span>
                         <h2 style="font-size: 2.25rem; margin-bottom: var(--space-4);">Our Vision &amp; Mission</h2>
-                        <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.7;">At EduPath, we believe discovering and applying to the perfect school should be an exciting and stress-free milestone for families. Our mission is to standardize, digitize, and simplify the K-12 admission process &mdash; clear comparison metrics, a secure document vault, and unified tracking, so your child's educational future is secured faster.</p>
+                        <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.7;">At EduPath,
+                            we believe discovering and applying to the perfect school should be an exciting and
+                            stress-free milestone for families. Our mission is to standardize, digitize, and simplify
+                            the K-12 admission process &mdash; clear comparison metrics, a secure document vault, and
+                            unified tracking, so your child's educational future is secured faster.</p>
                     </div>
                     <div class="mission-media" style="flex: 0.8; min-width: 300px;">
-                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80" alt="Students learning">
+                        <img src="assets/images/mission-students.jpg" alt="Students learning">
                     </div>
                 </div>
             </div>
@@ -239,17 +256,23 @@
                     <div class="value-card">
                         <div class="value-icon"><i class="ph ph-eye"></i></div>
                         <h3>Transparency</h3>
-                        <p style="color: var(--color-text-secondary); font-size: 0.95rem; margin-top: var(--space-2);">Clear fees breakdown, precise application timelines, and real-time status trackers so you're never left guessing.</p>
+                        <p style="color: var(--color-text-secondary); font-size: 0.95rem; margin-top: var(--space-2);">
+                            Clear fees breakdown, precise application timelines, and real-time status trackers so you're
+                            never left guessing.</p>
                     </div>
                     <div class="value-card">
                         <div class="value-icon"><i class="ph ph-shield-check"></i></div>
                         <h3>Security First</h3>
-                        <p style="color: var(--color-text-secondary); font-size: 0.95rem; margin-top: var(--space-2);">Your child's transcripts, birth certificates, and ID documents are safely stored in our vault under bank-grade encryption protocols.</p>
+                        <p style="color: var(--color-text-secondary); font-size: 0.95rem; margin-top: var(--space-2);">
+                            Your child's transcripts, birth certificates, and ID documents are safely stored in our
+                            vault under bank-grade encryption protocols.</p>
                     </div>
                     <div class="value-card">
                         <div class="value-icon"><i class="ph ph-hand-heart"></i></div>
                         <h3>Accessibility</h3>
-                        <p style="color: var(--color-text-secondary); font-size: 0.95rem; margin-top: var(--space-2);">Helping parents apply to any board curriculum—be it CBSE, ICSE, IB, or State boards—within a few clicks on any screen size.</p>
+                        <p style="color: var(--color-text-secondary); font-size: 0.95rem; margin-top: var(--space-2);">
+                            Helping parents apply to any board curriculum—be it CBSE, ICSE, IB, or State boards—within a
+                            few clicks on any screen size.</p>
                     </div>
                 </div>
             </div>
@@ -261,7 +284,8 @@
                 <div class="section-header">
                     <span class="eyebrow">Interactive</span>
                     <h2>Seven Years, One Idea</h2>
-                    <p class="subtext">Step through the moments that shaped EduPath &mdash; select any year on the rail.</p>
+                    <p class="subtext">Step through the moments that shaped EduPath &mdash; select any year on the rail.
+                    </p>
                 </div>
 
                 <div class="milestone-timeline" id="milestoneTimeline">
@@ -304,7 +328,7 @@
                     <!-- Member 1 -->
                     <div class="team-card">
                         <div class="team-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Dr. Aris V." class="team-img">
+                            <img src="assets/images/team-aris.jpg" alt="Dr. Aris V." class="team-img">
                         </div>
                         <div class="team-info">
                             <h4>Dr. Aris V.</h4>
@@ -314,7 +338,7 @@
                     <!-- Member 2 -->
                     <div class="team-card">
                         <div class="team-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80" alt="Mark S." class="team-img">
+                            <img src="assets/images/team-mark.jpg" alt="Mark S." class="team-img">
                         </div>
                         <div class="team-info">
                             <h4>Mark S.</h4>
@@ -324,7 +348,7 @@
                     <!-- Member 3 -->
                     <div class="team-card">
                         <div class="team-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="Priya N." class="team-img">
+                            <img src="assets/images/team-priya.jpg" alt="Priya N." class="team-img">
                         </div>
                         <div class="team-info">
                             <h4>Priya N.</h4>
@@ -336,10 +360,13 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="section" style="background-color: var(--color-brand-accent); color: white; text-align: center; margin: var(--space-8) var(--space-4); border-radius: var(--radius-soft);">
+        <section class="section"
+            style="background-color: var(--color-brand-accent); color: white; text-align: center; margin: var(--space-8) var(--space-4); border-radius: var(--radius-soft);">
             <div class="container">
                 <h2 style="color: white; font-family: var(--font-display);">Ready to simplify admissions?</h2>
-                <p style="color: rgba(255,255,255,0.8); font-size: 1.125rem; max-width: 600px; margin: 0 auto var(--space-6);">Join thousands of parents and find the perfect school for your child today.</p>
+                <p
+                    style="color: rgba(255,255,255,0.8); font-size: 1.125rem; max-width: 600px; margin: 0 auto var(--space-6);">
+                    Join thousands of parents and find the perfect school for your child today.</p>
                 <div class="cta-actions">
                     <a href="register.html" class="btn cta-btn cta-btn-solid">Register Parent Account</a>
                     <a href="browse-schools.html" class="btn cta-btn cta-btn-ghost">Browse Schools First</a>
@@ -356,18 +383,25 @@
                     <a href="index.html" class="navbar-brand">
                         <i class="ph-fill ph-student"></i> EduPath
                     </a>
-                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents and top educational institutions.</p>
+                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents
+                        and top educational institutions.</p>
+                    <div
+                        style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
+                        <a href="#" aria-label="EduPath on X"><i class="ph-fill ph-x-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">Platform</h4>
                     <ul class="footer-links">
-                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#how-it-works">How It Works</a></li>
                         <li><a href="blog.html">Admission Blog</a></li>
                         <li><a href="contact.html">Partner with Us</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">For Parents</h4>
                     <ul class="footer-links">
@@ -376,12 +410,13 @@
                         <li><a href="contact.html">Help & FAQ</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">Legal</h4>
                     <ul class="footer-links">
                         <li><a href="#">Terms of Service</a></li>
                         <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Data Security</a></li>
                     </ul>
                 </div>
             </div>
@@ -395,4 +430,5 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/interactive.js"></script>
 </body>
+
 </html>

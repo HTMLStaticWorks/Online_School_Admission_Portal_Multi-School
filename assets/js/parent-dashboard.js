@@ -44,8 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const section = document.getElementById('view-' + target);
 
       views.forEach(v => v.classList.toggle('is-active', v === section));
+
+      // Drill-down views (e.g. a single application) have no sidebar entry of
+      // their own; data-nav says which parent entry stays highlighted.
+      const navTarget = section.dataset.nav || target;
+
       navItems.forEach(a => {
-        const on = a.dataset.view === target;
+        const on = a.dataset.view === navTarget;
         a.classList.toggle('active', on);
         if (on) a.setAttribute('aria-current', 'page');
         else a.removeAttribute('aria-current');

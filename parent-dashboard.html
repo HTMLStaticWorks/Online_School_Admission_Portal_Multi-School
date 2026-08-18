@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parent Dashboard | EduPath</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -11,6 +12,316 @@
     
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* ---- Application detail view: status pipeline ---- */
+        .pipeline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            margin: var(--space-6) 0 var(--space-8);
+            padding: 0 var(--space-4);
+        }
+
+        .pipeline::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            inset-inline: var(--space-6);
+            height: 2px;
+            background: var(--color-border);
+            z-index: 1;
+        }
+
+        /* Logical properties throughout, so the whole pipeline mirrors in RTL
+           without a parallel set of [dir="rtl"] overrides. */
+        .pipeline-progress {
+            position: absolute;
+            top: 24px;
+            inset-inline-start: var(--space-6);
+            height: 2px;
+            background: var(--color-brand-accent);
+            z-index: 2;
+            width: 75%;
+            /* Interview stage */
+            transition: width var(--transition-normal);
+        }
+
+        .pipeline-step {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+            text-align: center;
+            width: 80px;
+        }
+
+        .pipeline-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--color-bg-primary);
+            border: 2px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            transition: all var(--transition-fast);
+        }
+
+        .pipeline-step.completed .pipeline-icon {
+            background: var(--color-brand-accent);
+            border-color: var(--color-brand-accent);
+            color: white;
+        }
+
+        .pipeline-step.active .pipeline-icon {
+            border-color: var(--color-brand-accent);
+            color: var(--color-brand-accent);
+            box-shadow: 0 0 0 4px rgba(45, 74, 34, 0.1);
+        }
+
+        .pipeline-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+
+        .pipeline-step.completed .pipeline-label,
+        .pipeline-step.active .pipeline-label {
+            color: var(--color-text-primary);
+        }
+
+        /* Tablet and below: the pipeline turns into a vertical rail. The rail
+           runs exactly from the first icon's centre to the last icon's centre
+           — hence the 24px (half an icon) insets, and the progress height
+           measured against that same span rather than the full box. */
+        @media (max-width: 768px) {
+            .pipeline {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-4);
+                padding-inline: 0;
+                margin: var(--space-5) 0;
+            }
+
+            .pipeline::before,
+            .pipeline-progress {
+                /* 24px = icon centre; -1px centres the 2px rail on it */
+                inset-inline: 23px auto;
+                top: 24px;
+                width: 2px;
+            }
+
+            .pipeline::before {
+                bottom: 24px;
+                height: auto;
+            }
+
+            .pipeline-progress {
+                /* 4th of 5 steps → 3/4 of the way down the rail */
+                height: calc((100% - 48px) * 0.75);
+            }
+
+            .pipeline-step {
+                flex-direction: row;
+                align-items: center;
+                gap: var(--space-3);
+                width: 100%;
+                text-align: start;
+            }
+
+            .pipeline-label {
+                font-size: 0.9375rem;
+            }
+        }
+
+        .app-detail-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+        }
+
+        .app-detail-id {
+            text-align: end;
+        }
+
+        .app-detail-logo {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            border-radius: var(--radius-soft);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+
+        .app-detail-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .app-detail-cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .app-detail-school {
+            display: flex;
+            gap: var(--space-4);
+        }
+
+        .app-callout {
+            background: var(--color-status-interview-bg);
+            border: 1px solid var(--color-status-interview);
+            padding: var(--space-4);
+            border-radius: var(--radius-soft);
+            display: flex;
+            gap: var(--space-3);
+            align-items: flex-start;
+            margin-top: var(--space-4);
+        }
+
+        .app-callout-icon {
+            color: var(--color-status-interview);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .app-callout-title {
+            color: var(--color-text-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .app-callout-text {
+            margin: 0;
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        .app-callout-btn {
+            margin-top: var(--space-3);
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Document vault: pin the six cards to a 3x2 grid at the 1024 tablet
+           width only. Wider and narrower views keep the auto-fill flow. */
+        @media (min-width: 901px) and (max-width: 1024px) {
+
+            /* minmax(0, 1fr), not 1fr: a plain 1fr track has an automatic
+               minimum of its content, so the row overflows the card instead
+               of the columns sharing the available width. */
+            .doc-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .doc-card {
+                min-width: 0;
+            }
+
+            /* Wrap filenames at their underscores instead of ellipsing them —
+               at three across there is not room for the full name on one line */
+            .doc-card .doc-name {
+                white-space: normal;
+                overflow-wrap: break-word;
+            }
+        }
+
+        /* Directional glyph — flip it so "back" still points backwards in RTL */
+        [dir="rtl"] .app-back-link .ph-arrow-left {
+            transform: scaleX(-1);
+        }
+
+        @media (max-width: 600px) {
+            .app-detail-id {
+                text-align: start;
+            }
+        }
+
+        /* --- Small phones (360px class) --- */
+        @media (max-width: 480px) {
+
+            /* Logo + name side by side leaves ~140px for the title, which
+               wraps to four lines. Stack them instead. */
+            .app-detail-school {
+                flex-direction: column;
+                gap: var(--space-3);
+            }
+
+            .app-detail-logo {
+                width: 64px;
+                height: 64px;
+            }
+
+            .app-detail-head {
+                gap: var(--space-3);
+            }
+
+            .app-detail-id {
+                display: flex;
+                align-items: baseline;
+                gap: 0.5rem;
+                width: 100%;
+                padding-top: var(--space-3);
+                border-top: 1px solid var(--color-border);
+            }
+
+            .app-detail-id>div {
+                margin-bottom: 0 !important;
+            }
+
+            /* Icon above the copy — inline it steals a third of the width */
+            .app-callout {
+                flex-direction: column;
+                gap: var(--space-2);
+                padding: var(--space-3);
+            }
+
+            .app-callout-btn {
+                display: block;
+                text-align: center;
+            }
+
+            .pipeline {
+                margin: var(--space-4) 0 var(--space-5);
+            }
+
+            /* Same geometry, re-derived for the smaller 40px icon */
+            .pipeline::before,
+            .pipeline-progress {
+                inset-inline: 19px auto;
+                top: 20px;
+            }
+
+            .pipeline::before {
+                bottom: 20px;
+            }
+
+            .pipeline-progress {
+                height: calc((100% - 40px) * 0.75);
+            }
+
+            .pipeline-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .pipeline-label {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
 </head>
 <body class="dashboard-layout">
 
@@ -131,7 +442,7 @@
                         <div class="kpi-icon" style="color: var(--color-status-shortlist); background: var(--color-status-shortlist-bg);"><i class="ph-fill ph-heart"></i></div>
                         <div class="kpi-info">
                             <h4>Shortlisted Schools</h4>
-                            <div class="kpi-value">5</div>
+                            <div class="kpi-value">3</div>
                         </div>
                     </a>
                     <a class="kpi-card" href="#vault">
@@ -227,7 +538,7 @@
                         <div class="sub">Every school you have applied to, and what each one is waiting on.</div>
                     </div>
                     <div class="dash-page-actions">
-                        <a href="browse-schools.html" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Start New</a>
+                        <a href="browse-schools.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Start New</a>
                     </div>
                 </div>
 
@@ -256,7 +567,6 @@
                                 <tr data-status="interview">
                                     <td class="cell-primary">
                                         <div class="dash-school-cell">
-                                            <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=120&q=80" alt="">
                                             <strong>Oakridge International</strong>
                                         </div>
                                     </td>
@@ -268,12 +578,11 @@
                                         </span>
                                     </td>
                                     <td data-label="Next action" style="color: var(--color-status-interview); font-size: 0.875rem;">Interview on Nov 15</td>
-                                    <td class="cell-action"><a href="application-detail.html" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
+                                    <td class="cell-action"><a href="#application" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
                                 </tr>
                                 <tr data-status="review">
                                     <td class="cell-primary">
                                         <div class="dash-school-cell">
-                                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=120&q=80" alt="">
                                             <strong>Delhi Public School</strong>
                                         </div>
                                     </td>
@@ -285,12 +594,11 @@
                                         </span>
                                     </td>
                                     <td data-label="Next action" style="color: var(--color-text-secondary); font-size: 0.875rem;">Awaiting school decision</td>
-                                    <td class="cell-action"><a href="application-detail.html" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
+                                    <td class="cell-action"><a href="#application" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
                                 </tr>
                                 <tr data-status="applied">
                                     <td class="cell-primary">
                                         <div class="dash-school-cell">
-                                            <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?auto=format&fit=crop&w=120&q=80" alt="">
                                             <strong>St. Mary's High School</strong>
                                         </div>
                                     </td>
@@ -302,12 +610,191 @@
                                         </span>
                                     </td>
                                     <td data-label="Next action" style="color: var(--color-status-reject); font-size: 0.875rem;">Missing Medical Record</td>
-                                    <td class="cell-action"><a href="application-detail.html" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
+                                    <td class="cell-action"><a href="#application" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <p class="empty-state" data-filter-empty="applications" hidden>No applications at this stage yet.</p>
+                </div>
+            </section>
+
+            <!-- ======================= APPLICATION DETAIL =======================
+                 Reached from the View buttons in My Applications. No sidebar
+                 entry — it is a drill-down, not a top-level destination. -->
+            <section class="dash-view" id="view-application" data-title="Application Detail" data-nav="applications" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <a href="#applications" class="app-back-link"
+                            style="color: var(--color-text-secondary); font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.35rem; margin-bottom: var(--space-2);">
+                            <i class="ph ph-arrow-left"></i> Back to My Applications
+                        </a>
+                        <h2>Application Detail</h2>
+                        <div class="sub">Track status, documents and school messages in one place.</div>
+                    </div>
+                </div>
+
+                <!-- School / application summary -->
+                <div class="dash-card app-detail-head">
+                    <div class="app-detail-school">
+                        <div class="app-detail-logo">
+                            <img src="assets/images/school-oakridge.jpg" alt="Oakridge International School">
+                        </div>
+                        <div>
+                            <h3 style="margin-bottom: var(--space-1);">Oakridge International School</h3>
+                            <div
+                                style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: var(--space-2);">
+                                Applying for: Grade 1 • Term 2026-27</div>
+                            <span class="status-badge status-interview" aria-label="Status: Interview Scheduled">
+                                <i class="ph-fill ph-calendar-check"></i> Interview Scheduled
+                            </span>
+                        </div>
+                    </div>
+                    <div class="app-detail-id">
+                        <div style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 0.25rem;">
+                            Application ID</div>
+                        <strong>#APP-2026-8472</strong>
+                    </div>
+                </div>
+
+                <!-- Status pipeline -->
+                <div class="dash-card">
+                    <h3 style="margin-bottom: var(--space-4);">Application Status</h3>
+
+                    <div class="pipeline">
+                        <div class="pipeline-progress"></div>
+
+                        <div class="pipeline-step completed">
+                            <div class="pipeline-icon"><i class="ph ph-check"></i></div>
+                            <div class="pipeline-label">Applied</div>
+                        </div>
+
+                        <div class="pipeline-step completed">
+                            <div class="pipeline-icon"><i class="ph ph-check"></i></div>
+                            <div class="pipeline-label">Under Review</div>
+                        </div>
+
+                        <div class="pipeline-step completed">
+                            <div class="pipeline-icon"><i class="ph ph-check"></i></div>
+                            <div class="pipeline-label">Shortlisted</div>
+                        </div>
+
+                        <div class="pipeline-step active">
+                            <div class="pipeline-icon"><i class="ph ph-calendar-blank"></i></div>
+                            <div class="pipeline-label">Interview</div>
+                        </div>
+
+                        <div class="pipeline-step">
+                            <div class="pipeline-icon"><i class="ph ph-handshake"></i></div>
+                            <div class="pipeline-label">Decision</div>
+                        </div>
+                    </div>
+
+                    <!-- Active step callout -->
+                    <div class="app-callout">
+                        <i class="ph-fill ph-warning-circle app-callout-icon"></i>
+                        <div>
+                            <strong class="app-callout-title">Action Required: Schedule Interview</strong>
+                            <p class="app-callout-text">Congratulations! Your child has been shortlisted. Please select
+                                an interview slot from the calendar sent in your messages.</p>
+                            <a href="#interviews" class="btn btn-primary app-callout-btn">View Calendar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="app-detail-cols">
+                    <!-- Document checklist -->
+                    <div class="dash-card">
+                        <h3 style="margin-bottom: var(--space-4);">Document Checklist</h3>
+
+                        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                            <div
+                                style="display: flex; align-items: center; justify-content: space-between; padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-border);">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="ph-fill ph-check-circle"
+                                        style="color: var(--color-status-admitted); font-size: 1.25rem;"></i>
+                                    <span style="font-size: 0.875rem; font-weight: 500;">Birth Certificate</span>
+                                </div>
+                                <a href="#vault" style="font-size: 0.75rem; color: var(--color-text-secondary);">View</a>
+                            </div>
+
+                            <div
+                                style="display: flex; align-items: center; justify-content: space-between; padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-border);">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="ph-fill ph-check-circle"
+                                        style="color: var(--color-status-admitted); font-size: 1.25rem;"></i>
+                                    <span style="font-size: 0.875rem; font-weight: 500;">Passport Size Photo</span>
+                                </div>
+                                <a href="#vault" style="font-size: 0.75rem; color: var(--color-text-secondary);">View</a>
+                            </div>
+
+                            <div
+                                style="display: flex; align-items: center; justify-content: space-between; padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-border);">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="ph-fill ph-check-circle"
+                                        style="color: var(--color-status-admitted); font-size: 1.25rem;"></i>
+                                    <span style="font-size: 0.875rem; font-weight: 500;">Previous Report Card</span>
+                                </div>
+                                <a href="#vault" style="font-size: 0.75rem; color: var(--color-text-secondary);">View</a>
+                            </div>
+
+                            <!-- Missing document -->
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="ph-fill ph-warning-circle"
+                                        style="color: var(--color-status-reject); font-size: 1.25rem;"></i>
+                                    <span
+                                        style="font-size: 0.875rem; font-weight: 500; color: var(--color-status-reject);">Medical
+                                        Record</span>
+                                </div>
+                                <div class="form-group" style="margin: 0;">
+                                    <label for="upload-medical" class="btn btn-outline"
+                                        style="padding: 0.25rem 0.75rem; font-size: 0.75rem; cursor: pointer;">Upload</label>
+                                    <input type="file" id="upload-medical" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- School messages -->
+                    <div class="dash-card">
+                        <h3 style="margin-bottom: var(--space-4);">Messages from School</h3>
+
+                        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                            <div
+                                style="background: var(--color-bg-secondary); padding: var(--space-3); border-radius: var(--radius-soft);">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                                    <strong style="font-size: 0.875rem;">Admissions Office</strong>
+                                    <span style="font-size: 0.75rem; color: var(--color-text-secondary);">Oct 20</span>
+                                </div>
+                                <p style="font-size: 0.875rem; margin-bottom: 0;">Dear Sarah, we have reviewed your
+                                    application and would like to invite you and your child for a brief interaction.
+                                    Please select a slot via the calendar link.</p>
+                            </div>
+
+                            <div
+                                style="background: var(--color-bg-secondary); padding: var(--space-3); border-radius: var(--radius-soft); opacity: 0.7;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                                    <strong style="font-size: 0.875rem;">System</strong>
+                                    <span style="font-size: 0.75rem; color: var(--color-text-secondary);">Oct 12</span>
+                                </div>
+                                <p style="font-size: 0.875rem; margin-bottom: 0;">Your application has been submitted
+                                    successfully and is now under review.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            style="margin-top: var(--space-4); border-top: 1px solid var(--color-border); padding-top: var(--space-4);">
+                            <div style="display: flex; gap: var(--space-2);">
+                                <label for="app-detail-reply" class="sr-only">Reply to Admissions Office</label>
+                                <input type="text" id="app-detail-reply" class="form-control"
+                                    placeholder="Reply to Admissions Office" style="padding: 0.5rem; font-size: 0.875rem;">
+                                <button class="btn btn-primary" aria-label="Send reply"
+                                    style="padding: 0.5rem; border-radius: var(--radius-soft);"><i
+                                        class="ph ph-paper-plane-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -385,14 +872,6 @@
                             <button class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;">Upload</button>
                         </div>
 
-                        <div class="doc-card is-missing">
-                            <div class="doc-icon" style="color: var(--color-status-reject);"><i class="ph ph-warning-circle"></i></div>
-                            <div class="doc-main">
-                                <div class="doc-name" style="color: var(--color-status-reject);">Missing Transfer Certificate</div>
-                                <div class="doc-meta">Required for Oakridge International</div>
-                            </div>
-                            <button class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;">Upload</button>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -405,7 +884,7 @@
                         <div class="sub">Saved for later. Apply when you are ready, or remove to tidy up.</div>
                     </div>
                     <div class="dash-page-actions">
-                        <a href="browse-schools.html" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Browse more</a>
+                        <a href="browse-schools.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Browse more</a>
                     </div>
                 </div>
 
@@ -460,40 +939,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="shortlist-card">
-                        <div class="shortlist-media">
-                            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=500&q=80" alt="Harmony Montessori">
-                            <button class="shortlist-fav" aria-label="Remove Harmony Montessori from shortlist"><i class="ph-fill ph-heart"></i></button>
-                        </div>
-                        <div class="shortlist-body">
-                            <span class="school-board-tag">State Board</span>
-                            <div class="name">Harmony Montessori</div>
-                            <div class="meta"><i class="ph ph-map-pin"></i> Indiranagar, Bangalore</div>
-                            <div class="meta"><i class="ph ph-wallet"></i> $4,100 / year</div>
-                            <div class="actions">
-                                <a href="school-detail.html" class="btn btn-outline">Details</a>
-                                <a href="browse-schools.html" class="btn btn-primary">Apply</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="shortlist-card">
-                        <div class="shortlist-media">
-                            <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=500&q=80" alt="Riverdale Public School">
-                            <button class="shortlist-fav" aria-label="Remove Riverdale Public School from shortlist"><i class="ph-fill ph-heart"></i></button>
-                        </div>
-                        <div class="shortlist-body">
-                            <span class="school-board-tag">State Board</span>
-                            <div class="name">Riverdale Public School</div>
-                            <div class="meta"><i class="ph ph-map-pin"></i> Kharadi, Pune</div>
-                            <div class="meta"><i class="ph ph-wallet"></i> $3,200 / year</div>
-                            <div class="actions">
-                                <a href="school-detail.html" class="btn btn-outline">Details</a>
-                                <a href="browse-schools.html" class="btn btn-primary">Apply</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -505,7 +950,7 @@
                         <div class="sub">Parent and child interactions scheduled by your shortlisted schools.</div>
                     </div>
                     <div class="dash-page-actions">
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i class="ph ph-calendar-plus"></i> Add to calendar</button>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i class="ph ph-calendar-plus"></i> Add to calendar</button>
                     </div>
                 </div>
 
@@ -626,7 +1071,7 @@
                         <div class="sub">Application fees, deposits and receipts across all your schools.</div>
                     </div>
                     <div class="dash-page-actions">
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i class="ph ph-download-simple"></i> Export receipts</button>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i class="ph ph-download-simple"></i> Export receipts</button>
                     </div>
                 </div>
 
@@ -714,7 +1159,7 @@
                         <div class="sub">Everything that has happened across your applications.</div>
                     </div>
                     <div class="dash-page-actions">
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Mark all as read</button>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Mark all as read</button>
                     </div>
                 </div>
 

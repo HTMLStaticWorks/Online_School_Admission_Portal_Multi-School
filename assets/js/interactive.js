@@ -353,21 +353,21 @@
         title: 'Document Vault opens',
         body: 'Transcripts, birth certificates and ID proofs moved into encrypted storage that parents control. Schools verify against the vault instead of asking for another photocopy.',
         stats: [['128k', 'documents secured'], ['0', 'reported breaches']],
-        img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80',
+        img: 'assets/images/milestone-2021.jpg',
         alt: 'Neatly organised documents and folders'
       },
       2023: {
         title: 'Admissions in your pocket',
         body: 'Real-time status tracking landed on mobile. Parents stopped calling front offices for updates because the dashboard already knew where each application stood.',
         stats: [['72%', 'of visits on mobile'], ['3.1x', 'faster status checks']],
-        img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=80',
+        img: 'assets/images/milestone-2023.jpg',
         alt: 'A parent checking application status on a phone'
       },
       2026: {
         title: 'Where we are today',
         body: 'Five hundred partner schools, and an average of fifteen days from first application to a confirmed seat. The eleven-page form is still out there — we just stopped making parents fill it in twice.',
         stats: [['500+', 'partner schools'], ['120k+', 'applications'], ['15', 'day average']],
-        img: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80',
+        img: 'assets/images/milestone-2026.jpg',
         alt: 'A bright classroom full of students at work'
       }
     };

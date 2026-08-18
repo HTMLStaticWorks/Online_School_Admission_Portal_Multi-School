@@ -1523,12 +1523,21 @@ p:last-child { margin-bottom: 0; }
 }
 
 @media (max-width: 768px) {
+  /* Four columns fold to a 2x2 block rather than one long stack */
   .footer-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8) var(--space-6);
   }
   .school-card-img-wrapper {
     height: 180px;
+  }
+}
+
+/* Two columns get too narrow for the link text on small phones */
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
   }
 }
 
@@ -1875,6 +1884,10 @@ body {
   overflow: hidden;
   color: #FFFFFF;
   background-color: #1A2216;      /* Holds the layout before the image loads */
+
+  /* --hero-image is set per page. Note for whoever sets it: a relative url()
+     inside a custom property is resolved against THIS stylesheet, not the
+     page — so pass an absolute URL, or a path relative to assets/css/. */
   background-image: var(--hero-image);
   background-size: cover;
   background-position: var(--hero-position, center);

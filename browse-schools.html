@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse Schools | EduPath</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <meta name="description" content="Browse and filter top schools based on location, curriculum, and fees.">
-    
+
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/rtl.css">
-    
+
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <style>
         .directory-layout {
             display: flex;
             gap: var(--space-8);
             align-items: flex-start;
         }
-        
+
         .filter-sidebar {
             width: 300px;
             flex-shrink: 0;
@@ -28,28 +30,29 @@
             border-radius: var(--radius-soft);
             border: 1px solid var(--color-border);
             position: sticky;
-            top: 88px; /* Clears the 72px sticky navbar */
+            top: 88px;
+            /* Clears the 72px sticky navbar */
             max-height: calc(100vh - 108px);
             overflow-y: auto;
             box-shadow: var(--shadow-soft);
         }
-        
+
         .directory-main {
             flex-grow: 1;
         }
-        
+
         .filter-group {
             margin-bottom: var(--space-5);
             padding-bottom: var(--space-5);
             border-bottom: 1px solid var(--color-border);
         }
-        
+
         .filter-group:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
-        
+
         .filter-title {
             font-size: 1rem;
             font-weight: 700;
@@ -59,7 +62,7 @@
             justify-content: space-between;
             color: var(--color-text-primary);
         }
-        
+
         .checkbox-item {
             display: flex;
             align-items: center;
@@ -70,7 +73,7 @@
             font-size: 0.9rem;
             transition: color var(--transition-fast);
         }
-        
+
         .checkbox-item input {
             cursor: pointer;
             width: 18px;
@@ -79,7 +82,7 @@
             border-radius: 4px;
             border: 1px solid var(--color-border);
         }
-        
+
         .checkbox-item:hover {
             color: var(--color-brand-accent);
         }
@@ -102,12 +105,13 @@
             transition: all var(--transition-fast);
         }
 
-        .view-btn.active, .view-btn:hover {
+        .view-btn.active,
+        .view-btn:hover {
             color: var(--color-brand-accent);
             border-color: var(--color-brand-accent);
             background: rgba(45, 74, 34, 0.05);
         }
-        
+
         /* Directory Main Grid */
         .schools-grid {
             display: grid;
@@ -116,7 +120,7 @@
             grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
             gap: var(--space-6);
         }
-        
+
         /* Clean Custom School Cards */
         .school-card {
             background-color: var(--color-bg-primary);
@@ -240,9 +244,11 @@
             border-color: #EF4444;
             background: #FEF2F2;
         }
-        
+
         /* --- Directory header --- */
-        .directory-header { margin-bottom: var(--space-6); }
+        .directory-header {
+            margin-bottom: var(--space-6);
+        }
 
         .directory-header-row {
             display: flex;
@@ -252,7 +258,10 @@
             gap: var(--space-3) var(--space-4);
         }
 
-        .result-count { color: var(--color-text-secondary); margin: 0; }
+        .result-count {
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
 
         .directory-controls {
             display: flex;
@@ -309,7 +318,9 @@
                 gap: var(--space-2);
             }
 
-            .sort-control label { font-size: 0.8rem; }
+            .sort-control label {
+                font-size: 0.8rem;
+            }
 
             .sort-control .form-control {
                 flex: 1;
@@ -317,7 +328,9 @@
                 min-width: 0;
             }
 
-            .view-toggles { flex: none; }
+            .view-toggles {
+                flex: none;
+            }
 
             .view-btn {
                 width: 38px;
@@ -346,7 +359,9 @@
             transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
         }
 
-        .filters-toggle:hover { border-color: var(--color-brand-secondary); }
+        .filters-toggle:hover {
+            border-color: var(--color-brand-secondary);
+        }
 
         .filters-toggle .count {
             margin-left: auto;
@@ -357,14 +372,26 @@
             font-size: 0.85rem;
         }
 
-        .filters-toggle .caret { transition: transform var(--transition-premium); }
-        .filters-toggle[aria-expanded="true"] .caret { transform: rotate(180deg); }
+        .filters-toggle .caret {
+            transition: transform var(--transition-premium);
+        }
+
+        .filters-toggle[aria-expanded="true"] .caret {
+            transform: rotate(180deg);
+        }
 
         /* ============================ 1100px ============================ */
         /* Keep the two-column directory, just narrow the rail */
         @media (max-width: 1100px) {
-            .directory-layout { gap: var(--space-6); }
-            .filter-sidebar { width: 250px; padding: var(--space-4); }
+            .directory-layout {
+                gap: var(--space-6);
+            }
+
+            .filter-sidebar {
+                width: 250px;
+                padding: var(--space-4);
+            }
+
             /* Smaller floor keeps two cards per row once the rail eats width */
             .schools-grid {
                 gap: var(--space-4);
@@ -384,9 +411,14 @@
                 align-items: stretch;
             }
 
-            .directory-main { width: 100%; min-width: 0; }
+            .directory-main {
+                width: 100%;
+                min-width: 0;
+            }
 
-            .filters-bar { display: block; }
+            .filters-bar {
+                display: block;
+            }
 
             .filter-sidebar {
                 width: 100%;
@@ -395,7 +427,9 @@
                 margin-bottom: var(--space-5);
             }
 
-            .filter-sidebar.is-open { display: block; }
+            .filter-sidebar.is-open {
+                display: block;
+            }
 
             /* Filter groups sit side by side rather than in one long column */
             .filter-sidebar .filter-group {
@@ -412,8 +446,13 @@
                 align-items: start;
             }
 
-            .filter-sidebar .filter-group:nth-last-child(2) { border-bottom: none; }
-            .filter-sidebar > .btn { grid-column: 1 / -1; }
+            .filter-sidebar .filter-group:nth-last-child(2) {
+                border-bottom: none;
+            }
+
+            .filter-sidebar>.btn {
+                grid-column: 1 / -1;
+            }
         }
 
         /* --- Pagination --- */
@@ -426,10 +465,24 @@
             margin-top: var(--space-8);
         }
 
-        .pagination .btn { padding: 0.5rem 1rem; }
-        .pagination .page-num { min-width: 44px; padding: 0.5rem 0.75rem; }
-        .pagination .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-        .pagination .btn:disabled:hover { transform: none; box-shadow: none; }
+        .pagination .btn {
+            padding: 0.5rem 1rem;
+        }
+
+        .pagination .page-num {
+            min-width: 44px;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .pagination .btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .pagination .btn:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
 
         .page-gap {
             padding: 0.5rem 0.25rem;
@@ -437,26 +490,49 @@
         }
 
         @media (max-width: 480px) {
+
             /* Page numbers on one row, the step buttons spanning below it */
-            .pagination { gap: 0.4rem; }
+            .pagination {
+                gap: 0.4rem;
+            }
+
             .pagination .page-step {
                 order: 1;
                 flex: 1 1 45%;
             }
+
             .pagination .page-num,
-            .pagination .page-gap { order: 0; }
-            .pagination .page-num { min-width: 40px; padding: 0.45rem 0.6rem; }
+            .pagination .page-gap {
+                order: 0;
+            }
+
+            .pagination .page-num {
+                min-width: 40px;
+                padding: 0.45rem 0.6rem;
+            }
         }
 
         /* ============================= 480px ============================= */
         @media (max-width: 480px) {
-            .school-card-img-wrapper { height: 180px; }
-            .school-card-content { padding: var(--space-4); }
-            .school-name { font-size: 1.2rem; }
-            .school-fees { font-size: 1rem; }
+            .school-card-img-wrapper {
+                height: 180px;
+            }
+
+            .school-card-content {
+                padding: var(--space-4);
+            }
+
+            .school-name {
+                font-size: 1.2rem;
+            }
+
+            .school-fees {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
+
 <body style="background-color: var(--color-bg-secondary);">
     <!-- Navbar -->
     <header class="navbar">
@@ -464,7 +540,7 @@
             <a href="index.html" class="navbar-brand">
                 <i class="ph-fill ph-student"></i> EduPath
             </a>
-            
+
             <nav class="navbar-menu">
                 <ul class="navbar-nav">
                     <li><a href="index.html" class="nav-link">Home</a></li>
@@ -485,7 +561,7 @@
                     <a href="login.html" class="btn btn-primary">Login</a>
                 </div>
             </nav>
-            
+
             <!-- Mobile Toggle -->
             <button class="nav-toggle" aria-label="Open Menu">
                 <i class="ph ph-list"></i>
@@ -531,7 +607,8 @@
         <div class="container">
             <span class="eyebrow eyebrow-center">The directory</span>
             <h1>Browse Schools</h1>
-            <p class="page-hero-lead">Compare 142 partner schools by board, fees, distance, and facilities &mdash; then apply with one profile.</p>
+            <p class="page-hero-lead">Compare 142 partner schools by board, fees, distance, and facilities &mdash; then
+                apply with one profile.</p>
         </div>
     </section>
 
@@ -552,10 +629,12 @@
                             </select>
                         </div>
                         <div class="view-toggles">
-                            <button type="button" class="view-btn active" id="gridViewBtn" aria-label="Grid View" aria-pressed="true">
+                            <button type="button" class="view-btn active" id="gridViewBtn" aria-label="Grid View"
+                                aria-pressed="true">
                                 <i class="ph-fill ph-squares-four"></i>
                             </button>
-                            <button type="button" class="view-btn" id="listViewBtn" aria-label="List View" aria-pressed="false">
+                            <button type="button" class="view-btn" id="listViewBtn" aria-label="List View"
+                                aria-pressed="false">
                                 <i class="ph-fill ph-list"></i>
                             </button>
                         </div>
@@ -566,8 +645,8 @@
             <div class="directory-layout">
                 <!-- Filters toggle: replaces the rail below 900px -->
                 <div class="filters-bar">
-                    <button type="button" class="filters-toggle" id="filtersToggle"
-                            aria-expanded="false" aria-controls="filterSidebar">
+                    <button type="button" class="filters-toggle" id="filtersToggle" aria-expanded="false"
+                        aria-controls="filterSidebar">
                         <i class="ph ph-sliders-horizontal"></i>
                         <span>Filters</span>
                         <span class="count">
@@ -585,8 +664,10 @@
                         </div>
                         <div class="form-group" style="margin-bottom: 0;">
                             <div style="position: relative;">
-                                <i class="ph ph-map-pin" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary);"></i>
-                                <input type="text" class="form-control" placeholder="Search area or zip" style="padding-left: 2.5rem; padding-top: 0.5rem; padding-bottom: 0.5rem; font-size: 0.875rem;">
+                                <i class="ph ph-map-pin"
+                                    style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary);"></i>
+                                <input type="text" class="form-control" placeholder="Search area or zip"
+                                    style="padding-left: 2.5rem; padding-top: 0.5rem; padding-bottom: 0.5rem; font-size: 0.875rem;">
                             </div>
                         </div>
                     </div>
@@ -634,8 +715,10 @@
                         <!-- School Card 1 -->
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80" alt="Oakridge International School" class="school-card-img">
-                                <span class="admission-status-badge" style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
+                                <img src="assets/images/browse-oakridge.jpg" alt="Oakridge International School"
+                                    class="school-card-img">
+                                <span class="admission-status-badge"
+                                    style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">IB / Cambridge</span>
@@ -643,14 +726,19 @@
                                 <div class="school-location">
                                     <i class="ph-fill ph-map-pin"></i> North Campus, Downtown
                                 </div>
-                                <div style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
-                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
-                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(124 reviews)</span>
+                                <div
+                                    style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph-fill ph-star-half"></i>
+                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(124
+                                        reviews)</span>
                                 </div>
                                 <div class="school-fees">$12,000 - $18,000 / year</div>
                                 <div class="school-actions">
                                     <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
-                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
+                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start
+                                        Application</a>
                                 </div>
                             </div>
                         </div>
@@ -658,8 +746,10 @@
                         <!-- School Card 2 -->
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Delhi Public School" class="school-card-img">
-                                <span class="admission-status-badge" style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
+                                <img src="assets/images/browse-dps.jpg" alt="Delhi Public School"
+                                    class="school-card-img">
+                                <span class="admission-status-badge"
+                                    style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">CBSE</span>
@@ -667,14 +757,19 @@
                                 <div class="school-location">
                                     <i class="ph-fill ph-map-pin"></i> Westend Sector 14
                                 </div>
-                                <div style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
-                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph ph-star"></i>
-                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(89 reviews)</span>
+                                <div
+                                    style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph ph-star"></i>
+                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(89
+                                        reviews)</span>
                                 </div>
                                 <div class="school-fees">$5,000 - $8,000 / year</div>
                                 <div class="school-actions">
                                     <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
-                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
+                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start
+                                        Application</a>
                                 </div>
                             </div>
                         </div>
@@ -682,8 +777,11 @@
                         <!-- School Card 3 -->
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=800&q=80" alt="St. Mary's High School" class="school-card-img">
-                                <span class="admission-status-badge" style="background-color: var(--color-status-applied); color: white;">FEW SEATS LEFT</span>
+                                <img src="assets/images/browse-stmarys.jpg" alt="St. Mary's High School"
+                                    class="school-card-img">
+                                <span class="admission-status-badge"
+                                    style="background-color: var(--color-status-applied); color: white;">FEW SEATS
+                                    LEFT</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">ICSE</span>
@@ -691,23 +789,30 @@
                                 <div class="school-location">
                                     <i class="ph-fill ph-map-pin"></i> Heritage Lane, Old City
                                 </div>
-                                <div style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
-                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
-                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(215 reviews)</span>
+                                <div
+                                    style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph-fill ph-star"></i>
+                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(215
+                                        reviews)</span>
                                 </div>
                                 <div class="school-fees">$4,500 - $7,000 / year</div>
                                 <div class="school-actions">
                                     <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
-                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
+                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start
+                                        Application</a>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- School Card 4 -->
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Greenwood High" class="school-card-img">
-                                <span class="admission-status-badge" style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
+                                <img src="assets/images/browse-greenwood.jpg" alt="Greenwood High"
+                                    class="school-card-img">
+                                <span class="admission-status-badge"
+                                    style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">IB / ICSE</span>
@@ -715,14 +820,19 @@
                                 <div class="school-location">
                                     <i class="ph-fill ph-map-pin"></i> Sarjapur Road
                                 </div>
-                                <div style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
-                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
-                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(156 reviews)</span>
+                                <div
+                                    style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph-fill ph-star-half"></i>
+                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(156
+                                        reviews)</span>
                                 </div>
                                 <div class="school-fees">$9,000 - $14,000 / year</div>
                                 <div class="school-actions">
                                     <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
-                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
+                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start
+                                        Application</a>
                                 </div>
                             </div>
                         </div>
@@ -730,8 +840,11 @@
                         <!-- School Card 5 -->
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="National Public School" class="school-card-img">
-                                <span class="admission-status-badge" style="background-color: var(--color-status-waitlist); color: black;">LAST CALL</span>
+                                <img src="assets/images/browse-nps.jpg" alt="National Public School"
+                                    class="school-card-img">
+                                <span class="admission-status-badge"
+                                    style="background-color: var(--color-status-waitlist); color: black;">LAST
+                                    CALL</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">CBSE</span>
@@ -739,14 +852,19 @@
                                 <div class="school-location">
                                     <i class="ph-fill ph-map-pin"></i> Indiranagar
                                 </div>
-                                <div style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
-                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph ph-star"></i>
-                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(342 reviews)</span>
+                                <div
+                                    style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph ph-star"></i>
+                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(342
+                                        reviews)</span>
                                 </div>
                                 <div class="school-fees">$6,000 - $9,000 / year</div>
                                 <div class="school-actions">
                                     <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
-                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
+                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start
+                                        Application</a>
                                 </div>
                             </div>
                         </div>
@@ -754,8 +872,10 @@
                         <!-- School Card 6 -->
                         <div class="school-card">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bishop Cotton Boys' School" class="school-card-img">
-                                <span class="admission-status-badge" style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
+                                <img src="assets/images/browse-bishopcotton.jpg" alt="Bishop Cotton Boys' School"
+                                    class="school-card-img">
+                                <span class="admission-status-badge"
+                                    style="background-color: var(--color-status-admitted);">ADMISSION OPEN</span>
                             </div>
                             <div class="school-card-content">
                                 <span class="school-board-tag">ICSE</span>
@@ -763,14 +883,19 @@
                                 <div class="school-location">
                                     <i class="ph-fill ph-map-pin"></i> St. Mark's Road
                                 </div>
-                                <div style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
-                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
-                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(410 reviews)</span>
+                                <div
+                                    style="display: flex; gap: 0.5rem; color: #F59E0B; margin-bottom: var(--space-2); font-size: 0.875rem;">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                        class="ph-fill ph-star"></i>
+                                    <span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(410
+                                        reviews)</span>
                                 </div>
                                 <div class="school-fees">$5,500 - $8,500 / year</div>
                                 <div class="school-actions">
                                     <button class="btn-shortlist" title="Shortlist"><i class="ph ph-heart"></i></button>
-                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start Application</a>
+                                    <a href="school-detail.html" class="btn btn-primary" style="flex: 1;">Start
+                                        Application</a>
                                 </div>
                             </div>
                         </div>
@@ -799,8 +924,16 @@
                     <a href="index.html" class="navbar-brand">
                         <i class="ph-fill ph-student"></i> EduPath
                     </a>
-                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents and top educational institutions.</p>
+                    <p class="footer-desc">A unified multi-school admission platform bridging the gap between parents
+                        and top educational institutions.</p>
+                    <div
+                        style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
+                        <a href="#" aria-label="EduPath on X"><i class="ph-fill ph-x-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
                 </div>
+
                 <div>
                     <h4 class="footer-heading">Platform</h4>
                     <ul class="footer-links">
@@ -809,6 +942,7 @@
                         <li><a href="contact.html">Partner with Us</a></li>
                     </ul>
                 </div>
+
                 <div>
                     <h4 class="footer-heading">For Parents</h4>
                     <ul class="footer-links">
@@ -817,11 +951,13 @@
                         <li><a href="contact.html">Help & FAQ</a></li>
                     </ul>
                 </div>
+
                 <div>
                     <h4 class="footer-heading">Legal</h4>
                     <ul class="footer-links">
                         <li><a href="#">Terms of Service</a></li>
                         <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Data Security</a></li>
                     </ul>
                 </div>
             </div>
@@ -877,4 +1013,5 @@
         });
     </script>
 </body>
+
 </html>
