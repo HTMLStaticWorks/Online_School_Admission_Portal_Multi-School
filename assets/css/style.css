@@ -462,8 +462,32 @@ p:last-child { margin-bottom: 0; }
   transform: scale(1.02);
 }
 
-.navbar-brand i {
-  color: var(--color-brand-secondary);
+/* One lockup, one size, everywhere it appears: navbar, drawer, footer,
+   auth cards and the dashboard sidebar/header. The wordmark lives inside
+   the SVG, so it picks up the display font and the link colour (which the
+   dark theme already remaps) via currentColor. */
+.brand-logo {
+  height: 2.25rem;
+  /* Explicit ratio, not width:auto — a replaced element sized only by height
+     collapses to near-zero inside a flex row (which is how the auth card and
+     the RTL layouts render it). flex: none keeps it off the shrink pass. */
+  aspect-ratio: 222 / 64;
+  width: auto;
+  flex: none;
+  display: block;
+  overflow: hidden;
+  /* The wordmark is Latin; RTL must not reorder or right-anchor its runs */
+  direction: ltr;
+}
+
+/* The auth cards carry nothing else above the heading, so the lockup leads */
+.auth-brand .brand-logo { height: 3.25rem; }
+
+.brand-logo .brand-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: -0.5px;
 }
 
 .navbar-menu {
@@ -1545,6 +1569,10 @@ p:last-child { margin-bottom: 0; }
   .mobile-drawer {
     width: 100%; /* Full width drawer on very small screens */
   }
+  /* 16px gap on top of 16px of link padding spreads the nav over more than
+     one screen here; tighten both so the whole menu is visible at once */
+  .drawer-nav { gap: var(--space-1); }
+  .drawer-nav .nav-link { padding: 0.625rem 0; }
   .container {
     padding: 0 var(--space-2);
   }
@@ -1682,12 +1710,14 @@ body {
 .nav-link:hover::after { left: 0.875rem; right: 0.875rem; opacity: 0.5; }
 .nav-link.active::after { left: 0.875rem; right: 0.875rem; opacity: 1; }
 
-.navbar-brand i {
-  color: var(--color-brand-secondary);
+/* The cap tilts on hover, as the icon it replaced used to */
+.brand-logo .brand-mark {
+  transform-box: fill-box;
+  transform-origin: center;
   transition: transform var(--transition-premium);
 }
 
-.navbar-brand:hover i { transform: rotate(-8deg) scale(1.08); }
+.navbar-brand:hover .brand-mark { transform: rotate(-8deg) scale(1.08); }
 
 .theme-toggle, .rtl-toggle {
   border: 1px solid transparent;
@@ -3247,9 +3277,11 @@ main > section[style*="--color-brand-accent"] {
   .dashboard-header-brand { font-size: 1.15rem; }
 }
 
-/* The full lockup still fits at 360; below that the mark stands alone */
+/* The full lockup still fits at 360; below that the mark stands alone.
+   Cropping the SVG box (it is xMin-anchored) leaves the cap flush left. */
 @media (max-width: 359px) {
   .dashboard-header-brand .brand-text { display: none; }
+  .dashboard-header-brand .brand-logo { width: 2.25rem; }
 }
 
 /* KPI tiles double as links into their own view */
