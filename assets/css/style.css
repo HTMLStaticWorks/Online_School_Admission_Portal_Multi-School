@@ -786,6 +786,12 @@ p:last-child { margin-bottom: 0; }
 
 /* Dashboard Cards/Tables */
 .dash-card {
+  /* Same min-width:auto trap the dashboard columns hit: a card in a grid or
+     flex context is floored at its content width, so the max-content table
+     stretches the card instead of overflowing .dash-table-wrapper. The
+     wrapper then never becomes the scroll container — its scrollbar is not
+     drawn, and the row text bleeds past the card padding. */
+  min-width: 0;
   background-color: var(--color-bg-primary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-soft);
@@ -836,12 +842,26 @@ p:last-child { margin-bottom: 0; }
 
 .dash-table-wrapper {
   overflow-x: auto;
-  /* The global scrollbar is a thin --color-border thumb on a transparent
-     track, which disappears against the dark card and reads as a cropped
-     table. Give the data tables a scrollbar in the secondary brand colour
-     so the fact that there is more to the right is obvious. */
-  scrollbar-color: var(--color-brand-secondary) var(--color-bg-secondary);
-  scrollbar-width: thin;
+  /* Never let the wrapper itself be widened by the table it is meant to clip */
+  max-width: 100%;
+  min-width: 0;
+  /* The global rule sets scrollbar-width/-color on every element. Chrome and
+     Safari ignore ::-webkit-scrollbar entirely once either standard property
+     holds a non-initial value, which hands the table back the platform's
+     auto-hiding overlay bar — the reason the scrollbar still was not showing.
+     Resetting both here lets the styled bar below take effect and stay put. */
+  scrollbar-width: auto;
+  scrollbar-color: auto;
+}
+
+/* Firefox has no ::-webkit-scrollbar, so it takes the colour the standard way.
+   It always reserves the track for overflow-x: scroll, so there is nothing to
+   force there. */
+@supports not selector(::-webkit-scrollbar) {
+  .dash-table-wrapper {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-brand-secondary) var(--color-bg-secondary);
+  }
 }
 
 .dash-table-wrapper::-webkit-scrollbar { height: 10px; }
